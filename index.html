@@ -1,0 +1,1663 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>SAKURA AVENUE 図解</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Azeret+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: 審判のクリップボード — one reading column of rules; the match player breaks wider with the field beside a scoreboard console. */
+:root{
+  --bg:#FBF6F7; --surface:#FFFFFF; --surface-2:#F5ECEF; --ink:#2A1D17; --muted:#77635C; --line:#E8D9DE;
+  --sakura:#C9476F; --sakura-2:#E89AB5; --sakura-soft:#F9DCE6; --petal:#F4A9C2; --bark:#5A3D2B;
+  --wood:#CF9A66; --wood-dark:#8E5F37; --field:#24913B; --mat:#E9DFE2; --chalk:#F4FAF1;
+  --red:#D7263D; --red-soft:#FCE1E5; --blue:#2559D9; --blue-soft:#DEE7FC; --yellow:#E8AC00;
+  --ok:#1E8A4C; --ok-soft:#DCF1E4; --warn:#B4650A; --warn-soft:#FCEBD2; --bad:#A3122C; --bad-soft:#F8D6DC;
+  --board:#24170F; --board-ink:#FFF3EC; --board-muted:#BBA79D;
+  --seg-a:#A69089; --seg-b:#E2A500; --seg-c:#EDA9C0; --seg-e:#C9476F; --seg-f:#5E2338;
+  --shadow:0 1px 2px rgba(42,29,23,.06),0 10px 30px rgba(42,29,23,.07);
+  --f-display:"Dela Gothic One","Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  --f-num:"Azeret Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16100E; --surface:#211916; --surface-2:#2B211D; --ink:#F5EAE6; --muted:#B9A59E; --line:#3A2D28;
+    --sakura:#F28DB0; --sakura-2:#C9668A; --sakura-soft:#4A2533; --petal:#F7B3CB; --bark:#E3C2A8;
+    --wood:#C08A55; --wood-dark:#7A4F2C; --field:#1F8134; --mat:#2A201C; --chalk:#E9F3E6;
+    --red:#FF5468; --red-soft:#4A1C23; --blue:#6A93FF; --blue-soft:#1D2949; --yellow:#F3C232;
+    --ok:#4FC584; --ok-soft:#173726; --warn:#F2A43A; --warn-soft:#3E2A12; --bad:#FF6F84; --bad-soft:#4A1A24;
+    --board:#0C0807; --board-ink:#FFF3EC; --board-muted:#A8948A;
+    --seg-a:#8C7A73; --seg-b:#E8B320; --seg-c:#B86A86; --seg-e:#F28DB0; --seg-f:#F6CBDA;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16100E; --surface:#211916; --surface-2:#2B211D; --ink:#F5EAE6; --muted:#B9A59E; --line:#3A2D28;
+  --sakura:#F28DB0; --sakura-2:#C9668A; --sakura-soft:#4A2533; --petal:#F7B3CB; --bark:#E3C2A8;
+  --wood:#C08A55; --wood-dark:#7A4F2C; --field:#1F8134; --mat:#2A201C; --chalk:#E9F3E6;
+  --red:#FF5468; --red-soft:#4A1C23; --blue:#6A93FF; --blue-soft:#1D2949; --yellow:#F3C232;
+  --ok:#4FC584; --ok-soft:#173726; --warn:#F2A43A; --warn-soft:#3E2A12; --bad:#FF6F84; --bad-soft:#4A1A24;
+  --board:#0C0807; --board-ink:#FFF3EC; --board-muted:#A8948A;
+  --seg-a:#8C7A73; --seg-b:#E8B320; --seg-c:#B86A86; --seg-e:#F28DB0; --seg-f:#F6CBDA;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+:root[data-lang="en"] [lang="ja"]:not(html),:root:not([data-lang="en"]) [lang="en"]:not(html){display:none!important}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance}
+p{margin:0}
+button{font:inherit;color:inherit}
+button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--sakura);outline-offset:2px}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.nw{display:inline-block}
+.eyebrow{font-family:var(--f-num);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sakura);font-weight:700;margin:0 0 8px}
+
+/* ---------- language switch ---------- */
+.langsw{flex:none;display:inline-flex;border:1px solid var(--line);border-radius:999px;background:var(--surface);padding:2px}
+.langsw button{border:0;background:transparent;border-radius:999px;padding:6px 11px;font-weight:700;font-size:12px;line-height:1;cursor:pointer;color:var(--muted);white-space:nowrap}
+.langsw button[aria-pressed="true"]{background:var(--sakura);color:#fff}
+
+/* ---------- hero ---------- */
+.hero{padding-block:32px 28px}
+.hero .wrap{display:grid;gap:22px}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.hero-top .eyebrow{margin:0}
+.title{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,14vw,104px);line-height:.92;margin:0;letter-spacing:.005em}
+.title span{display:block}
+.title .s1{color:var(--sakura)}
+.lede{font-size:17px;max-width:34em;line-height:1.8}
+.lede b{font-weight:700;background:linear-gradient(transparent 62%,var(--sakura-soft) 62%)}
+.avenue-mini{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;max-width:560px;padding:10px;border-radius:12px;background:var(--field);position:relative;box-shadow:inset 0 0 0 4px var(--wood)}
+.avenue-mini .cell{aspect-ratio:3/4;border-radius:4px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 2px rgba(207,154,102,.9);display:grid;place-items:center;position:relative}
+.avenue-mini .cell i{position:absolute;top:2px;left:0;right:0;text-align:center;font:700 9px/1 var(--f-num);font-style:normal;color:rgba(255,255,255,.65)}
+.avenue-mini .dot{width:58%;aspect-ratio:1;border-radius:50%;background:#F7FBFF;box-shadow:inset 0 0 0 3px #F7FBFF;position:relative;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.avenue-mini .dot::after{content:"";position:absolute;inset:28%;border-radius:50%;background:var(--c)}
+.avenue-mini .cell.on .dot{transform:scale(1)}
+.avenue-mini .flower{position:absolute;inset:-30%;opacity:0;transform:scale(.2) rotate(-40deg);transition:transform .7s cubic-bezier(.2,1.4,.4,1),opacity .4s;pointer-events:none}
+.avenue-mini .cell.bloom .flower{opacity:1;transform:scale(1) rotate(0)}
+.flower path{fill:var(--petal);stroke:var(--sakura);stroke-width:1.5}
+.flower circle{fill:#FFE27A}
+.formula{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:1fr}
+.formula li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start;padding:12px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line);position:relative}
+.formula .n{grid-row:span 2;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 13px/1 var(--f-num);background:var(--sakura-soft);color:var(--sakura)}
+.formula li:last-child .n{background:var(--sakura);color:#fff}
+.formula b{font-size:17px;font-weight:900}
+.formula .d{color:var(--muted);font-size:13.5px;line-height:1.6}
+@media(min-width:760px){.formula{grid-template-columns:repeat(3,1fr)}.formula li:not(:last-child)::after{content:"";position:absolute;right:-9px;top:50%;width:8px;height:8px;border-top:2px solid var(--sakura);border-right:2px solid var(--sakura);transform:translateY(-50%) rotate(45deg)}}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.facts div{background:var(--surface);padding:10px 14px}
+.facts dt{font-size:12px;color:var(--muted)}
+.facts dd{margin:0;font:700 18px/1.4 var(--f-num)}
+.facts dd small{font-family:var(--f-body);font-size:12px;font-weight:500;color:var(--muted);margin-left:2px}
+@media(min-width:760px){.facts{grid-template-columns:repeat(4,1fr)}}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:8px;padding-block:8px}
+.navlinks{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;min-width:0}
+.navlinks::-webkit-scrollbar{display:none}
+.nav a{flex:none;text-decoration:none;color:var(--muted);font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);white-space:nowrap}
+.nav a[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* ---------- sections ---------- */
+.sec{padding-block:52px 8px;scroll-margin-top:56px}
+.sec-head{max-width:720px;margin-bottom:20px}
+.sec-head h2{font-size:clamp(23px,5.8vw,32px);line-height:1.32;margin:0 0 10px;font-weight:900}
+.lead{color:var(--muted);max-width:62ch}
+.note{font-size:12.5px;color:var(--muted);line-height:1.7;margin-top:12px;max-width:72ch}
+.sub{font-size:17px;font-weight:900;margin:28px 0 10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+
+/* ---------- match player ---------- */
+.player{display:grid;gap:12px;grid-template-areas:"board" "stage" "status" "controls" "caption"}
+.player>*{min-width:0}
+@media(min-width:900px){.player{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);grid-template-areas:"stage board" "stage status" "stage controls" "stage caption";grid-template-rows:auto auto auto 1fr;column-gap:24px;align-items:start}}
+.board{grid-area:board;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:var(--board);color:var(--board-ink);border-radius:14px;padding:10px 14px;gap:10px}
+.team{display:flex;align-items:center;gap:10px;min-width:0}
+.team.blue{justify-content:flex-end}
+.tname{font-weight:900;font-size:13px;padding:3px 9px;border-radius:6px;color:#fff;white-space:nowrap}
+.team.red .tname{background:var(--red)} .team.blue .tname{background:var(--blue)}
+.score{font:700 clamp(26px,7.5vw,36px)/1 var(--f-num);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.team.won .tname::after{content:" WIN";font-family:var(--f-num)}
+.team.won .score{color:#FFE27A}
+.clock{text-align:center;display:grid;line-height:1.1}
+.clabel{font:700 10px/1 var(--f-num);letter-spacing:.14em;color:var(--board-muted)}
+.ctime{font:700 22px/1.2 var(--f-num);font-variant-numeric:tabular-nums}
+.stage-wrap{grid-area:stage}
+.stage{position:relative;border-radius:14px;overflow:hidden;background:var(--mat);box-shadow:var(--shadow)}
+.stage svg{display:block;width:100%;height:auto;aspect-ratio:1}
+.fx{position:absolute;inset:0;pointer-events:none}
+.pop{position:absolute;left:0;top:0;transform:translate(-50%,-50%);font:700 11.5px/1 var(--f-num);padding:4px 7px;border-radius:999px;color:#fff;white-space:nowrap;display:none;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.pop.red{background:var(--red)} .pop.blue{background:var(--blue)} .pop.neg{background:#2B1E19;color:#FFB4C0;outline:2px solid var(--red)}
+.pop small{font-family:var(--f-body);font-weight:700;font-size:10px;margin-left:3px}
+.ban{position:absolute;left:0;top:0;transform:translate(-50%,-50%);font-weight:900;font-size:12.5px;line-height:1.3;padding:5px 10px;border-radius:8px;white-space:nowrap;display:none;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.ban.b-red{background:var(--red)} .ban.b-blue{background:var(--blue)} .ban.b-warn{background:#2B1E19;color:#FFD27A;outline:2px solid #FFD27A}
+.ban.b-dark{background:#2B1E19;color:#fff} .ban.b-sakura{background:var(--sakura);color:#fff}
+.ban.b-final{font-size:clamp(15px,4.4vw,22px);padding:10px 16px;background:var(--blue);outline:3px solid #fff}
+.bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:10px;padding:14px 22px 14px 18px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:900;font-size:16px;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.35);white-space:nowrap}
+.bigplay svg{width:22px;height:22px;fill:currentColor}
+.status{grid-area:status;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.st{border-radius:12px;padding:9px 11px;border:1px solid var(--line);background:var(--surface);display:grid;gap:5px;font-size:12px;min-width:0}
+.st.red{border-top:3px solid var(--red)} .st.blue{border-top:3px solid var(--blue)}
+.st .row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:18px}
+.st .lab{color:var(--muted);font-size:11px}
+.st .lab b{color:var(--ink)}
+.slots{display:flex;gap:3px}
+.slot{width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--muted);opacity:.55}
+.slot.s{background:var(--petal);box-shadow:inset 0 0 0 2px var(--sakura);opacity:1}
+.slot.h{background:var(--yellow);box-shadow:inset 0 0 0 2px #A87A00;opacity:1}
+.pips{display:flex;gap:3px;align-items:center}
+.pip5{width:9px;height:14px;border-radius:2px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.st.red .pip5.on{background:var(--red)} .st.blue .pip5.on{background:var(--blue)}
+.pips em{font-style:normal;font:700 11px/1 var(--f-num);margin-left:3px}
+.badge{font-size:10.5px;font-weight:900;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.badge.go{background:var(--sakura-soft);color:var(--sakura)}
+.badge.full{background:var(--sakura);color:#fff}
+.badge.lock{background:var(--warn-soft);color:var(--warn)}
+.badge.retry{background:var(--surface-2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.controls{grid-area:controls;display:grid;gap:10px}
+.btns{display:flex;align-items:center;gap:8px}
+.cbtn{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.cbtn svg{width:18px;height:18px;fill:currentColor}
+.cbtn.play{width:56px;background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.cbtn.speed{width:auto;padding:0 12px;font:700 13px/1 var(--f-num);margin-left:auto}
+.scene-ix{font:700 12px/1 var(--f-num);color:var(--muted)}
+.timeline{position:relative;height:30px;touch-action:none;cursor:pointer;user-select:none;-webkit-user-select:none}
+.segs{position:absolute;inset:8px 0;display:flex;gap:2px}
+.seg{flex:1 1 0;border:0;padding:0;border-radius:3px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;min-width:0}
+.seg.done{background:var(--sakura-2)}
+.seg.cur{background:var(--sakura)}
+.head{position:absolute;top:2px;bottom:2px;width:4px;margin-left:-2px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 2px var(--bg)}
+.caption{grid-area:caption;padding:16px 16px 18px}
+.cap-num{font:700 11px/1 var(--f-num);letter-spacing:.12em;color:var(--sakura);margin-bottom:8px}
+.cap-title{font-size:19px;line-height:1.4;margin:0 0 8px;font-weight:900}
+.cap-body{font-size:14.5px;line-height:1.85}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.ref{font:700 11px/1 var(--f-num);padding:5px 8px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+
+/* field svg */
+.f-mat{fill:var(--mat)}
+.f-floor{fill:var(--field)}
+.f-half{opacity:.07}
+.f-half.red{fill:#FF2A45} .f-half.blue{fill:#2E5BFF}
+.chalk line,.chalk rect{stroke:var(--chalk);stroke-width:44;fill:none;opacity:.92}
+.tape{stroke-width:42}
+.tape.red{stroke:#E8213A} .tape.blue{stroke:#2F5BFF}
+.wood-sh{stroke:var(--wood-dark);stroke-width:76;stroke-linecap:square}
+.wood{stroke:var(--wood);stroke-width:48;stroke-linecap:square}
+.frame-sh{fill:none;stroke:var(--wood-dark);stroke-width:100}
+.frame{fill:none;stroke:var(--wood);stroke-width:70}
+.znum{font-family:var(--f-num);font-size:150px;font-weight:700;fill:#FFFFFF;opacity:.6}
+.bt-body{fill:#F7FBFF;stroke:rgba(15,30,20,.45);stroke-width:12}
+.cap.c-red{fill:#E8213A} .cap.c-blue{fill:#2F5BFF} .cap.c-yel{fill:#F2C200}
+.weed-body{fill:#EAF3DE;stroke:#38521C;stroke-width:14}
+.weed-cap{fill:#557421}
+.hit{fill:none;stroke:#FFE36E;stroke-width:40}
+.dice{fill:#FFFDF8;stroke:rgba(0,0,0,.4);stroke-width:12}
+.pipd{fill:#2A1D17}
+.rb-body{stroke:rgba(0,0,0,.45);stroke-width:16}
+.t-red .rb-body{fill:#D51E37} .t-blue .rb-body{fill:#2452D4}
+.rb-plate{fill:rgba(255,255,255,.16);stroke:rgba(255,255,255,.35);stroke-width:8}
+.es-base{fill:#F2C200;stroke:#7A5D00;stroke-width:8}
+.es-btn{fill:#C9121F;stroke:#5E0710;stroke-width:6}
+.es-ring{fill:none;stroke:#FFE36E;stroke-width:26;opacity:0}
+.rb-lamp{fill:rgba(255,255,255,.28);stroke:rgba(0,0,0,.35);stroke-width:8}
+.rb-lamp.on{fill:#FFE36E}
+.arm-bar{fill:#C3CBD2;stroke:#4F5A64;stroke-width:12}
+.arm-grip{fill:#6B7884;stroke:#3A434B;stroke-width:8}
+.hd{stroke:#fff;stroke-width:12}
+.hd.s{fill:#F4A9C2} .hd.h{fill:#F2C200}
+.focus{fill:rgba(255,246,176,.12);stroke:#FFF2A0;stroke-width:44;stroke-dasharray:130 90;opacity:0;transition:opacity .3s}
+.focus.on{opacity:1;animation:march 1.3s linear infinite}
+@keyframes march{to{stroke-dashoffset:-220}}
+.petal{fill:#F7B9CF;stroke:#D9668D;stroke-width:8}
+.thrown .tb-shadow{fill:rgba(0,0,0,.3)}
+.dim{fill:rgba(12,8,6,.55)}
+.hl-rect{fill:none;stroke:#FFF2A0;stroke-width:46;stroke-dasharray:130 90;animation:march 1.3s linear infinite}
+.hatch-line{stroke:rgba(255,255,255,.55);stroke-width:30}
+.wood-glow{stroke:#FFE36E;stroke-width:70;stroke-linecap:square;opacity:.95}
+
+/* ---------- field explorer ---------- */
+.explore{display:grid;gap:14px}
+@media(min-width:900px){.explore{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:24px}}
+.explore .stage{max-width:620px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.exp-desc{padding:14px 16px;margin-top:12px}
+.exp-desc h3{margin:0 0 4px;font-size:17px;font-weight:900}
+.exp-desc p{font-size:14.5px}
+.tag{position:absolute;transform:translate(-50%,-50%);background:#FFF2A0;color:#2A1D17;font-weight:900;font-size:12px;padding:3px 8px;border-radius:6px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.3);pointer-events:none}
+.objs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:4px}
+@media(min-width:760px){.objs{grid-template-columns:repeat(4,1fr)}}
+.obj{padding:12px 12px 14px;display:grid;gap:6px;align-content:start}
+.obj svg{height:92px;width:auto;justify-self:center;margin:4px 0}
+.obj h4{margin:0;font-size:15px;font-weight:900}
+.obj p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.obj .cnt{font:700 13px/1 var(--f-num);color:var(--ink)}
+.ob-body{fill:var(--surface-2);stroke:var(--muted);stroke-width:2}
+.ob-ball{fill:var(--sakura-2)} .ob-ball.b2{fill:var(--yellow)} .ob-ball.b3{fill:var(--blue)}
+
+/* ---------- win sim ---------- */
+.win-grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.win-grid>*,.explore>*,.robo>*,.two>*,.fgrid>*,.dicebox>*{min-width:0}
+@media(min-width:900px){.win-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}}
+.sim{padding:12px}
+.lane{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;padding:8px;border-radius:12px;background:var(--field);box-shadow:inset 0 0 0 4px var(--wood)}
+@media(min-width:500px){.lane{gap:4px;padding:10px}}
+.zc{position:relative;aspect-ratio:3/5;border:0;border-radius:5px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 2px rgba(207,154,102,.95);cursor:pointer;padding:0;display:grid;place-items:center}
+.zc .zn{position:absolute;top:3px;left:0;right:0;text-align:center;font:700 10px/1 var(--f-num);color:rgba(255,255,255,.75)}
+.zc .bot{width:62%;aspect-ratio:1;border-radius:50%;background:#F7FBFF;position:relative;transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.zc .bot::after{content:"";position:absolute;inset:27%;border-radius:50%;background:var(--c,#999)}
+.zc.red .bot{--c:#E8213A;transform:scale(1)} .zc.blue .bot{--c:#2F5BFF;transform:scale(1)}
+.zc.next{box-shadow:inset 0 0 0 2px #FFF2A0;animation:nextp 1.1s ease-in-out infinite}
+@keyframes nextp{50%{background:rgba(255,242,160,.3)}}
+.zc.twelve::before{content:"";position:absolute;inset:auto 0 3px;margin:auto;width:9px;height:9px;border-radius:50%;background:var(--petal);box-shadow:0 0 0 2px var(--sakura)}
+.zc.red::before,.zc.blue::before{display:none}
+.zc.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.lane-legend{display:flex;justify-content:space-between;gap:8px;font:700 11px/1.3 var(--f-num);color:var(--muted);margin:6px 2px 0}
+.sim-teams{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.simt{border-radius:12px;padding:10px;display:grid;gap:8px;border:1px solid var(--line);align-content:start}
+.simt.red{background:var(--red-soft)} .simt.blue{background:var(--blue-soft)}
+.simt h4{margin:0;font-size:14px;font-weight:900;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.simt .put{border:0;border-radius:10px;padding:10px;font-weight:900;color:#fff;cursor:pointer;font-size:14px}
+.simt.red .put{background:var(--red)} .simt.blue .put{background:var(--blue)}
+.simt .meter{display:flex;gap:3px}
+.simt .meter i{flex:1;height:8px;border-radius:2px;background:rgba(127,127,127,.25)}
+.simt.red .meter i.on{background:var(--red)} .simt.blue .meter i.on{background:var(--blue)}
+.simt .sc{font-size:12px;color:var(--muted)}
+.simt .sc b{font-family:var(--f-num);color:var(--ink)}
+.switch{display:flex;align-items:center;gap:8px;font-size:12.5px;cursor:pointer;line-height:1.35}
+.switch input{appearance:none;-webkit-appearance:none;width:34px;height:20px;border-radius:999px;background:rgba(127,127,127,.35);position:relative;flex:none;cursor:pointer;margin:0;transition:background .2s}
+.switch input::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+.switch input:checked{background:var(--warn)}
+.switch input:checked::after{transform:translateX(14px)}
+.sim-msg{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--surface-2);font-size:13.5px;line-height:1.65;min-height:3.2em}
+.sim-msg.ng{background:var(--warn-soft);color:var(--ink)}
+.sim-msg.win{background:var(--sakura);color:#fff;font-weight:700}
+.sim-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.ghost{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;cursor:pointer}
+.hint{font-size:12px;color:var(--muted)}
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.rules li{padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.rules .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--sakura-soft);color:var(--sakura)}
+.rules .ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.rules b{display:block;font-size:14.5px}
+.rules .rd{font-size:13px;color:var(--muted);line-height:1.6;display:block}
+.two{display:grid;gap:12px}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+.prio{list-style:none;margin:0;padding:0;counter-reset:p}
+.prio li{counter-increment:p;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.prio li:last-child{border-bottom:0}
+.prio li::before{content:counter(p);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 12px/1 var(--f-num);background:var(--surface-2);color:var(--muted)}
+.prio li:first-child::before{background:var(--sakura);color:#fff}
+.prio li:first-child{font-weight:900}
+.box{padding:14px 16px}
+.box h3{margin:0 0 8px;font-size:16px;font-weight:900}
+.plain{margin:0;padding-left:1.2em;font-size:14.5px}
+.plain li{margin:3px 0}
+
+/* ---------- score ---------- */
+.srow{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+.srow:last-child{border-bottom:0}
+.sl{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font:700 14px/1 var(--f-num);background:var(--surface-2)}
+.srow .tx{font-size:14.5px;line-height:1.55}
+.srow .tx small{display:block;color:var(--muted);font-size:12px}
+.srow .pt{font:700 18px/1 var(--f-num);text-align:right;white-space:nowrap}
+.srow .pt.neg{color:var(--bad)}
+.srow .bar{grid-column:2/4;height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.srow .bar i{display:block;height:100%;border-radius:4px;background:var(--sakura)}
+.srow .bar i.neg{background:repeating-linear-gradient(45deg,var(--bad) 0 5px,transparent 5px 9px)}
+.ex{padding:14px 16px;margin-top:14px}
+.ex h3{margin:0 0 12px;font-size:16px;font-weight:900}
+.exrow{display:grid;grid-template-columns:44px minmax(0,1fr) 46px;gap:10px;align-items:center;margin:8px 0}
+.exrow .who{font-weight:900;font-size:13px;color:#fff;border-radius:6px;text-align:center;padding:2px 0}
+.exrow .who.r{background:var(--red)} .exrow .who.b{background:var(--blue)}
+.stack{display:flex;height:26px;border-radius:6px;overflow:hidden;gap:2px}
+.stack span{display:grid;place-items:center;font:700 10.5px/1 var(--f-num);color:#fff;min-width:0;overflow:hidden;white-space:nowrap}
+.stack .a{background:var(--seg-a)} .stack .b{background:var(--seg-b);color:#2A1D17} .stack .c{background:var(--seg-c);color:#2A1D17} .stack .e{background:var(--seg-e)} .stack .f{background:var(--seg-f)}
+:root[data-theme="dark"] .stack .f{color:#2A1D17}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .stack .f{color:#2A1D17}}
+.exrow .tot{font:700 16px/1 var(--f-num);text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+
+/* ---------- dice ---------- */
+.dicebox{padding:16px;display:grid;gap:16px}
+@media(min-width:760px){.dicebox{grid-template-columns:auto 1fr;align-items:center}}
+.dice-play{display:flex;align-items:center;gap:14px;justify-content:center}
+.dsvg{width:92px;height:92px}
+.dsvg.roll{animation:tumble .7s cubic-bezier(.3,.1,.3,1)}
+@keyframes tumble{0%{transform:rotate(0) scale(1)}40%{transform:rotate(200deg) scale(1.25) translateY(-14px)}100%{transform:rotate(360deg) scale(1)}}
+.dsvg rect{fill:#FFFDF8;stroke:var(--ink);stroke-width:3}
+.dsvg circle{fill:#2A1D17}
+.arrow{width:26px;height:26px;color:var(--muted)}
+.mini-robot{width:96px;height:96px}
+.mr-body{fill:var(--red);stroke:rgba(0,0,0,.4);stroke-width:2}
+.mr-slot{fill:rgba(255,255,255,.22)}
+.mr-slot.on{fill:#F4A9C2;stroke:#fff;stroke-width:2}
+.mr-slot.over{fill:#FFD27A;stroke:#fff;stroke-width:2}
+.dctl{display:grid;gap:12px}
+.drow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.step button{width:40px;height:40px;border:0;background:transparent;font-size:20px;cursor:pointer}
+.step output{min-width:40px;text-align:center;font:700 18px/1 var(--f-num)}
+.verdict{padding:10px 12px;border-radius:10px;font-weight:700;font-size:14px;transition:background .25s}
+.verdict.ok{background:var(--ok-soft);color:var(--ok)}
+.verdict.ng{background:var(--warn-soft);color:var(--warn)}
+.roll-btn{border:0;border-radius:10px;padding:10px 14px;background:var(--ink);color:var(--bg);font-weight:900;cursor:pointer}
+
+/* ---------- fouls ---------- */
+.fgrid{display:grid;gap:12px}
+@media(min-width:760px){.fgrid{grid-template-columns:1fr 1fr}}
+.fcard{padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--surface)}
+.fcard.v{border-top:5px solid var(--warn)} .fcard.d{border-top:5px solid var(--bad)}
+.fcard h3{margin:0;font-size:18px;font-weight:900;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fcard .res{font-size:13px;font-weight:900;padding:3px 9px;border-radius:999px}
+.fcard.v .res{background:var(--warn-soft);color:var(--warn)} .fcard.d .res{background:var(--bad-soft);color:var(--bad)}
+.fcard .sum{font-size:13.5px;color:var(--muted);margin:8px 0 10px}
+.flist{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.flist li{display:grid;grid-template-columns:44px 1fr;gap:8px;font-size:14px;line-height:1.55}
+.flist .rn{font:700 11px/1.9 var(--f-num);color:var(--muted)}
+.quiz{margin-top:16px;padding:16px;overflow:hidden}
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.qtop h3{margin:0;font-size:17px;font-weight:900}
+.qprog{font:700 12px/1 var(--f-num);color:var(--muted);white-space:nowrap}
+.qcard.anim{animation:qin .35s ease-out}
+@keyframes qin{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.qtext{font-size:16.5px;font-weight:700;line-height:1.6;min-height:3.4em}
+.qbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.qb{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 4px;font-weight:900;font-size:14.5px;line-height:1.2;cursor:pointer;transition:transform .15s,background .2s,border-color .2s}
+:root[data-lang="en"] .qb{font-size:13.5px}
+.qb:active{transform:scale(.97)}
+.qb.safe{color:var(--ok)} .qb.foul{color:var(--warn)} .qb.dq{color:var(--bad)}
+.qb.right{background:var(--ok-soft);border-color:var(--ok)}
+.qb.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.qb.wrong.anim{animation:shake .35s}
+.qb:disabled{cursor:default}
+.qans{margin-top:12px;padding:12px;border-radius:10px;background:var(--surface-2);font-size:14px;line-height:1.7;display:none}
+.qans.show{display:block}
+.qans.anim{animation:qin .3s ease-out}
+.qans b{font-weight:900}
+.qnext{margin-top:10px;border:0;border-radius:10px;padding:10px 16px;background:var(--ink);color:var(--bg);font-weight:900;cursor:pointer;display:none}
+.qnext.show{display:inline-block}
+
+/* ---------- retry ---------- */
+.rsteps{list-style:none;margin:0;padding:0;display:grid;gap:8px;position:relative}
+@media(min-width:900px){.rsteps{grid-template-columns:repeat(5,1fr)}}
+.rstep{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;grid-template-columns:auto 1fr;gap:4px 12px;cursor:pointer;transition:background .3s,border-color .3s,transform .3s;align-content:start}
+@media(min-width:900px){.rstep{grid-template-columns:1fr}}
+.rstep .rn2{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 13px/1 var(--f-num);background:var(--surface-2);color:var(--muted);grid-row:span 2;transition:background .3s,color .3s}
+.rstep b{font-size:15px}
+.rstep .rd{font-size:13px;color:var(--muted);line-height:1.6}
+.rstep.on{border-color:var(--sakura);background:var(--sakura-soft);transform:translateY(-2px)}
+.rstep.on .rn2{background:var(--sakura);color:#fff}
+
+/* ---------- robot ---------- */
+.robo{display:grid;gap:16px}
+@media(min-width:900px){.robo{grid-template-columns:300px 1fr;align-items:start}}
+.cubebox{padding:18px 16px;display:grid;justify-items:center;gap:10px}
+.scene3d{width:220px;height:220px;perspective:700px;display:grid;place-items:center}
+.cube{width:150px;height:150px;position:relative;transform-style:preserve-3d;animation:grow 7s ease-in-out infinite}
+.cube div{position:absolute;inset:0;border:2px solid var(--sakura);background:color-mix(in srgb,var(--sakura) 10%,transparent)}
+.cube .f1{transform:translateZ(75px)} .cube .f2{transform:rotateY(180deg) translateZ(75px)}
+.cube .f3{transform:rotateY(90deg) translateZ(75px)} .cube .f4{transform:rotateY(-90deg) translateZ(75px)}
+.cube .f5{transform:rotateX(90deg) translateZ(75px)} .cube .f6{transform:rotateX(-90deg) translateZ(75px);background:color-mix(in srgb,var(--field) 45%,transparent);border-color:var(--field)}
+@keyframes grow{0%,12%{transform:rotateX(-22deg) rotateY(-35deg) scale(.7)}38%,62%{transform:rotateX(-22deg) rotateY(-35deg) scale(1)}88%,100%{transform:rotateX(-22deg) rotateY(-35deg) scale(.7)}}
+.cubelab{display:grid;justify-items:center;position:relative;height:44px;width:100%}
+.cubelab .cl{position:absolute;text-align:center;font-size:13px;line-height:1.45;animation:lab 7s ease-in-out infinite}
+.cubelab b{font:700 17px/1.2 var(--f-num);display:block}
+.cubelab .l2{animation-name:lab2}
+@keyframes lab{0%,20%{opacity:1}28%,80%{opacity:0}88%,100%{opacity:1}}
+@keyframes lab2{0%,22%{opacity:0}32%,72%{opacity:1}80%,100%{opacity:0}}
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px;margin:0}
+.spec{padding:12px 14px}
+.spec dt{font-size:12px;color:var(--muted);font-weight:700}
+.spec dd{margin:2px 0 0;font-size:14px;line-height:1.6}
+.spec dd b{font-family:var(--f-num);font-size:17px}
+.estop{display:inline-grid;place-items:center;width:22px;height:22px;background:#F2C200;border-radius:4px;vertical-align:-5px;margin-right:6px;box-shadow:inset 0 0 0 1.5px #7A5D00}
+.estop::after{content:"";width:12px;height:12px;border-radius:50%;background:#C9121F}
+.safety{margin-top:14px;padding:14px 16px;display:flex;gap:12px;align-items:center;background:var(--warn-soft);border-color:transparent}
+.safety svg{width:28px;height:28px;flex:none;fill:none;stroke:var(--warn);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.safety p{font-size:14px}
+footer{padding-block:48px 56px;color:var(--muted);font-size:12.5px;line-height:1.8}
+footer a{color:var(--sakura)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .cube{transform:rotateX(-22deg) rotateY(-35deg) scale(1)}
+}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-top">
+        <p class="eyebrow"><span lang="ja">関西春ロボコン2027 競技課題</span><span lang="en">Kansai Spring Robocon 2027 rules</span> · ver.1.0.0</p>
+        <div class="langsw" role="group" aria-label="Language"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+      </div>
+      <h1 class="title"><span class="s1">SAKURA</span><span>AVENUE</span></h1>
+    </div>
+    <p class="lede"><span lang="ja">フィールド中央に並ぶ<b>12個の共通ゾーン</b>に、自分の色の桜ボトルを並べていく赤と青の1対1。並木を伸ばして、<b>12番目に桜ボトルを置いて「満開宣言」</b>したら勝ちです。</span><span lang="en">A one-on-one, Red vs Blue match: line up Sakura bottles in your color along the <b>12 Common Zones</b> down the middle of the field. Grow the avenue, then <b>place a bottle in zone 12 and make the Full Bloom Declaration</b> to win.</span></p>
+    <div class="avenue-mini" id="mini" aria-hidden="true"></div>
+    <ol class="formula">
+      <li><span class="n">1</span><b><span lang="ja">五分咲き</span><span lang="en">Half Bloom (五分咲き)</span></b><span class="d"><span lang="ja">自分の桜ボトルがある共通ゾーンが5個以上になる</span><span lang="en">Your Sakura bottles occupy 5 or more Common Zones</span></span></li>
+      <li><span class="n">2</span><b><span lang="ja">満開</span><span lang="en">Full Bloom (満開)</span></b><span class="d"><span lang="ja">五分咲きの状態で、12番の共通ゾーンに自分の桜ボトルを置く</span><span lang="en">While in Half Bloom, place your Sakura bottle in Common Zone 12</span></span></li>
+      <li><span class="n">3</span><b><span lang="ja">満開宣言</span><span lang="en">Full Bloom Declaration (満開宣言)</span></b><span class="d"><span lang="ja">ロボットが合図し、審判が確認したら試合終了。その時点で勝ち</span><span lang="en">Your robot signals and the referee confirms. The match ends and you win on the spot</span></span></li>
+    </ol>
+    <dl class="facts">
+      <div><dt><span lang="ja">競技時間</span><span lang="en">Match time</span></dt><dd>3:00</dd></div>
+      <div><dt><span lang="ja">対戦</span><span lang="en">Format</span></dt><dd><span lang="ja">赤 <small>vs</small> 青</span><span lang="en">Red <small>vs</small> Blue</span></dd></div>
+      <div><dt><span lang="ja">フィールド</span><span lang="en">Field</span></dt><dd>7×7<small>m</small></dd></div>
+      <div><dt><span lang="ja">ロボット</span><span lang="en">Robot</span></dt><dd>1<small><span lang="ja">台・20kg以下</span><span lang="en">per team · ≤20 kg</span></small></dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <div class="navlinks">
+      <a href="#match"><span lang="ja">試合の流れ</span><span lang="en">Match</span></a>
+      <a href="#field"><span lang="ja">フィールド</span><span lang="en">Field</span></a>
+      <a href="#win"><span lang="ja">勝ち方</span><span lang="en">Winning</span></a>
+      <a href="#score"><span lang="ja">得点</span><span lang="en">Scoring</span></a>
+      <a href="#dice"><span lang="ja">サイコロ</span><span lang="en">Dice</span></a>
+      <a href="#foul"><span lang="ja">違反・失格</span><span lang="en">Fouls</span></a>
+      <a href="#retry"><span lang="ja">リトライ</span><span lang="en">Retry</span></a>
+      <a href="#robot"><span lang="ja">ロボット規定</span><span lang="en">Robot rules</span></a>
+    </div>
+    <div class="langsw" role="group" aria-label="Language"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+</nav>
+
+<main>
+<!-- ================= MATCH ================= -->
+<section class="sec" id="match">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 3 · <span lang="ja">試合の進行</span><span lang="en">Match flow</span></p>
+      <h2><span lang="ja">1試合を通しで見る</span><span lang="en">Watch a whole match</span></h2>
+      <p class="lead"><span lang="ja">赤と青の試合を早送りで再現しました。下のバーやボタンで好きな場面に飛べます。時間配分やロボットの動き方は説明用の一例です。</span><span lang="en">A fast-forward replay of a Red vs Blue match. Use the bar or buttons to jump to any scene. The timing and robot moves are just one example for explanation.</span></p>
+    </div>
+    <div class="player" id="player">
+      <div class="board">
+        <div class="team red" id="tmR"><span class="tname"><span lang="ja">赤</span><span lang="en">RED</span></span><span class="score" id="scR">0</span></div>
+        <div class="clock"><span class="clabel" id="clockLabel">SETTING</span><span class="ctime" id="clock">1:00</span></div>
+        <div class="team blue" id="tmB"><span class="score" id="scB">0</span><span class="tname"><span lang="ja">青</span><span lang="en">BLUE</span></span></div>
+      </div>
+      <div class="stage-wrap">
+        <div class="stage" id="stage">
+          <svg id="matchSvg" role="img" aria-label="Match animation"></svg>
+          <div class="fx" id="fx"></div>
+          <button class="bigplay" id="bigplay" type="button"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg><span lang="ja">試合を再生</span><span lang="en">Play match</span></button>
+        </div>
+      </div>
+      <div class="status" id="status"></div>
+      <div class="controls">
+        <div class="timeline" id="timeline"><div class="segs" id="segs"></div><div class="head" id="head"></div></div>
+        <div class="btns">
+          <button class="cbtn" id="bPrev" type="button"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+          <button class="cbtn play" id="bPlay" type="button"><svg viewBox="0 0 24 24" id="playIco"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+          <button class="cbtn" id="bNext" type="button"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+          <span class="scene-ix" id="sceneIx">01 / 11</span>
+          <button class="cbtn speed" id="bSpeed" type="button">1×</button>
+        </div>
+      </div>
+      <div class="caption card" aria-live="polite">
+        <p class="cap-num" id="capNum">SCENE 01</p>
+        <h3 class="cap-title" id="capTitle"></h3>
+        <p class="cap-body" id="capBody"></p>
+        <div class="refs" id="capRefs"></div>
+      </div>
+    </div>
+    <p class="note"><span lang="ja">※ フィールドは平面図（図4）をもとにした概略図です。ボトルやサイコロは見やすいように実寸より大きく描いています。</span><span lang="en">* The field is a simplified drawing based on the plan view (Fig. 4). Bottles and dice are drawn larger than scale so they're easy to see.</span></p>
+  </div>
+</section>
+
+<!-- ================= FIELD ================= -->
+<section class="sec" id="field">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 1–2 · <span lang="ja">用語とオブジェクト</span><span lang="en">Terms &amp; objects</span></p>
+      <h2><span lang="ja">フィールドの見かた</span><span lang="en">Reading the field</span></h2>
+      <p class="lead"><span lang="ja">赤コート（左）と青コート（右）は、真ん中の木枠を境に左右対称。名前をタップすると、その場所が図の上で光ります。</span><span lang="en">The Red court (left) and Blue court (right) mirror each other across the center wooden frame. Tap a name to light up that spot on the map.</span></p>
+    </div>
+    <div class="explore">
+      <div class="stage" id="expStage">
+        <svg id="expSvg" role="img" aria-label="Field plan"></svg>
+        <div class="fx" id="expFx"></div>
+      </div>
+      <div>
+        <div class="chips" id="expChips" role="group"></div>
+        <div class="exp-desc card" aria-live="polite"><h3 id="expTitle"></h3><p id="expText"></p></div>
+        <p class="note"><span lang="ja">※ ルールブックの図3では、雑草ゾーンの枠が青コート側の帯にだけ描かれています。フィールドは左右対称なので、このページでは各コートの共通ゾーン横の帯を、それぞれの雑草ゾーンとして描いています。正確な扱いは公式FAQで確認しておくのがおすすめです。</span><span lang="en">* In the rulebook's Fig. 3, the Weed Zone outline is drawn only on the strip on the Blue side. Because the field is symmetric, this page treats the strip beside the Common Zones on each side as that court's Weed Zone. It's worth confirming this in the official FAQ.</span></p>
+      </div>
+    </div>
+
+    <h3 class="sub"><span lang="ja">使うオブジェクト</span><span lang="en">Objects</span></h3>
+    <div class="objs">
+      <div class="obj card">
+        <svg viewBox="0 0 70 150" aria-hidden="true"><path class="ob-body" d="M27 16h16v10c0 5 15 11 15 25v82c0 6-4 10-10 10H22c-6 0-10-4-10-10V51c0-14 15-20 15-25z"/><rect x="25" y="5" width="20" height="13" rx="3" fill="#E8213A"/><rect x="35" y="5" width="10" height="13" rx="3" fill="#2F5BFF"/><circle class="ob-ball" cx="24" cy="134" r="6"/><circle class="ob-ball b2" cx="37" cy="135" r="6"/><circle class="ob-ball b3" cx="48" cy="133" r="6"/><circle class="ob-ball" cx="31" cy="123" r="6"/></svg>
+        <h4><span lang="ja">桜ボトル</span><span lang="en">Sakura bottle</span></h4>
+        <p class="cnt"><span lang="ja">各チーム 15本</span><span lang="en">15 per team</span></p>
+        <p><span lang="ja">500mlの炭酸水ボトル（ラベルレス）にスーパーボールを入れて計150g。キャップに自チームの色（赤／青）の19mmテープ。</span><span lang="en">A 500 ml labelless sparkling-water bottle with super balls inside, 150 g total. 19 mm tape in your team color (red / blue) on the cap.</span></p>
+      </div>
+      <div class="obj card">
+        <svg viewBox="0 0 70 150" aria-hidden="true"><path class="ob-body" d="M27 16h16v10c0 5 15 11 15 25v82c0 6-4 10-10 10H22c-6 0-10-4-10-10V51c0-14 15-20 15-25z"/><rect x="25" y="5" width="20" height="13" rx="3" fill="#F2C200"/><circle class="ob-ball" cx="24" cy="134" r="6"/><circle class="ob-ball b2" cx="37" cy="135" r="6"/><circle class="ob-ball b3" cx="48" cy="133" r="6"/><circle class="ob-ball b2" cx="40" cy="123" r="6"/></svg>
+        <h4><span lang="ja">除草剤ボトル</span><span lang="en">Herbicide bottle</span></h4>
+        <p class="cnt"><span lang="ja">各チーム 5本</span><span lang="en">5 per team</span></p>
+        <p><span lang="ja">桜ボトルと同じ500mlボトルで計150g。キャップは黄色テープ。投げて相手の雑草ボトルを倒すのに使う。</span><span lang="en">The same 500 ml bottle, 150 g total, with yellow tape on the cap. Thrown to knock over the opponent's Weed bottles.</span></p>
+      </div>
+      <div class="obj card">
+        <svg viewBox="0 0 70 150" aria-hidden="true"><path class="ob-body" d="M28 10h14v10c0 5 18 12 18 28v90c0 6-4 10-10 10H20c-6 0-10-4-10-10V48c0-16 18-23 18-28z"/><rect x="26" y="2" width="18" height="10" rx="3" fill="#557421"/><circle class="ob-ball" cx="22" cy="139" r="6"/><circle class="ob-ball b3" cx="35" cy="140" r="6"/><circle class="ob-ball b2" cx="48" cy="138" r="6"/></svg>
+        <h4><span lang="ja">雑草ボトル</span><span lang="en">Weed bottle</span></h4>
+        <p class="cnt"><span lang="ja">各チーム 3本</span><span lang="en">3 per team</span></p>
+        <p><span lang="ja">1000mlの炭酸水ボトルにスーパーボールを入れて計150g。軽くて背が高いので倒れやすい。</span><span lang="en">A 1000 ml sparkling-water bottle with super balls, 150 g total. Light and tall, so it tips over easily.</span></p>
+      </div>
+      <div class="obj card">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 14 102 36v48L60 106 18 84V36z" fill="var(--surface-2)" stroke="var(--muted)" stroke-width="2"/><path d="M18 36 60 58l42-22M60 58v48" fill="none" stroke="var(--muted)" stroke-width="2"/><ellipse cx="60" cy="36" rx="7" ry="4" fill="var(--ink)"/><circle cx="34" cy="62" r="4" fill="var(--ink)"/><circle cx="46" cy="80" r="4" fill="var(--ink)"/><circle cx="74" cy="64" r="4" fill="var(--ink)"/><circle cx="88" cy="56" r="4" fill="var(--ink)"/><circle cx="74" cy="86" r="4" fill="var(--ink)"/><circle cx="88" cy="78" r="4" fill="var(--ink)"/></svg>
+        <h4><span lang="ja">サイコロ</span><span lang="en">Dice</span></h4>
+        <p class="cnt"><span lang="ja">各チーム 1個</span><span lang="en">1 per team</span></p>
+        <p><span lang="ja">15cmのスポンジサイコロ。試合前に相手チームが、自分のサイコロゾーンに置く。</span><span lang="en">A 15 cm sponge die. Before the match, the opposing team places it in your Dice Zone.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WIN ================= -->
+<section class="sec" id="win">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 1 · 3.7 · 3.8 · <span lang="ja">勝敗</span><span lang="en">Winning</span></p>
+      <h2><span lang="ja"><span class="nw">勝ち方：</span><span class="nw">並木を伸ばして、</span><span class="nw">12番で咲かせる</span></span><span lang="en">How to win: grow the avenue, bloom at zone 12</span></h2>
+      <p class="lead"><span lang="ja">共通ゾーンは赤と青で共有する1本道です。置けるのはいつも「いちばん小さい空き番号」だけ。下のシミュレーターで、置く・どける・妨害を試せます。</span><span lang="en">The Common Zones are one path shared by Red and Blue, and you can only ever place in the lowest empty zone. Try placing, removing and blocking in the simulator below.</span></p>
+    </div>
+    <div class="win-grid">
+      <div class="sim card">
+        <div class="lane" id="lane"></div>
+        <div class="lane-legend"><span><span lang="ja">1番（スタート側）</span><span lang="en">Zone 1 (start side)</span></span><span><span lang="ja">12番 → 満開</span><span lang="en">12 → Full Bloom</span></span></div>
+        <div class="sim-teams" id="simTeams"></div>
+        <p class="sim-msg" id="simMsg" aria-live="polite"></p>
+        <div class="sim-foot">
+          <button class="ghost" id="simEx" type="button"><span lang="ja">例の状態に戻す</span><span lang="en">Load example</span></button>
+          <button class="ghost" id="simClear" type="button"><span lang="ja">空にする</span><span lang="en">Clear</span></button>
+          <span class="hint"><span lang="ja">置いてあるボトルをタップすると、相手チームがどけます。</span><span lang="en">Tap a placed bottle to have the other team remove it.</span></span>
+        </div>
+      </div>
+      <ul class="rules">
+        <li class="card"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 18h4v-4h4v-4h4V6h4"/></svg></span><div><b><span lang="ja">番号順にしか置けない</span><span lang="en">Number order only</span></b><span class="rd"><span lang="ja">N番に置けるのは、1〜N−1番がすべて埋まっているときだけ（どちらの色でもOK）。1番はいつでも置けます。</span><span lang="en">You can place in zone N only when zones 1 to N−1 are all filled, in either color. Zone 1 is always open.</span></span></div></li>
+        <li class="card"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span><div><b><span lang="ja">12番は五分咲きの後だけ</span><span lang="en">Zone 12 only after Half Bloom</span></b><span class="rd"><span lang="ja">自分の桜ボトルがある共通ゾーンが5個以上になって初めて、12番に置けます。</span><span lang="en">Only once your Sakura bottles occupy 5 or more Common Zones can you place in zone 12.</span></span></div></li>
+        <li class="card"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21V11M12 11c0-4 3-7 7-7 0 4-3 7-7 7zM12 14c0-3-2-5-5-5 0 3 2 5 5 5z"/></svg></span><div><b><span lang="ja">雑草が倒れていたら置けない</span><span lang="en">A fallen weed blocks you</span></b><span class="rd"><span lang="ja">自コートの雑草ボトルが1本でも倒れている（底面が接地していない）と、共通ゾーンにまったく置けません。</span><span lang="en">If even one Weed bottle in your court is down (its base not fully on the floor), you can't place in any Common Zone.</span></span></div></li>
+        <li class="card"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><div><b><span lang="ja">相手のボトルはどけてよい</span><span lang="en">You may move the opponent's bottles</span></b><span class="rd"><span lang="ja">共通ゾーンにある相手の桜ボトルは動かせます。ただし、それを自コート内に置くと違反です。</span><span lang="en">You can move the opponent's Sakura bottles in the Common Zones, but putting one inside your own court is a violation.</span></span></div></li>
+      </ul>
+    </div>
+
+    <div class="two" style="margin-top:16px">
+      <div class="box card">
+        <h3><span lang="ja">試合が終わるとき（どれか1つで終了）</span><span lang="en">When the match ends (any one)</span></h3>
+        <ul class="plain">
+          <li><span lang="ja">どちらかのチームが<b>満開宣言</b>した</span><span lang="en">A team makes the <b>Full Bloom Declaration</b></span></li>
+          <li><span lang="ja">どちらかのチームが<b>失格</b>になった</span><span lang="en">A team is <b>disqualified</b></span></li>
+          <li><span lang="ja">競技開始から<b>3分</b>たった</span><span lang="en"><b>3 minutes</b> pass from the start</span></li>
+        </ul>
+        <p class="note"><span lang="ja">予選リーグだけは例外で、片方が満開宣言しても、もう片方は続けます。両チームが満開宣言するか、3分たった時点で終了です。</span><span lang="en">The preliminary league is the exception: after one team declares Full Bloom, the other keeps playing. The match ends when both teams have declared or 3 minutes have passed.</span></p>
+      </div>
+      <div class="box card">
+        <h3><span lang="ja">勝敗の決め方（上から順に比べる）</span><span lang="en">Deciding the winner (compare in order)</span></h3>
+        <ol class="prio">
+          <li><span lang="ja">先に満開宣言したチーム</span><span lang="en">First to declare Full Bloom</span></li>
+          <li><span lang="ja">合計得点が高いチーム</span><span lang="en">Higher total score</span></li>
+          <li><span lang="ja">先に桜ボトルを共通ゾーンに置いたチーム</span><span lang="en">First to place a Sakura bottle in a Common Zone</span></li>
+          <li><span lang="ja">先に初めての得点をとったチーム</span><span lang="en">First to score any points</span></li>
+          <li><span lang="ja">審判による決定</span><span lang="en">Referee's decision</span></li>
+        </ol>
+        <p class="note"><span lang="ja">勝敗や得点への異議は、競技終了から退場までの間にチームリーダーが審判へ。退場後は受け付けられません。</span><span lang="en">Protests about the result or score go from the team leader to the referee between the end of the match and leaving the field. Nothing is accepted after you leave.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCORE ================= -->
+<section class="sec" id="score">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 3.6 · <span lang="ja">得点</span><span lang="en">Scoring</span></p>
+      <h2><span lang="ja">点数のしくみ</span><span lang="en">How points work</span></h2>
+      <p class="lead"><span lang="ja">点が効くのは、どちらも満開宣言できなかったとき。満開宣言したチームは、点数に関係なく勝ちです。</span><span lang="en">Points only matter when neither team declares Full Bloom. A team that declares Full Bloom wins regardless of score.</span></p>
+    </div>
+    <div class="card">
+      <div class="srow"><span class="sl">A</span><span class="tx"><span lang="ja">エリア2に初めて進入する</span><span lang="en">First entry into Area 2</span></span><span class="pt">+10</span><span class="bar"><i style="width:5.6%"></i></span></div>
+      <div class="srow"><span class="sl">B</span><span class="tx"><span lang="ja">サイコロの目を初めて変える</span><span lang="en">First change of the dice face</span></span><span class="pt">+20</span><span class="bar"><i style="width:11.1%"></i></span></div>
+      <div class="srow"><span class="sl">C</span><span class="tx"><span lang="ja">共通ゾーンに桜ボトルが完全に接地している<small>1本につき</small></span><span lang="en">Sakura bottle fully grounded in a Common Zone<small>each</small></span></span><span class="pt">+30</span><span class="bar"><i style="width:16.7%"></i></span></div>
+      <div class="srow"><span class="sl">D</span><span class="tx"><span lang="ja">雑草ボトルの底面が雑草ゾーン内に完全に接地していない<small>1本につき（倒れた・ゾーンから出た）</small></span><span lang="en">Weed bottle base not fully grounded inside the Weed Zone<small>each (knocked over or out of the zone)</small></span></span><span class="pt neg">−15</span><span class="bar"><i class="neg" style="width:8.3%"></i></span></div>
+      <div class="srow"><span class="sl">E</span><span class="tx"><span lang="ja">五分咲きを達成する</span><span lang="en">Achieve Half Bloom</span></span><span class="pt">+90</span><span class="bar"><i style="width:50%"></i></span></div>
+      <div class="srow"><span class="sl">F</span><span class="tx"><span lang="ja">満開を達成する</span><span lang="en">Achieve Full Bloom</span></span><span class="pt">+180</span><span class="bar"><i style="width:100%"></i></span></div>
+    </div>
+    <div class="ex card">
+      <h3><span lang="ja">上の試合の内訳</span><span lang="en">Breakdown of the match above</span></h3>
+      <div class="exrow"><span class="who r"><span lang="ja">赤</span><span lang="en">Red</span></span><div class="stack" style="width:62.5%"><span class="a" style="flex:10">A</span><span class="b" style="flex:20">B</span><span class="c" style="flex:180">C 180</span><span class="e" style="flex:90">E 90</span></div><span class="tot">300</span></div>
+      <div class="exrow"><span class="who b"><span lang="ja">青</span><span lang="en">Blue</span></span><div class="stack" style="width:100%"><span class="a" style="flex:10">A</span><span class="b" style="flex:20">B</span><span class="c" style="flex:180">C 180</span><span class="e" style="flex:90">E 90</span><span class="f" style="flex:180">F 180</span></div><span class="tot">480</span></div>
+      <div class="legend"><span><i style="background:var(--seg-a)"></i><span lang="ja">A エリア2 10</span><span lang="en">A Area 2: 10</span></span><span><i style="background:var(--seg-b)"></i><span lang="ja">B サイコロ 20</span><span lang="en">B Dice: 20</span></span><span><i style="background:var(--seg-c)"></i><span lang="ja">C 桜ボトル 6本×30</span><span lang="en">C Sakura: 6 × 30</span></span><span><i style="background:var(--seg-e)"></i><span lang="ja">E 五分咲き 90</span><span lang="en">E Half Bloom: 90</span></span><span><i style="background:var(--seg-f)"></i><span lang="ja">F 満開 180</span><span lang="en">F Full Bloom: 180</span></span></div>
+      <p class="note"><span lang="ja">赤は雑草を2本倒されて一度−30点になりましたが、リトライで立て直したので最終的な減点はゼロ。それでも青が先に満開宣言したので、勝敗は点数より先に決まっています。</span><span lang="en">Red briefly dropped 30 points when two weeds were knocked over, but stood them back up with a retry, so its final penalty was zero. Blue still declared Full Bloom first, so the result was settled before points came into it.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DICE ================= -->
+<section class="sec" id="dice">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 1 · 2.4 · 5.4 · <span lang="ja">サイコロ</span><span lang="en">Dice</span></p>
+      <h2><span lang="ja"><span class="nw">サイコロの目 ＝</span><span class="nw">一度に持てる本数</span></span><span lang="en">Dice face = bottles you can hold</span></h2>
+      <p class="lead"><span lang="ja">ロボットがつかめるボトルの数は、自分のサイコロゾーンに完全に接地しているサイコロの目の数まで。サイコロを転がして、持つ本数を変えてみてください。</span><span lang="en">Your robot may grip as many bottles as the face of the die sitting fully grounded in your own Dice Zone. Roll the die and change how many bottles you hold.</span></p>
+    </div>
+    <div class="dicebox card">
+      <div class="dice-play">
+        <svg class="dsvg" id="dsvg" viewBox="0 0 100 100" aria-hidden="true"><rect x="6" y="6" width="88" height="88" rx="16"/><g id="dpips"></g></svg>
+        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg class="mini-robot" id="mrobot" viewBox="0 0 100 100" aria-hidden="true"></svg>
+      </div>
+      <div class="dctl">
+        <div class="drow"><button class="roll-btn" id="rollBtn" type="button"><span lang="ja">サイコロを転がす</span><span lang="en">Roll the die</span></button><span class="hint" id="rollNote"></span></div>
+        <div class="drow"><span><span lang="ja">つかむボトルの本数</span><span lang="en">Bottles gripped</span></span><span class="step"><button type="button" id="hMinus">−</button><output id="hOut">1</output><button type="button" id="hPlus">＋</button></span></div>
+        <p class="verdict" id="verdict" aria-live="polite"></p>
+      </div>
+    </div>
+    <ul class="plain" style="margin-top:14px">
+      <li><span lang="ja">サイコロは試合前に<b>相手チーム</b>が、こちらのサイコロゾーンの白線の四角にぴったり重なるように置きます。</span><span lang="en">Before the match, the <b>opposing team</b> places your die so it lines up exactly with the white square in your Dice Zone.</span></li>
+      <li><span lang="ja">数えるのは桜・除草剤・雑草を合わせた「ペットボトル」の本数。目より多く持つと<b>違反（強制リトライ）</b>。</span><span lang="en">Every PET bottle counts: Sakura, Herbicide and Weed together. Holding more than the face is a <b>violation (forced retry)</b>.</span></li>
+      <li><span lang="ja">目を<b>初めて</b>変えた時点で+20点。2回目以降は点になりません。</span><span lang="en">You get +20 the <b>first</b> time you change the face. Later changes score nothing.</span></li>
+      <li><span lang="ja">リトライでサイコロを置き直すときは、<b>リトライ前と同じ目</b>で置きます。</span><span lang="en">When you re-place the die during a retry, use <b>the same face as before the retry</b>.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= FOUL ================= -->
+<section class="sec" id="foul">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 5–6 · <span lang="ja">違反と失格</span><span lang="en">Violations &amp; disqualification</span></p>
+      <h2><span lang="ja"><span class="nw">違反と失格の</span><span class="nw">ちがい</span></span><span lang="en">Violation vs. disqualification</span></h2>
+      <p class="lead"><span lang="ja">違反はやり直し（強制リトライ）で試合は続きます。失格はその場で負け、得点も0点です。</span><span lang="en">A violation means a do-over (forced retry) and the match goes on. A disqualification means you lose on the spot with 0 points.</span></p>
+    </div>
+    <div class="fgrid">
+      <div class="fcard v">
+        <h3><span lang="ja">違反</span><span lang="en">Violation</span> <span class="res"><span lang="ja">→ 強制リトライ</span><span lang="en">→ Forced retry</span></span></h3>
+        <p class="sum"><span lang="ja">スタートゾーンからやり直し。試合は続く。</span><span lang="en">Start over from the Start Zone. The match continues.</span></p>
+        <ul class="flist">
+          <li><span class="rn">5.1</span><span><span lang="ja">メンバーが審判の許可なくフィールドに入る（上空も含む）、ロボットに触る</span><span lang="en">A member enters the field (including the space above it) or touches the robot without the referee's permission</span></span></li>
+          <li><span class="rn">5.2</span><span><span lang="ja">メンバーが審判の許可なくオブジェクトに触る</span><span lang="en">A member touches an object without permission</span></span></li>
+          <li><span class="rn">5.3</span><span><span lang="ja">ロボットが入ってはいけない場所・触ってはいけない物に入る／触る（相手コート、外周の木枠の上面・外側など）</span><span lang="en">The robot enters or touches a place or object it isn't allowed to (the opponent's court, the top or outside of the outer frame, etc.)</span></span></li>
+          <li><span class="rn">5.4</span><span><span lang="ja">サイコロの目より多い本数のボトルを持つ</span><span lang="en">Holding more bottles than the dice face</span></span></li>
+          <li><span class="rn">5.5</span><span><span lang="ja">相手の桜ボトルを自コート内に置く</span><span lang="en">Placing an opponent's Sakura bottle inside your own court</span></span></li>
+          <li><span class="rn">5.6</span><span><span lang="ja">自分の桜ボトルを相手コート内に置く</span><span lang="en">Placing your own Sakura bottle inside the opponent's court</span></span></li>
+          <li><span class="rn">5.7</span><span><span lang="ja">相手ロボットに意図的に接触する</span><span lang="en">Intentionally contacting the opponent's robot</span></span></li>
+          <li><span class="rn">5.8</span><span><span lang="ja">その他ルールに抵触すると判断された</span><span lang="en">Anything else judged to break the rules</span></span></li>
+        </ul>
+      </div>
+      <div class="fcard d">
+        <h3><span lang="ja">失格</span><span lang="en">Disqualification</span> <span class="res"><span lang="ja">→ 相手の勝ち・得点0</span><span lang="en">→ Opponent wins · 0 points</span></span></h3>
+        <p class="sum"><span lang="ja">非常停止ボタンでロボットを止め、競技終了までフィールド外で待機。審判が非常停止を押すこともある。</span><span lang="en">Stop the robot with the emergency stop and wait outside the field until the match ends. The referee may press the emergency stop.</span></p>
+        <ul class="flist">
+          <li><span class="rn">6.1.1</span><span><span lang="ja">フィールド・周囲の環境・オブジェクトを著しく壊す／汚す</span><span lang="en">Seriously damaging or soiling the field, its surroundings or objects</span></span></li>
+          <li><span class="rn">6.1.2</span><span><span lang="ja">相手ロボットを故意に壊す／汚す</span><span lang="en">Intentionally damaging or soiling the opponent's robot</span></span></li>
+          <li><span class="rn">6.1.3</span><span><span lang="ja">審判の指示に繰り返し従わない</span><span lang="en">Repeatedly ignoring the referee's instructions</span></span></li>
+          <li><span class="rn">6.1.4</span><span><span lang="ja">安全上の重大な問題が起きている</span><span lang="en">A serious safety problem</span></span></li>
+          <li><span class="rn">6.1.5</span><span><span lang="ja">その他フェアプレイ精神に反する行為</span><span lang="en">Any other unsportsmanlike conduct</span></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="quiz card">
+      <div class="qtop"><h3><span lang="ja">これはどうなる？</span><span lang="en">What happens here?</span></h3><span class="qprog" id="qprog"></span></div>
+      <div id="qwrap"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RETRY ================= -->
+<section class="sec" id="retry">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 4 · <span lang="ja">リトライ</span><span lang="en">Retry</span></p>
+      <h2><span lang="ja">リトライの手順</span><span lang="en">How a retry works</span></h2>
+      <p class="lead"><span lang="ja">何度でもできるやり直し。違反したときの強制リトライも、手順は同じです。</span><span lang="en">A do-over you can use as many times as you like. A forced retry after a violation follows the same steps.</span></p>
+    </div>
+    <ol class="rsteps" id="rsteps">
+      <li class="rstep"><span class="rn2">1</span><b><span lang="ja">宣言する</span><span lang="en">Declare</span></b><span class="rd"><span lang="ja">メンバーが「リトライ」を宣言し、審判が承認。</span><span lang="en">A member declares "retry" and the referee approves.</span></span></li>
+      <li class="rstep"><span class="rn2">2</span><b><span lang="ja">止める</span><span lang="en">Stop</span></b><span class="rd"><span lang="ja">非常停止ボタンで、すぐにロボットを止める。</span><span lang="en">Stop the robot right away with the emergency stop button.</span></span></li>
+      <li class="rstep"><span class="rn2">3</span><b><span lang="ja">運ぶ</span><span lang="en">Carry</span></b><span class="rd"><span lang="ja">ロボットをスタートゾーンへ。リトライ中はロボットに触れても、動かしてもOK。</span><span lang="en">Take the robot to the Start Zone. During a retry you may touch and move it.</span></span></li>
+      <li class="rstep"><span class="rn2">4</span><b><span lang="ja">戻す</span><span lang="en">Reset</span></b><span class="rd"><span lang="ja">ロボットが触れていたオブジェクトは競技開始時の状態へ。自コートのオブジェクトは初期位置に置き直せる。サイコロは同じ目で。</span><span lang="en">Objects the robot was touching go back to their starting state. Objects in your own court can be re-placed at their starting spots. The die goes back on the same face.</span></span></li>
+      <li class="rstep"><span class="rn2">5</span><b><span lang="ja">再スタート</span><span lang="en">Restart</span></b><span class="rd"><span lang="ja">「リスタート」を宣言し、審判の承認後にスタートゾーンから出発。</span><span lang="en">Declare "restart" and, once the referee approves, go again from the Start Zone.</span></span></li>
+    </ol>
+    <div class="box card" style="margin-top:14px">
+      <h3><span lang="ja">ルールから読み取れること</span><span lang="en">What the rules imply</span></h3>
+      <ul class="plain">
+        <li><span lang="ja">倒された雑草ボトルは、リトライで初期位置に置き直せます（自コート内のオブジェクトなので）。</span><span lang="en">Knocked-over Weed bottles can be put back at their starting spots during a retry, since they're objects in your own court.</span></li>
+        <li><span lang="ja">共通ゾーンに置いた桜ボトルは、そのとき触れていなければ戻す対象ではありません。</span><span lang="en">Sakura bottles already in the Common Zones stay put unless the robot was touching them.</span></li>
+        <li><span lang="ja">試合終了は「競技開始から3分」なので、リトライ中も時間は進むと考えておきましょう。</span><span lang="en">The match ends "3 minutes after the start," so assume the clock keeps running during a retry.</span></li>
+        <li><span lang="ja">違反のほか、安全などの観点で審判が必要と判断したときも強制リトライになります。</span><span lang="en">Besides violations, the referee can also call a forced retry for safety or similar reasons.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROBOT ================= -->
+<section class="sec" id="robot">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rule 7–9 · <span lang="ja">チームとロボット</span><span lang="en">Team &amp; robot</span></p>
+      <h2><span lang="ja"><span class="nw">ロボットと</span><span class="nw">チームの決まり</span></span><span lang="en">Robot and team rules</span></h2>
+      <p class="lead"><span lang="ja">試合前日のテストラン前と当日の予選前に計量・計測・安全確認があり、合格しないとテストランにも試合にも出られません。</span><span lang="en">Weighing, measuring and a safety check happen before the test run the day before and before the preliminaries on match day. Fail it and you can't join the test run or the matches.</span></p>
+    </div>
+    <div class="robo">
+      <div class="cubebox card" aria-hidden="true">
+        <div class="scene3d"><div class="cube"><div class="f1"></div><div class="f2"></div><div class="f3"></div><div class="f4"></div><div class="f5"></div><div class="f6"></div></div></div>
+        <div class="cubelab"><span class="cl l1"><b>700mm</b><span lang="ja">スタート時（初期制限）</span><span lang="en">At the start (initial limit)</span></span><span class="cl l2"><b>1000mm</b><span lang="ja">競技中（展開制限）</span><span lang="en">During the match (expansion limit)</span></span></div>
+      </div>
+      <dl class="specs">
+        <div class="spec card"><dt><span lang="ja">台数</span><span lang="en">Robots</span></dt><dd><span lang="ja"><b>1</b>台。分離は禁止。</span><span lang="en"><b>1</b> robot. It may not split apart.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">サイズ</span><span lang="en">Size</span></dt><dd><span lang="ja">スタート時 <b>700</b>mm立方、競技中 <b>1000</b>mm立方に収める。エアタンクも対象。</span><span lang="en">Fit inside a <b>700</b> mm cube at the start and a <b>1000</b> mm cube during the match. Air tanks included.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">重量</span><span lang="en">Weight</span></dt><dd><span lang="ja"><b>20</b>kg以下（エアタンクを除く）。エアタンクの重量は大会前に提出。</span><span lang="en"><b>20</b> kg or less, not counting air tanks. Air tank weight is submitted before the event.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">動力源</span><span lang="en">Power</span></dt><dd><span lang="ja">バッテリー・圧縮空気・弾性力のみ。</span><span lang="en">Batteries, compressed air and elastic force only.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">電圧</span><span lang="en">Voltage</span></dt><dd><span lang="ja">バッテリーの公称電圧 <b>24</b>V以下（直列でも合計24V以下）。回路内の実電圧は <b>42</b>V以下。</span><span lang="en">Battery nominal voltage <b>24</b> V or less (also the total when in series). Actual voltage in any circuit <b>42</b> V or less.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">非常停止ボタン</span><span lang="en">Emergency stop</span></dt><dd><span class="estop" aria-hidden="true"></span><span lang="ja">黄色単色の背景＋赤のプッシュロック・ターンリセット式。押すと全ての駆動用電源を遮断。すぐ押せる位置に、フレームへねじ止め（可動部に触れる位置は不可）。</span><span lang="en">A solid yellow base with a red push-lock, turn-reset button. Pressing it cuts all drive power. Mount it where it's quick to reach (not where moving parts could hit your hand), screwed to the frame.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">コントローラ</span><span lang="en">Controller</span></dt><dd><span lang="ja">有線・無線どちらでもOK。重量には含むが、サイズ制限はなし。無線は技適品で、通信環境は保証されない。</span><span lang="en">Wired or wireless. Counts toward the weight but has no size limit. Wireless gear must be certified in Japan (技適), and the organizers don't guarantee the radio environment.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">その他の安全</span><span lang="en">Other safety</span></dt><dd><span lang="ja">レーザーはクラス2以下で目に入らない対策を。高温・爆発性の物質、硫酸を含む電池などは禁止。電源は衝撃対策と固定、ブレーカー等の電流制限を。</span><span lang="en">Lasers class 2 or below and kept out of people's eyes. No hot or explosive materials or batteries containing sulfuric acid. Protect and secure the power supply, and add breakers or other current limiting.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">チーム</span><span lang="en">Team</span></dt><dd><span lang="ja">同じ教育機関のメンバー <b>3</b>人（うち1人がリーダー）＋ピットクルー最大 <b>3</b>人＋引率 <b>1</b>人（上級生か教職員）。セッティングは最大6人。</span><span lang="en"><b>3</b> members from the same school (one is the leader), up to <b>3</b> pit crew, and <b>1</b> supervisor (a senior student or staff member). Up to 6 people for setup.</span></dd></div>
+        <div class="spec card"><dt><span lang="ja">ロゴ</span><span lang="en">Logos</span></dt><dd><span lang="ja">1つ100×100mm以内。機体を立方体と見たとき、各面のロゴの合計は面積の50%以下。</span><span lang="en">Each logo within 100 × 100 mm. Treating the robot as a cube, logos may cover at most 50% of each face.</span></dd></div>
+      </dl>
+    </div>
+    <div class="safety card">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.5 20h19z"/><path d="M12 10v4.5M12 17.5v.01"/></svg>
+      <p><span lang="ja">本番だけでなく、練習やテストランでも<b>靴・ヘルメット・ゴーグル</b>を常に着用。安全は最優先事項です。</span><span lang="en">Always wear <b>shoes, a helmet and goggles</b>, not only at the event but also in practice and test runs. Safety comes first.</span></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><span lang="ja">出典：関西春ロボコン2027 競技課題「SAKURA AVENUE」ver.1.0.0（2026年10月1日、関西春ロボコン運営委員会）。このページは非公式の解説です。ルールの補足・変更やFAQは <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">公式ホームページ</a> で確認してください。</span><span lang="en">Source: Kansai Spring Robocon 2027 game rules "SAKURA AVENUE" ver.1.0.0 (October 1, 2026, Kansai Spring Robocon Organizing Committee). This is an unofficial explainer; the Japanese rulebook is authoritative. Check rule updates and the FAQ on the <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">official website</a>.</span></p>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+/* ================= LANGUAGE ================= */
+let LANG = 'ja';
+try { const v = localStorage.getItem('sakura-avenue-lang'); if (v === 'en' || v === 'ja') LANG = v; } catch (_) {}
+const L = (ja, en) => LANG === 'en' ? en : ja;
+const tx = p => Array.isArray(p) ? (LANG === 'en' ? p[1] : p[0]) : p;
+const langHooks = [];
+function applyLangAttr() {
+  document.documentElement.setAttribute('data-lang', LANG);
+  document.documentElement.setAttribute('lang', LANG);
+  document.querySelectorAll('.langsw button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
+}
+function setLang(l) {
+  if (l === LANG) return;
+  LANG = l;
+  try { localStorage.setItem('sakura-avenue-lang', l); } catch (_) {}
+  applyLangAttr();
+  langHooks.forEach(f => f());
+}
+applyLangAttr();
+document.querySelectorAll('.langsw button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+const NS = 'http://www.w3.org/2000/svg';
+const W = 7000, PAD = 110, VB = W + PAD * 2;
+const RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = id => document.getElementById(id);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const easeIO = p => p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const backOut = p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+function s(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const M = x => W - x;
+const RUNG = k => 6083 - 507 * k;
+const ZC = k => 6083 - 507 * (k - 0.5);
+const ZR = k => Math.max(ZC(k) + 50, 300);
+const pct = v => ((v + PAD) / VB * 100);
+
+/* ---------- geometry (mm, red court; blue = mirror) ---------- */
+const GEO = {
+  wood: [[0,1140,1625,1140],[0,2280,500,2280],[1625,1140,1625,5134],[1089,3340,1625,3340],[0,4360,500,4360],[0,6281,1640,6281],[3022,RUNG(4),3331,RUNG(4)],[3022,RUNG(8),3331,RUNG(8)]],
+  chalk: [[500,0,500,2280],[1640,6281,3022,6281],[2794,6281,2794,7000],[3022,0,3022,6281]],
+  sakura: (() => { const a = []; for (let r = 0; r < 5; r++) for (let c = 0; c < 3; c++) a.push([110 + c * 140, 1255 + r * 195]); return a; })(),
+  herb: [[140,230],[360,230],[140,520],[360,520],[250,820]],
+  weed: [[3176,1000],[3176,3040],[3176,5070]],
+  dice: [3150, 6618]
+};
+const FACES = {1:['C'],2:['TL','BR'],3:['TL','C','BR'],4:['TL','TR','BL','BR'],5:['TL','TR','BL','BR','C'],6:['TL','ML','BL','TR','MR','BR']};
+const PIPPOS = {TL:[-64,-64],TR:[64,-64],ML:[-64,0],MR:[64,0],BL:[-64,64],BR:[64,64],C:[0,0]};
+
+function buildField(svg) {
+  svg.setAttribute('viewBox', `${-PAD} ${-PAD} ${VB} ${VB}`);
+  const L2 = {};
+  L2.base = s('g', null, svg);
+  s('rect', {x:-PAD, y:-PAD, width:VB, height:VB, class:'f-mat'}, L2.base);
+  s('rect', {x:0, y:0, width:W, height:W, class:'f-floor'}, L2.base);
+  s('rect', {x:0, y:0, width:3500, height:W, class:'f-half red'}, L2.base);
+  s('rect', {x:3500, y:0, width:3500, height:W, class:'f-half blue'}, L2.base);
+  const chalk = s('g', {class:'chalk'}, svg);
+  for (const side of [0, 1]) {
+    const X = side ? M : (x => x);
+    for (const [x1,y1,x2,y2] of GEO.chalk) s('line', {x1:X(x1), y1, x2:X(x2), y2}, chalk);
+    const dc = X(GEO.dice[0]);
+    s('rect', {x:dc-125, y:GEO.dice[1]-125, width:250, height:250}, chalk);
+    s('line', {x1:X(700), y1:6281, x2:X(700), y2:7000, class: side ? 'tape blue' : 'tape red'}, svg);
+  }
+  const wood = s('g', null, svg);
+  const segs = [];
+  for (const side of [0, 1]) { const X = side ? M : (x => x); for (const [x1,y1,x2,y2] of GEO.wood) segs.push([X(x1),y1,X(x2),y2]); }
+  segs.push([3331,0,3331,6083],[3669,0,3669,6083],[3331,6083,3669,6083],[3500,6083,3500,7000]);
+  for (let k = 1; k <= 11; k++) segs.push([3331,RUNG(k),3669,RUNG(k)]);
+  L2.segs = segs;
+  for (const q of segs) s('line', {x1:q[0], y1:q[1], x2:q[2], y2:q[3], class:'wood-sh'}, wood);
+  for (const q of segs) s('line', {x1:q[0], y1:q[1], x2:q[2], y2:q[3], class:'wood'}, wood);
+  s('rect', {x:0, y:0, width:W, height:W, class:'frame-sh'}, wood);
+  s('rect', {x:0, y:0, width:W, height:W, class:'frame'}, wood);
+  const nums = s('g', null, svg);
+  for (let k = 1; k <= 12; k++) { const t = s('text', {x:3500, y:ZC(k) - 125, 'text-anchor':'middle', 'dominant-baseline':'central', class:'znum'}, nums); t.textContent = k; }
+  L2.focus = s('g', null, svg);
+  L2.obj = s('g', null, svg);
+  L2.actors = s('g', null, svg);
+  L2.top = s('g', null, svg);
+  return L2;
+}
+function bottle(parent, x, y, r, cap) {
+  const outer = s('g', {transform:`translate(${x} ${y})`}, parent);
+  const g = s('g', null, outer);
+  s('circle', {r, class:'bt-body'}, g);
+  s('circle', {r:r * .45, class:'cap ' + cap}, g);
+  return {outer, g, x, y};
+}
+function weedBottle(parent, x, y) {
+  const outer = s('g', {transform:`translate(${x} ${y})`}, parent);
+  const g = s('g', null, outer);
+  const hit = s('circle', {r:100, class:'hit', opacity:0}, g);
+  const stand = s('g', null, g);
+  s('circle', {r:96, class:'weed-body'}, stand);
+  s('circle', {r:42, class:'weed-cap'}, stand);
+  const lie = s('g', {opacity:0}, g);
+  s('rect', {x:-60, y:-80, width:400, height:160, rx:70, class:'weed-body'}, lie);
+  s('rect', {x:340, y:-36, width:70, height:72, rx:16, class:'weed-cap'}, lie);
+  return {outer, g, stand, lie, hit, x, y};
+}
+function makeDice(parent, x, y) {
+  const outer = s('g', {transform:`translate(${x} ${y})`}, parent);
+  const g = s('g', null, outer);
+  s('rect', {x:-125, y:-125, width:250, height:250, rx:44, class:'dice'}, g);
+  const pips = {};
+  for (const k in PIPPOS) pips[k] = s('circle', {cx:PIPPOS[k][0], cy:PIPPOS[k][1], r:24, class:'pipd'}, g);
+  const d = {outer, g, pips, x, y, face:0, set(n) { if (n === d.face) return; d.face = n; const on = FACES[n]; for (const k in pips) pips[k].style.display = on.includes(k) ? '' : 'none'; }};
+  d.set(1);
+  return d;
+}
+function makeObjects(L2) {
+  const O = {sak:{red:[], blue:[]}, herb:{red:[], blue:[]}, weed:{red:[], blue:[]}, dice:{}, zone:[]};
+  for (const team of ['red', 'blue']) {
+    const X = team === 'blue' ? M : (x => x);
+    GEO.sakura.forEach(([x,y]) => O.sak[team].push(bottle(L2.obj, X(x), y, 64, 'c-' + team)));
+    GEO.herb.forEach(([x,y]) => O.herb[team].push(bottle(L2.obj, X(x), y, 64, 'c-yel')));
+    GEO.weed.forEach(([x,y]) => O.weed[team].push(weedBottle(L2.obj, X(x), y)));
+    O.dice[team] = makeDice(L2.obj, X(GEO.dice[0]), GEO.dice[1]);
+  }
+  for (let k = 1; k <= 12; k++) { const b = bottle(L2.obj, 3500, ZC(k) + 60, 88, 'c-red'); b.outer.style.display = 'none'; O.zone[k] = b; }
+  O.sakOrder = GEO.sakura.map((p, i) => i).sort((a, b) => (GEO.sakura[b][0] - GEO.sakura[a][0]) || (GEO.sakura[a][1] - GEO.sakura[b][1]));
+  return O;
+}
+function makeRobot(parent, team) {
+  const g = s('g', {class:'robot t-' + team}, parent);
+  const arm = s('g', {style:'display:none'}, g);
+  const armBar = s('rect', {x:0, y:-60, width:10, height:120, rx:30, class:'arm-bar'}, arm);
+  const grip = s('path', {d:'M0 -100H95V-58H42V58H95V100H0Z', class:'arm-grip'}, arm);
+  s('rect', {x:-260, y:-260, width:520, height:520, rx:80, class:'rb-body'}, g);
+  s('rect', {x:-205, y:-205, width:410, height:410, rx:54, class:'rb-plate'}, g);
+  const ex = team === 'red' ? 160 : -160;
+  s('rect', {x:ex - 62, y:-232, width:124, height:124, rx:18, class:'es-base'}, g);
+  s('circle', {cx:ex, cy:-170, r:40, class:'es-btn'}, g);
+  const ring = s('circle', {cx:ex, cy:-170, r:90, class:'es-ring'}, g);
+  const lamp = s('circle', {cx:-ex, cy:-170, r:46, class:'rb-lamp'}, g);
+  const dots = [];
+  [[-115,-20],[0,-20],[115,-20],[-115,115],[0,115],[115,115]].forEach(([x,y]) => { const c = s('circle', {cx:x, cy:y, r:48, class:'hd s'}, g); c.style.display = 'none'; dots.push(c); });
+  return {g, arm, armBar, grip, lamp, ring, dots, held:''};
+}
+function setArm(R, ang, len) {
+  if (len <= 2) { if (R.arm.style.display !== 'none') R.arm.style.display = 'none'; return; }
+  R.arm.style.display = '';
+  R.arm.setAttribute('transform', `rotate(${ang}) translate(250 0)`);
+  R.armBar.setAttribute('width', len);
+  R.grip.setAttribute('transform', `translate(${len - 20} 0)`);
+}
+function setHeld(R, sk, hb) {
+  const key = sk + ',' + hb;
+  if (R.held === key) return; R.held = key;
+  R.dots.forEach((d, i) => {
+    if (i < sk) { d.style.display = ''; d.setAttribute('class', 'hd s'); }
+    else if (i < sk + hb) { d.style.display = ''; d.setAttribute('class', 'hd h'); }
+    else d.style.display = 'none';
+  });
+}
+
+/* ================= MATCH DATA ================= */
+const RX = 2740, BX = M(2740);
+const END = 64.8, TOTAL = 72;
+const PATH = {
+  red: [[0,350,6640],[6,350,6640],[9.5,2560,6640],[14.2,2560,6640],[15.0,2250,6640],[16.4,2250,5800],[18,2000,5650],[19.5,800,5650],[22.5,800,1710],[26,800,1710],[28,800,5650],[29.2,RX,5650],[29.7,RX,ZR(1)],[30.7,RX,ZR(1)],[31.2,RX,ZR(2)],[32.2,RX,ZR(2)],[33.4,RX,ZR(4)],[34.4,RX,ZR(4)],[35.8,RX,ZR(6)],[36.8,RX,ZR(6)],[37.3,RX,ZR(7)],[40.6,RX,ZR(7)],[41.8,RX,ZR(10)],[43.4,RX,ZR(10)],[44.8,RX,5650],[46.0,800,5650],[47.8,800,1710],[49.4,800,1710],[51.2,800,5650],[52.4,RX,5650],[56.4,RX,ZR(11)],[59.05,RX,ZR(11)],[59.1,350,6640],[62.4,350,6640],[66.5,1900,6640]],
+  blue: [[0,6650,6640],[6,6650,6640],[9.8,4440,6640],[14.4,4440,6640],[15.2,4750,6640],[16.6,4750,5800],[18.3,5000,5650],[19.8,6200,5650],[22.9,6200,1710],[26.4,6200,1710],[28.6,6200,5650],[29.9,BX,5650],[32.2,BX,ZR(3)],[33.2,BX,ZR(3)],[34.6,BX,ZR(5)],[35.6,BX,ZR(5)],[38.4,BX,ZR(8)],[39.4,BX,ZR(8)],[39.9,BX,ZR(9)],[40.9,BX,ZR(9)],[43.6,BX,ZR(9)],[45.0,BX,560],[46.6,5980,560],[48.8,5980,560],[50.4,BX,560],[53.0,BX,2400],[57.4,BX,2400],[59.4,BX,ZR(11)],[60.6,BX,ZR(11)],[61.5,BX,ZR(12)]]
+};
+const PLACE = [[30.2,1,'red'],[31.7,2,'red'],[32.7,3,'blue'],[33.9,4,'red'],[35.1,5,'blue'],[36.3,6,'red'],[37.8,7,'red'],[38.9,8,'blue'],[40.4,9,'blue'],[42.3,10,'red'],[60.1,11,'blue'],[62.0,12,'blue']];
+const ARM = {
+  red: [[9.6,10.9,0,260],[22.7,25.8,180,420],[47.9,49.3,180,420],[56.5,57.4,0,460]],
+  blue: [[10.0,11.3,180,260],[23.0,26.1,0,420],[46.8,48.6,0,480],[53.8,54.4,180,320],[55.6,56.2,180,320]]
+};
+PLACE.forEach(([t,k,tm]) => ARM[tm].push([t - 0.5, t + 0.5, tm === 'red' ? 0 : 180, 470]));
+const HELD = {red:[], blue:[]};
+const SAKPICK = {red:[], blue:[]}, SAKRET = {red:[], blue:[]}, HERBPICK = {red:[], blue:[]};
+[23.2,23.6,24.0,24.4,24.8,25.2,48.4,48.8].forEach(t => { HELD.red.push([t,1,0]); SAKPICK.red.push(t); });
+[23.5,23.9,24.3,24.7,25.1,25.5].forEach(t => { HELD.blue.push([t,1,0]); SAKPICK.blue.push(t); });
+PLACE.forEach(([t,k,tm]) => HELD[tm].push([t,-1,0]));
+HELD.red.push([59.1,-2,0]); SAKRET.red.push(59.1, 59.1);
+HELD.blue.push([47.4,0,1],[48.1,0,1],[54.2,0,-1],[56.0,0,-1]); HERBPICK.blue.push(47.4, 48.1);
+const DICEFLIP = {red:[10.2,11.0], blue:[10.6,11.4]};
+const WEEDEV = {red:[[1,55.1,59.8],[0,56.9,59.8]], blue:[]};
+const THROWS = [[54.2,55.1,1],[56.0,56.9,0]];
+const SCORE = [
+  [11.0,'red',20,['サイコロ','Dice'],[2300,6000]],[11.4,'blue',20,['サイコロ','Dice'],[4700,6000]],
+  [15.5,'red',10,['エリア2','Area 2'],[2250,5250]],[15.9,'blue',10,['エリア2','Area 2'],[4750,5250]],
+  ...PLACE.map(([t,k,tm]) => [t, tm, 30, '', [3500, ZC(k) - 180]]),
+  [38.3,'red',90,['五分咲き','Half Bloom'],[1900,ZC(7) - 350]],
+  [55.4,'red',-15,['雑草','Weed'],[3176,3040 - 260]],[57.2,'red',-15,['雑草','Weed'],[3176,1000 + 300]],
+  [60.3,'red',30,['減点が消えた','Penalty cleared'],[2300,2050]],
+  [60.5,'blue',90,['五分咲き','Half Bloom'],[5200,ZC(11) + 450]],
+  [62.4,'blue',180,['満開','Full Bloom'],[3500,ZC(12) + 520]]
+];
+const BANNERS = [
+  [10.4,12.4,[3500,5250],['出目 1 → 6　6本まで持てる','Dice 1 → 6 · hold up to 6'],'b-dark'],
+  [36.9,38.3,[1500,ZC(6) + 200],['1〜6番が埋まった → 7番へ','Zones 1–6 filled → zone 7'],'b-dark'],
+  [38.3,40.4,[1500,ZC(7) - 900],['赤 五分咲き！','Red: Half Bloom!'],'b-red'],
+  [55.2,56.9,[1700,3700],['赤の雑草が倒れた → 赤は置けない',"Red's weed is down → Red can't place"],'b-warn'],
+  [56.9,58.0,[RX - 600,ZR(11) + 560],['置けない！',"Can't place!"],'b-warn'],
+  [58.0,59.1,[RX - 600,ZR(11) + 560],['リトライ宣言','Retry declared'],'b-red'],
+  [59.8,61.4,[2200,2000],['雑草を立て直し','Weeds stood back up'],'b-red'],
+  [60.5,62.1,[5300,ZC(11) + 800],['青 五分咲き！','Blue: Half Bloom!'],'b-blue'],
+  [62.4,63.8,[3500,1150],['満開！','Full Bloom!'],'b-sakura'],
+  [63.0,64.8,[5500,900],['ロボットが合図','Robot signals'],'b-blue'],
+  [64.8,TOTAL + 1,[3500,3400],['満開宣言 → 青の勝ち','Full Bloom Declaration → Blue wins'],'b-final']
+];
+const CLK = [[6,0],[10,8],[14.2,16],[18,24],[27,46],[37.6,66],[43.4,78],[53,98],[57.6,106],[61.6,114],[64.8,120]];
+const SCENES = [
+  {t:0, title:['セッティング（1分間）','Setup (1 minute)'],
+   body:['試合前に1分のセッティングタイム。各チームはロボットと桜ボトル15本・除草剤ボトル5本・雑草ボトル3本を決まった場所に置きます。サイコロだけは相手チームが、こちらのサイコロゾーンに置きます。作業できるのはメンバーとピットクルー合わせて6人まで。',
+         'Before the match there is a 1-minute setup time. Each team puts its robot, 15 Sakura bottles, 5 Herbicide bottles and 3 Weed bottles in their spots. Only the die is placed by the opposing team, in your Dice Zone. Up to 6 people (members plus pit crew) can help.'],
+   refs:[['3.2 セッティング','3.2 Setup']], focus:['sakura','herb','weed','dice']},
+  {t:6, title:['競技開始（3分）','Start (3 minutes)'],
+   body:['審判の合図でスタート。ロボットはスタートゾーンを底面とした高さ700mmの箱に収まった状態から出ます。ここから先、人は審判の許可なくフィールドに入ったり、ロボットに触れたりできません。',
+         "The match starts on the referee's signal. The robot starts fully inside a 700 mm-tall box standing on the Start Zone. From here on, people can't enter the field or touch the robot without the referee's permission."],
+   refs:[['3.3 競技の開始','3.3 Start'],['3.4 メンバーの動き','3.4 Team members']], focus:['start']},
+  {t:10, title:['サイコロの目を変える　+20','Change the dice face  +20'],
+   body:['サイコロの目の数が、ロボットが一度に持てるボトルの本数。相手が置いたサイコロを転がして大きい目に変えます。初めて目を変えた時点で20点。',
+         'The dice face is how many bottles the robot can hold at once. Roll the die the opponent placed over to a bigger number. The first change of the face is worth 20 points.'],
+   refs:['3.5.2','3.6 B'], focus:['dice']},
+  {t:14.2, title:['エリア2へ進入　+10','Enter Area 2  +10'],
+   body:['桜ゾーンと除草剤ゾーンがあるエリア2へ。真上から見たロボットの影（正射影）が少しでも重なれば「進入」で、初めての進入で10点です。',
+         "Into Area 2, home of the Sakura Zone and Herbicide Zone. If the robot's footprint seen from directly above overlaps an area even slightly, it has entered. The first entry is worth 10 points."],
+   refs:[['1 用語「進入」','1 Terms: entry'],'3.6 A'], focus:['area2']},
+  {t:18, title:['桜ボトルを回収','Collect Sakura bottles'],
+   body:['木枠で仕切られた通路を抜けて桜ゾーンへ。持てるのはサイコロの目の数まで、目が6なら6本です。除草剤ボトルも同じ枠で数えるので、合計が目を超えたら違反です。',
+         'Through the walled corridors to the Sakura Zone. You can hold up to the dice face, so 6 bottles with a 6. Herbicide bottles count toward the same limit, so going over the face is a violation.'],
+   refs:[['1 用語「サイコロ」','1 Terms: dice'],'5.4'], focus:['sakura']},
+  {t:27, title:['共通ゾーンに並べる　+30/本','Line up the Common Zones  +30 each'],
+   body:['中央の共通ゾーンは1番から順番。N番に置けるのは1〜N−1番が全部埋まっているときだけで、色は問いません。赤と青で1本の並木を一緒に伸ばしていく形になります。置いた桜ボトル1本につき30点。',
+         'The Common Zones fill from zone 1. You can place in zone N only when zones 1 to N−1 are all filled, in any color, so Red and Blue grow one avenue together. Each Sakura bottle placed is worth 30 points.'],
+   refs:[['1 用語「共通ゾーン」','1 Terms: Common Zone'],'3.6 C'], focus:['common']},
+  {t:37.6, title:['五分咲き　+90','Half Bloom  +90'],
+   body:['赤の色が5ゾーンそろって「五分咲き」。90点が入り、12番に置く資格を得ます。青も8番・9番と続けて4ゾーン。赤はさらに10番を埋めました。',
+         'Red now holds 5 zones: Half Bloom. That earns 90 points and the right to place in zone 12. Blue adds zones 8 and 9 for 4 zones, and Red fills zone 10 as well.'],
+   refs:[['1 用語「五分咲き」','1 Terms: Half Bloom'],'3.6 E'], focus:['common']},
+  {t:43.4, title:['次の一手','The next move'],
+   body:['赤は手持ちを使い切ったので、桜ボトルを取りに戻ります。青は桜2本を持ったまま除草剤ゾーンへ行き、計4本。11番を埋めると12番が相手にも開くので、残り本数とタイミングの読み合いになります。',
+         "Red has used up its bottles and heads back for more Sakura bottles. Blue keeps 2 Sakura bottles and picks up 2 Herbicide bottles, 4 in total. Filling zone 11 opens zone 12 to the opponent as well, so it turns into a game of bottle counts and timing."],
+   refs:[['1 用語「除草剤ボトル」','1 Terms: Herbicide bottle']], focus:['sakuraR','herbB']},
+  {t:53, title:['除草剤で妨害','Blocking with herbicide'],
+   body:['青が除草剤ボトルを投げて、赤の雑草ボトルを倒しました。自コートの雑草ボトルが1本でも倒れていると、共通ゾーンに桜ボトルを置けません。赤は11番の前まで来たのに置けず、倒れた雑草1本につき−15点。',
+         "Blue throws Herbicide bottles and knocks over Red's Weed bottles. If even one Weed bottle in your court is down, you can't place Sakura bottles in the Common Zones. Red reaches zone 11 but can't place, and loses 15 points per fallen weed."],
+   refs:[['1 用語「雑草ボトル」','1 Terms: Weed bottle'],'3.6 D'], focus:['weedR']},
+  {t:57.6, title:['リトライで立て直す','Recover with a retry'],
+   body:['赤はリトライを宣言。非常停止してスタートゾーンへ運び、倒れた雑草を元の位置に置き直します。ロボットが持っていた桜ボトルも元の場所へ戻り、減点は消えました。その間に青は11番を埋めて五分咲き。',
+         'Red declares a retry: emergency stop, carry the robot to the Start Zone, and stand the fallen weeds back in place. The bottles the robot was holding go back too, and the penalty disappears. Meanwhile Blue fills zone 11 and reaches Half Bloom.'],
+   refs:[['4 リトライ','4 Retry']], focus:['startR','weedR']},
+  {t:61.6, title:['満開 → 満開宣言','Full Bloom → Declaration'],
+   body:['五分咲きの青が12番に置いて「満開」+180点。ロボットの合図を審判が確認して「満開宣言」となり、その場で試合終了。点数に関係なく、先に満開宣言したチームの勝ちです。',
+         "In Half Bloom, Blue places in zone 12: Full Bloom, +180. The referee confirms the robot's signal, that counts as the Full Bloom Declaration, and the match ends right there. Whoever declares first wins, regardless of score."],
+   refs:['3.5.5',['3.7 競技の終了','3.7 End'],['3.8 勝敗','3.8 Winner']], focus:['z12']}
+];
+SCENES.forEach((sc, i) => sc.end = i < SCENES.length - 1 ? SCENES[i + 1].t : TOTAL);
+
+const R1 = (r) => [r, [M(r[2]), r[1], M(r[0]), r[3]]];
+const FOCUS = {
+  start: R1([0,6281,700,7000]), dice: R1([2794,6281,3500,7000]), area2: R1([0,0,3022,6281]),
+  sakura: R1([0,1140,500,2280]), herb: R1([0,0,500,1140]), weed: R1([3022,0,3331,6083]),
+  common: [[3331,0,3669,6083]], sakuraR: [[0,1140,500,2280]], herbB: [[6500,0,7000,1140]],
+  weedR: [[3022,0,3331,6083]], startR: [[0,6281,700,7000]], z12: [[3331,0,3669,RUNG(11)]]
+};
+
+function lerpMap(pts, t) {
+  if (t <= pts[0][0]) return pts[0][1];
+  for (let i = 1; i < pts.length; i++) if (t <= pts[i][0]) { const a = pts[i-1], b = pts[i]; return a[1] + (b[1] - a[1]) * (t - a[0]) / (b[0] - a[0]); }
+  return pts[pts.length - 1][1];
+}
+function pathAt(wps, t) {
+  if (t <= wps[0][0]) return [wps[0][1], wps[0][2]];
+  for (let i = 1; i < wps.length; i++) {
+    const a = wps[i-1], b = wps[i];
+    if (t <= b[0]) { const p = b[0] === a[0] ? 1 : easeIO((t - a[0]) / (b[0] - a[0])); return [a[1] + (b[1] - a[1]) * p, a[2] + (b[2] - a[2]) * p]; }
+  }
+  const l = wps[wps.length - 1]; return [l[1], l[2]];
+}
+function armAt(list, t) {
+  for (const [a, b, ang, len] of list) if (t >= a && t <= b) {
+    const p = (t - a) / (b - a);
+    const e = p < .3 ? easeOut(p / .3) : p > .7 ? easeOut((1 - p) / .3) : 1;
+    return [ang, len * e];
+  }
+  return null;
+}
+const sumUntil = (list, t, idx) => list.reduce((acc, ev) => ev[0] <= t ? acc + ev[idx] : acc, 0);
+const countUntil = (list, t) => list.reduce((a, x) => x <= t ? a + 1 : a, 0);
+function weedFall(team, i, t) {
+  const ev = WEEDEV[team].find(e => e[0] === i);
+  if (!ev || t < ev[1]) return 0;
+  if (ev[2] && t >= ev[2]) return 1 - clamp((t - ev[2]) / .45, 0, 1);
+  return clamp((t - ev[1]) / .45, 0, 1);
+}
+const isLocked = (team, t) => WEEDEV[team].some(e => weedFall(team, e[0], t) > .5);
+const faceAt = (team, t) => t >= (DICEFLIP[team][0] + DICEFLIP[team][1]) / 2 ? 6 : 1;
+const zonesOf = (team, t) => PLACE.filter(p => p[2] === team && p[0] <= t).length;
+
+/* ================= MATCH PLAYER ================= */
+const ML = buildField($('matchSvg'));
+const MO = makeObjects(ML);
+const ROB = {red: makeRobot(ML.actors, 'red'), blue: makeRobot(ML.actors, 'blue')};
+PLACE.forEach(([t,k,tm]) => MO.zone[k].g.lastChild.setAttribute('class', 'cap c-' + tm));
+const focusEls = {};
+for (const key in FOCUS) focusEls[key] = FOCUS[key].map(([x1,y1,x2,y2]) => s('rect', {x:x1, y:y1, width:x2 - x1, height:y2 - y1, rx:50, class:'focus'}, ML.focus));
+const thrown = THROWS.map(() => {
+  const g = s('g', {class:'thrown', style:'display:none'}, ML.top);
+  const sh = s('ellipse', {rx:70, ry:40, class:'tb-shadow'}, g);
+  const fly = s('g', null, g);
+  s('circle', {r:64, class:'bt-body'}, fly); s('circle', {r:29, class:'cap c-yel'}, fly);
+  const lie = s('g', {style:'display:none'}, g);
+  s('rect', {x:-70, y:-60, width:260, height:120, rx:55, class:'bt-body'}, lie);
+  s('rect', {x:180, y:-30, width:56, height:60, rx:14, class:'cap c-yel'}, lie);
+  return {g, sh, fly, lie};
+});
+const PET = [];
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let i = 0; i < 44; i++) {
+  const p = s('path', {d:'M0 -70C48 -52 52 30 0 70C-52 30 -48 -52 0 -70Z', class:'petal', style:'display:none'}, ML.top);
+  PET.push({el:p, x0:rnd() * 7000, d:rnd() * 2.2, v:900 + rnd() * 900, sw:150 + rnd() * 250, w:1.5 + rnd() * 2, ph:rnd() * 6, rs:(rnd() - .5) * 300, sc:.8 + rnd() * .8});
+}
+const fx = $('fx');
+const pops = SCORE.map(([t, team, pts, label, pos]) => {
+  const d = document.createElement('div');
+  d.className = 'pop ' + (pts < 0 ? 'neg' : team);
+  d.style.left = clamp(pct(pos[0]), 8, 92) + '%'; d.style.top = pct(pos[1]) + '%';
+  fx.appendChild(d); return {d, t, pts, label};
+});
+const bans = BANNERS.map(([t0, t1, pos, text, cls]) => {
+  const d = document.createElement('div');
+  d.className = 'ban ' + cls;
+  d.style.left = pct(pos[0]) + '%'; d.style.top = pct(pos[1]) + '%';
+  fx.appendChild(d); return {d, t0, t1, px:pct(pos[0]), text};
+});
+function fxText() {
+  pops.forEach(p => { p.d.innerHTML = (p.pts > 0 ? '+' : '−') + Math.abs(p.pts) + (p.label ? `<small>${tx(p.label)}</small>` : ''); });
+  bans.forEach(b => { b.d.textContent = tx(b.text); b.d.style.display = 'none'; });
+}
+fxText();
+const statusEl = $('status');
+const ST = {};
+for (const team of ['red', 'blue']) {
+  const box = document.createElement('div'); box.className = 'st ' + team;
+  box.innerHTML = `<div class="row"><span class="lab lab1"></span><span class="slots"></span></div><div class="row"><span class="lab lab2"></span><span class="pips">${'<i class="pip5"></i>'.repeat(5)}<em></em></span></div><div class="row badges"></div>`;
+  statusEl.appendChild(box);
+  const slots = box.querySelector('.slots');
+  for (let i = 0; i < 6; i++) { const sl = document.createElement('i'); sl.className = 'slot'; slots.appendChild(sl); }
+  ST[team] = {box, slots:[...slots.children], lab1:box.querySelector('.lab1'), lab2:box.querySelector('.lab2'), pips:[...box.querySelectorAll('.pip5')], cnt:box.querySelector('.pips em'), badges:box.querySelector('.badges'), key:''};
+}
+const segsEl = $('segs');
+SCENES.forEach(sc => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'seg';
+  b.style.flexGrow = (sc.end - sc.t).toFixed(2);
+  b.addEventListener('click', e => { if (e.detail === 0) seek(sc.t + .01); });
+  segsEl.appendChild(b);
+});
+const segBtns = [...segsEl.children];
+function playerLabels() {
+  segBtns.forEach((b, i) => { const ttl = tx(SCENES[i].title); b.title = ttl; b.setAttribute('aria-label', L(`シーン${i + 1}: `, `Scene ${i + 1}: `) + ttl); });
+  $('bPrev').setAttribute('aria-label', L('前のシーン', 'Previous scene'));
+  $('bNext').setAttribute('aria-label', L('次のシーン', 'Next scene'));
+  $('bSpeed').setAttribute('aria-label', L('再生速度', 'Playback speed'));
+  $('timeline').setAttribute('aria-label', L('シーンの選択', 'Choose a scene'));
+  $('matchSvg').setAttribute('aria-label', L('フィールド上で赤と青のロボットが動く試合アニメーション', 'Animation of Red and Blue robots playing a match on the field'));
+}
+
+let T = 0, playing = false, speed = 1, last = 0, curScene = -1, popDirty = true, everPlayed = false;
+const fmt = sec => { sec = Math.max(0, Math.round(sec)); return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'); };
+function sceneAt(t) { let i = 0; for (let k = 0; k < SCENES.length; k++) if (t >= SCENES[k].t) i = k; return i; }
+
+function render(t) {
+  const tm = Math.min(t, END);
+  for (const team of ['red', 'blue']) {
+    const R = ROB[team];
+    const [x, y] = pathAt(PATH[team], tm);
+    R.g.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+    const a = armAt(ARM[team], tm);
+    setArm(R, a ? a[0] : 0, a ? a[1] : 0);
+    setHeld(R, sumUntil(HELD[team], tm, 1), sumUntil(HELD[team], tm, 2));
+  }
+  let op = 1;
+  if (tm >= 58.6 && tm < 59.0) op = 1 - (tm - 58.6) / .4; else if (tm >= 59.0 && tm < 59.15) op = 0; else if (tm >= 59.15 && tm < 59.6) op = (tm - 59.15) / .45;
+  ROB.red.g.setAttribute('opacity', op.toFixed(2));
+  const er = tm >= 58.0 && tm < 59.0 ? (tm - 58.0) % .5 / .5 : -1;
+  ROB.red.ring.setAttribute('opacity', er >= 0 ? (1 - er).toFixed(2) : 0);
+  ROB.red.ring.setAttribute('r', er >= 0 ? 60 + er * 120 : 90);
+  const lampOn = t >= 62.6 && (t >= END || Math.floor((t - 62.6) / .25) % 2 === 0);
+  ROB.blue.lamp.setAttribute('class', 'rb-lamp' + (lampOn ? ' on' : ''));
+  if (t < 6 || popDirty) {
+    popDirty = t < 6;
+    const popS = at => t >= at + .35 ? 1 : t < at ? 0 : Math.max(0, backOut((t - at) / .35));
+    for (const team of ['red', 'blue']) {
+      const off = team === 'blue' ? .05 : 0;
+      MO.sak[team].forEach((b, i) => b.g.setAttribute('transform', `scale(${popS(.5 + i * .06 + off).toFixed(3)})`));
+      MO.herb[team].forEach((b, i) => b.g.setAttribute('transform', `scale(${popS(1.7 + i * .09 + off).toFixed(3)})`));
+      MO.weed[team].forEach((b, i) => b.outer.setAttribute('transform', `translate(${b.x} ${b.y}) scale(${popS(2.5 + i * .16 + off).toFixed(3)})`));
+      const d = MO.dice[team];
+      d.outer.setAttribute('transform', `translate(${d.x} ${d.y}) scale(${popS(3.6 + off).toFixed(3)})`);
+    }
+  }
+  for (const team of ['red', 'blue']) {
+    const removed = countUntil(SAKPICK[team], tm) - countUntil(SAKRET[team], tm);
+    MO.sakOrder.forEach((idx, rank) => { MO.sak[team][idx].outer.style.display = rank < removed ? 'none' : ''; });
+    const hr = countUntil(HERBPICK[team], tm);
+    MO.herb[team].forEach((b, i) => { b.outer.style.display = i < hr ? 'none' : ''; });
+    const d = MO.dice[team]; const [f0, f1] = DICEFLIP[team];
+    d.set(faceAt(team, tm));
+    if (tm > f0 && tm < f1) { const p = (tm - f0) / (f1 - f0); d.g.setAttribute('transform', `rotate(${(easeIO(p) * 360).toFixed(1)}) scale(${(1 + .4 * Math.sin(Math.PI * p)).toFixed(3)})`); }
+    else d.g.setAttribute('transform', '');
+    MO.weed[team].forEach((w, i) => {
+      const f = weedFall(team, i, tm);
+      w.stand.setAttribute('opacity', (1 - f).toFixed(2));
+      w.lie.setAttribute('opacity', f.toFixed(2));
+      w.lie.setAttribute('transform', `rotate(${(-30 + f * 150).toFixed(1)}) scale(${(.5 + .5 * f).toFixed(2)})`);
+      const ev = WEEDEV[team].find(e => e[0] === i);
+      const hq = ev && tm >= ev[1] && tm < ev[1] + .6 ? (tm - ev[1]) / .6 : -1;
+      w.hit.setAttribute('opacity', hq >= 0 ? (1 - hq).toFixed(2) : 0);
+      w.hit.setAttribute('r', hq >= 0 ? 100 + hq * 380 : 100);
+    });
+  }
+  for (const [te, k] of PLACE) {
+    const b = MO.zone[k];
+    if (tm < te) { b.outer.style.display = 'none'; continue; }
+    b.outer.style.display = '';
+    const p = clamp((tm - te) / .35, 0, 1);
+    b.g.setAttribute('transform', `scale(${(1.7 - .7 * easeOut(p)).toFixed(3)})`);
+    b.g.setAttribute('opacity', p.toFixed(2));
+  }
+  THROWS.forEach(([t0, t1, wi], i) => {
+    const o = thrown[i];
+    if (tm < t0) { o.g.style.display = 'none'; return; }
+    o.g.style.display = '';
+    const w = MO.weed.red[wi];
+    const fx0 = BX - 720, fy0 = 2400, tx2 = w.x - 40, ty = w.y + 210;
+    if (tm < t1) {
+      const p = (tm - t0) / (t1 - t0);
+      const gx = fx0 + (tx2 - fx0) * p, gy = fy0 + (ty - fy0) * p, h = 1100 * Math.sin(Math.PI * p);
+      o.sh.setAttribute('cx', gx); o.sh.setAttribute('cy', gy); o.sh.style.display = '';
+      o.fly.style.display = ''; o.lie.style.display = 'none';
+      o.fly.setAttribute('transform', `translate(${gx.toFixed(1)} ${(gy - h).toFixed(1)}) scale(${(1 + h / 1400).toFixed(3)}) rotate(${(p * 540).toFixed(0)})`);
+    } else {
+      o.sh.style.display = 'none'; o.fly.style.display = 'none'; o.lie.style.display = '';
+      o.lie.setAttribute('transform', `translate(${tx2} ${ty}) rotate(${i ? 200 : 160})`);
+    }
+  });
+  const sIdx = sceneAt(t);
+  PET.forEach(pt => {
+    const age = t - (END + pt.d);
+    if (age < 0) { if (pt.el.style.display !== 'none') pt.el.style.display = 'none'; return; }
+    const y = -300 + age * pt.v;
+    if (y > 7300) { pt.el.style.display = 'none'; return; }
+    pt.el.style.display = '';
+    const x = pt.x0 + Math.sin(age * pt.w + pt.ph) * pt.sw;
+    pt.el.setAttribute('transform', `translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${(age * pt.rs + pt.ph * 60).toFixed(0)}) scale(${pt.sc.toFixed(2)})`);
+  });
+  pops.forEach(p => {
+    const age = t - p.t;
+    if (age < 0 || age > 1.6) { p.d.style.display = 'none'; return; }
+    p.d.style.display = 'block';
+    p.d.style.opacity = age < .15 ? age / .15 : age > 1.2 ? (1.6 - age) / .4 : 1;
+    p.d.style.transform = `translate(-50%, calc(-50% - ${(easeOut(Math.min(age / 1.2, 1)) * 22).toFixed(1)}px))`;
+  });
+  bans.forEach(b => {
+    if (t < b.t0 || t > b.t1) { b.d.style.display = 'none'; return; }
+    if (b.d.style.display !== 'block') { b.d.style.display = 'block'; const sw = fx.clientWidth, bw = b.d.offsetWidth; b.d.style.left = clamp(b.px / 100 * sw, bw / 2 + 6, sw - bw / 2 - 6) + 'px'; }
+    const age = t - b.t0, rem = b.t1 - t;
+    b.d.style.opacity = Math.min(1, age / .2, rem / .2);
+    const sc = age < .3 ? .7 + .3 * backOut(age / .3) : 1;
+    b.d.style.transform = `translate(-50%,-50%) scale(${sc.toFixed(3)})`;
+  });
+  for (const team of ['red', 'blue']) {
+    let sc = 0;
+    for (const [te, tt, pts] of SCORE) if (tt === team && te <= t) sc += pts * clamp((t - te) / .35, 0, 1);
+    $(team === 'red' ? 'scR' : 'scB').textContent = Math.round(sc);
+  }
+  $('tmB').classList.toggle('won', t >= END);
+  if (t < 6) { $('clockLabel').textContent = 'SETTING'; $('clock').textContent = fmt(60 - t * 10); }
+  else { $('clockLabel').textContent = t >= END ? 'FINISH' : 'REMAIN'; $('clock').textContent = fmt(180 - lerpMap(CLK, t)); }
+  for (const team of ['red', 'blue']) {
+    const S = ST[team];
+    const face = faceAt(team, tm), sk = sumUntil(HELD[team], tm, 1), hb = sumUntil(HELD[team], tm, 2), z = zonesOf(team, tm);
+    const lock = isLocked(team, tm), retry = team === 'red' && tm >= 58.0 && tm < 62.4;
+    const full = PLACE.some(p => p[1] === 12 && p[2] === team && p[0] + .4 <= tm);
+    const key = [LANG, face, sk, hb, z, lock, retry, full, t >= END].join('|');
+    if (key === S.key) continue; S.key = key;
+    S.lab1.innerHTML = L(`持てる <b class="num">${face}</b>本`, `Hold <b class="num">${face}</b>`);
+    S.lab2.textContent = L('共通ゾーン', 'Zones');
+    S.slots.forEach((el, i) => { el.style.display = i < face ? '' : 'none'; el.className = 'slot' + (i < sk ? ' s' : i < sk + hb ? ' h' : ''); });
+    S.pips.forEach((el, i) => el.classList.toggle('on', i < z));
+    S.cnt.textContent = z + '/5';
+    let bh = '';
+    if (full) bh += `<span class="badge full">${L('満開', 'Full Bloom')}</span>`;
+    else if (z >= 5) bh += `<span class="badge go">${L('五分咲き', 'Half Bloom')}</span>`;
+    if (lock) bh += `<span class="badge lock">${L('配置不可', "Can't place")}</span>`;
+    if (retry) bh += `<span class="badge retry">${L('リトライ中', 'Retrying')}</span>`;
+    if (t >= END && team === 'blue') bh += `<span class="badge full">${L('満開宣言', 'Declared')}</span>`;
+    S.badges.innerHTML = bh || '<span class="hint">—</span>';
+  }
+  $('head').style.left = (t / TOTAL * 100) + '%';
+  if (sIdx !== curScene) {
+    curScene = sIdx;
+    const sc = SCENES[sIdx];
+    $('capNum').textContent = `SCENE ${String(sIdx + 1).padStart(2, '0')} / ${SCENES.length}`;
+    $('capTitle').textContent = tx(sc.title);
+    $('capBody').textContent = tx(sc.body);
+    $('capRefs').innerHTML = sc.refs.map(r => `<span class="ref">${L('ルール ', 'Rule ')}${tx(r)}</span>`).join('');
+    $('sceneIx').textContent = `${String(sIdx + 1).padStart(2, '0')} / ${SCENES.length}`;
+    segBtns.forEach((b, i) => { b.classList.toggle('done', i < sIdx); b.classList.toggle('cur', i === sIdx); });
+    for (const key in focusEls) focusEls[key].forEach(r => r.classList.toggle('on', sc.focus.includes(key)));
+  }
+}
+function setPlayIcon() {
+  $('playIco').innerHTML = playing ? '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>' : '<path d="M7 4.5v15l13-7.5z"/>';
+  $('bPlay').setAttribute('aria-label', playing ? L('一時停止', 'Pause') : L('再生', 'Play'));
+  $('bigplay').hidden = playing || everPlayed;
+}
+function loop(now) {
+  if (!playing) return;
+  const dt = Math.min(.1, (now - last) / 1000); last = now;
+  T += dt * speed;
+  if (T >= TOTAL) { T = TOTAL; playing = false; setPlayIcon(); }
+  render(T);
+  if (playing) requestAnimationFrame(loop);
+}
+function play() { if (T >= TOTAL - .05) { T = 0; popDirty = true; } playing = true; everPlayed = true; last = performance.now(); setPlayIcon(); requestAnimationFrame(loop); }
+function pause() { playing = false; setPlayIcon(); }
+function seek(t) { T = clamp(t, 0, TOTAL); popDirty = true; render(T); }
+$('bPlay').addEventListener('click', () => playing ? pause() : play());
+$('bigplay').addEventListener('click', play);
+$('bNext').addEventListener('click', () => { const i = sceneAt(T); seek(i < SCENES.length - 1 ? SCENES[i + 1].t + .01 : TOTAL); });
+$('bPrev').addEventListener('click', () => { const i = sceneAt(T); seek(T - SCENES[i].t > 1.2 || i === 0 ? SCENES[i].t + .01 : SCENES[i - 1].t + .01); });
+const speeds = [1, 2, .5];
+$('bSpeed').addEventListener('click', () => { speed = speeds[(speeds.indexOf(speed) + 1) % speeds.length]; $('bSpeed').textContent = speed + '×'; });
+const tl = $('timeline'); let drag = false, moved = false, sx = 0;
+const tlPos = e => { const r = tl.getBoundingClientRect(); return clamp((e.clientX - r.left) / r.width, 0, 1) * TOTAL; };
+tl.addEventListener('pointerdown', e => { drag = true; moved = false; sx = e.clientX; try { tl.setPointerCapture(e.pointerId); } catch (_) {} });
+tl.addEventListener('pointermove', e => { if (!drag) return; if (Math.abs(e.clientX - sx) > 6) moved = true; if (moved) seek(tlPos(e)); });
+tl.addEventListener('pointerup', e => { if (drag && !moved) seek(SCENES[sceneAt(tlPos(e))].t + .01); drag = false; });
+tl.addEventListener('pointercancel', () => { drag = false; });
+window.addEventListener('resize', () => { bans.forEach(b => { b.d.style.display = 'none'; }); render(T); });
+playerLabels();
+render(0); setPlayIcon();
+langHooks.push(() => { fxText(); playerLabels(); setPlayIcon(); curScene = -1; render(T); });
+if (!RM && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting && !everPlayed) { play(); io.disconnect(); } }); }, {threshold:.55});
+  io.observe($('stage'));
+}
+if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting && playing) pause(); }), {threshold:0}).observe($('stage'));
+
+/* ================= FIELD EXPLORER ================= */
+const esvg = $('expSvg');
+const EL = buildField(esvg);
+makeObjects(EL);
+makeRobot(EL.actors, 'red').g.setAttribute('transform', 'translate(350 6640)');
+makeRobot(EL.actors, 'blue').g.setAttribute('transform', 'translate(6650 6640)');
+const dimPath = s('path', {class:'dim', 'fill-rule':'evenodd', style:'display:none'}, EL.top);
+const hlG = s('g', null, EL.top);
+const glowG = s('g', {style:'display:none'}, EL.top);
+EL.segs.forEach(q => s('line', {x1:q[0], y1:q[1], x2:q[2], y2:q[3], class:'wood-glow'}, glowG));
+s('rect', {x:0, y:0, width:W, height:W, fill:'none', class:'wood-glow'}, glowG);
+const defs = s('defs', null, esvg);
+const pat = s('pattern', {id:'hatch', width:260, height:260, patternUnits:'userSpaceOnUse', patternTransform:'rotate(45)'}, defs);
+s('line', {x1:0, y1:0, x2:0, y2:260, class:'hatch-line'}, pat);
+const reachG = s('g', {style:'display:none'}, EL.top);
+s('path', {d:'M3500 0H7000V7000H3500V6083H3669V0Z', fill:'rgba(12,8,6,.5)'}, reachG);
+s('path', {d:'M3500 0H7000V7000H3500V6083H3669V0Z', fill:'url(#hatch)'}, reachG);
+s('path', {d:'M0 0H3669V6083H3500V7000H0Z', class:'hl-rect'}, reachG);
+const expFx = $('expFx');
+const R2 = r => [r, [M(r[2]), r[1], M(r[0]), r[3]]];
+const EXP = [
+  {k:'all', label:['全体','Overview'], title:['フィールド全体（7m×7m）','The whole field (7 m × 7 m)'],
+   text:['赤コート（左）と青コート（右）は左右対称。下の帯がエリア1、左右の広い部分がエリア2、中央の帯がエリア3です。床はロンリウム、仕切りは木枠と白線（幅50mm）。','The Red court (left) and Blue court (right) are mirror images. The bottom strip is Area 1, the wide parts on each side are Area 2, and the center strip is Area 3. The floor is Lonrium; dividers are wooden frames and 50 mm white lines.'],
+   rects:[], tags:[[['エリア1','Area 1'],1750,6640],[['エリア2','Area 2'],1500,3000],[['エリア3','Area 3'],3500,3000]]},
+  {k:'area1', label:['エリア1','Area 1'], title:['エリア1','Area 1'],
+   text:['スタートゾーンとサイコロゾーンがある下の帯。ここから出発して、まずサイコロの目を変えに行きます。','The bottom strip with the Start Zone and Dice Zone. Robots start here and usually go change the dice face first.'],
+   rects:R2([0,6281,3500,7000]), tags:[[['エリア1','Area 1'],1750,6640]]},
+  {k:'area2', label:['エリア2','Area 2'], title:['エリア2','Area 2'],
+   text:['桜ゾーンと除草剤ゾーンがあるメインのエリア。木枠で迷路のように仕切られています。初めて進入すると+10点。','The main area, with the Sakura Zone and Herbicide Zone, divided into a maze by wooden frames. First entry earns +10.'],
+   rects:R2([0,0,3022,6281]), tags:[[['エリア2','Area 2'],2300,3000]]},
+  {k:'area3', label:['エリア3','Area 3'], title:['エリア3','Area 3'],
+   text:['12個の共通ゾーンと雑草ゾーンがある中央の帯。共通ゾーンだけは、赤と青どちらのロボットも入れます。','The center strip with the 12 Common Zones and the Weed Zones. The Common Zones are the one place both Red and Blue robots may enter.'],
+   rects:[[3022,0,3978,6281]], tags:[[['エリア3','Area 3'],3500,3000]]},
+  {k:'start', label:['スタート','Start'], title:['スタートゾーン','Start Zone'],
+   text:['700×700mm。境界は赤・青の幅19mmビニールテープ。試合開始もリトライ後の再スタートもここから。出発時、ロボットはこのゾーンを底面にした高さ700mmの箱に完全に収まっている必要があります。','700 × 700 mm, bordered with 19 mm red or blue vinyl tape. Robots start here, and restart here after a retry. At the start the robot must fit completely inside a 700 mm-tall box standing on this zone.'],
+   rects:R2([0,6281,700,7000]), tags:[[['スタート','Start'],350,6100]]},
+  {k:'dice', label:['サイコロ','Dice'], title:['サイコロゾーン','Dice Zone'],
+   text:['試合前に相手チームがサイコロを置く場所。中の白線の四角（150mm）に、サイコロの影がぴったり重なるように置きます。','Where the opposing team places your die before the match. Its footprint must line up exactly with the 150 mm white square inside.'],
+   rects:R2([2794,6281,3500,7000]), tags:[[['サイコロ','Dice'],3150,6000]]},
+  {k:'sakura', label:['桜ゾーン','Sakura Zone'], title:['桜ゾーン','Sakura Zone'],
+   text:['桜ボトル15本を置く場所。キャップには自チームの色（赤／青）のテープが巻いてあります。','Holds your 15 Sakura bottles. Their caps are taped in your team color (red / blue).'],
+   rects:R2([0,1140,500,2280]), tags:[[['桜','Sakura'],250,2500]]},
+  {k:'herb', label:['除草剤ゾーン','Herbicide Zone'], title:['除草剤ゾーン','Herbicide Zone'],
+   text:['除草剤ボトル5本（黄色テープ）を置く場所。ロボットはこれを投げて、相手の雑草ボトルを倒せます。',"Holds 5 Herbicide bottles (yellow tape). The robot can throw them to knock over the opponent's Weed bottles."],
+   rects:R2([0,0,500,1140]), tags:[[['除草剤','Herbicide'],250,1300]]},
+  {k:'weed', label:['雑草ゾーン','Weed Zone'], title:['雑草ゾーン','Weed Zone'],
+   text:['雑草ボトル3本（1L）を置く場所。木枠に触れないように置きます。自コートの雑草が1本でも倒れると共通ゾーンに置けなくなり、1本につき−15点。',"Holds 3 Weed bottles (1 L), set up so they don't touch the wooden frame. If even one of your weeds falls, you can't place in the Common Zones, and it costs −15 per bottle."],
+   rects:R2([3022,0,3331,6083]), tags:[[['雑草','Weed'],2600,3040]]},
+  {k:'common', label:['共通ゾーン','Common Zones'], title:['共通ゾーン1〜12','Common Zones 1–12'],
+   text:['両チームで共有する12個のマス。下の1番から順に埋まっていき、五分咲きのチームが12番に置けば満開です。各マスは幅300mm、木枠で区切られています。','12 boxes shared by both teams. They fill up in order from zone 1 at the bottom, and a team in Half Bloom that places in zone 12 reaches Full Bloom. Each box is 300 mm wide, divided by wooden frames.'],
+   rects:[[3331,0,3669,6083]], tags:[['1',3500,6300],['12',3500,-40]]},
+  {k:'wood', label:['木枠','Frames'], title:['木枠（断面38×89mm）','Wooden frames (38 × 89 mm)'],
+   text:['自コート内の木枠には触れてOK。外周の木枠は、上に「はみ出す」のはOKでも、上面や外側に触れるのはNG。固定用の金属部品で表面に出っ張りがあることもあります。',"Touching the wooden frames inside your own court is fine. The outer frame may be overhung from above, but touching its top or outside is not allowed. Metal fixings can stick out of the surface."],
+   rects:[], wood:true, tags:[]},
+  {k:'reach', label:['入れる範囲','Where to go'], title:['ロボットが入れる範囲（赤の場合）',"Where the robot may go (Red's view)"],
+   text:['自分のコート、共通ゾーン、自コートを囲う木枠の上（触れずに）。相手コートには入れません。真上から見た影が少しでも重なった時点で「進入」です。',"Your own court, the Common Zones, and the space above the frame around your court (without touching it). Never the opponent's court: the moment your footprint seen from above overlaps it, you have entered."],
+   rects:[], reach:true, tags:[[['入れる','Allowed'],1750,3000],[['入れない','Not allowed'],5300,3000]]}
+];
+const chipsEl = $('expChips');
+EXP.forEach(item => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'chip';
+  b.setAttribute('aria-pressed', 'false');
+  b.addEventListener('click', () => selectExp(item.k));
+  item.btn = b; chipsEl.appendChild(b);
+});
+let curExp = 'all';
+function selectExp(k) {
+  curExp = k;
+  const item = EXP.find(x => x.k === k);
+  EXP.forEach(x => { x.btn.textContent = tx(x.label); x.btn.setAttribute('aria-pressed', String(x === item)); });
+  chipsEl.setAttribute('aria-label', L('場所を選ぶ', 'Choose a place'));
+  esvg.setAttribute('aria-label', L('フィールドの平面図', 'Field plan'));
+  $('expTitle').textContent = tx(item.title); $('expText').textContent = tx(item.text);
+  hlG.innerHTML = '';
+  if (item.rects.length) {
+    let d = `M${-PAD} ${-PAD}H${W + PAD}V${W + PAD}H${-PAD}Z`;
+    item.rects.forEach(([x1,y1,x2,y2]) => { d += `M${x1} ${y1}H${x2}V${y2}H${x1}Z`; s('rect', {x:x1, y:y1, width:x2 - x1, height:y2 - y1, rx:40, class:'hl-rect'}, hlG); });
+    dimPath.setAttribute('d', d); dimPath.style.display = '';
+  } else if (item.wood) {
+    dimPath.setAttribute('d', `M${-PAD} ${-PAD}H${W + PAD}V${W + PAD}H${-PAD}Z`); dimPath.style.display = '';
+  } else dimPath.style.display = 'none';
+  glowG.style.display = item.wood ? '' : 'none';
+  reachG.style.display = item.reach ? '' : 'none';
+  expFx.innerHTML = '';
+  item.tags.forEach(([txt, x, y]) => {
+    const d = document.createElement('div'); d.className = 'tag'; d.textContent = tx(txt);
+    d.style.left = clamp(pct(x), 10, 90) + '%'; d.style.top = clamp(pct(y), 4, 96) + '%';
+    expFx.appendChild(d);
+  });
+}
+selectExp('all');
+langHooks.push(() => selectExp(curExp));
+
+/* ================= HERO MINI AVENUE ================= */
+const mini = $('mini');
+const MSEQ = ['red','red','blue','red','blue','red','red','blue','blue','red','blue','blue'];
+const mcells = MSEQ.map((c, i) => {
+  const d = document.createElement('div'); d.className = 'cell on';
+  d.innerHTML = `<i>${i + 1}</i><span class="dot" style="--c:${c === 'red' ? '#E8213A' : '#2F5BFF'}"></span>` + (i === 11 ? '<svg class="flower" viewBox="-20 -20 40 40"><g>' + [0,72,144,216,288].map(a => `<path transform="rotate(${a})" d="M0 -2C5 -6 6 -14 0 -18C-6 -14 -5 -6 0 -2Z"/>`).join('') + '</g><circle r="3.2"/></svg>' : '');
+  mini.appendChild(d); return d;
+});
+mcells[11].classList.add('bloom');
+if (!RM) {
+  let step = -1;
+  const tick = () => {
+    step++;
+    if (step === 0) { mcells.forEach(c => c.classList.remove('on', 'bloom')); setTimeout(tick, 700); return; }
+    if (step <= 12) { mcells[step - 1].classList.add('on'); if (step === 12) setTimeout(() => mcells[11].classList.add('bloom'), 250); setTimeout(tick, step === 12 ? 4200 : 420); return; }
+    step = -1; tick();
+  };
+  setTimeout(tick, 2600);
+}
+
+/* ================= WIN SIM ================= */
+const lane = $('lane');
+const zcells = [];
+for (let k = 1; k <= 12; k++) {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'zc' + (k === 12 ? ' twelve' : '');
+  b.innerHTML = `<span class="zn">${k}</span><span class="bot"></span>`;
+  b.addEventListener('click', () => simRemove(k));
+  lane.appendChild(b); zcells[k] = b;
+}
+const simTeams = $('simTeams');
+const TN = {red:['赤','Red'], blue:['青','Blue']};
+const tn = team => tx(TN[team]);
+const SIMUI = {};
+for (const team of ['red', 'blue']) {
+  const d = document.createElement('div'); d.className = 'simt ' + team;
+  d.innerHTML = `<h4><span class="nm"></span><span class="bdg"></span></h4><button class="put" type="button"></button><div><div class="meter">${'<i></i>'.repeat(5)}</div><p class="sc"></p></div><label class="switch"><input type="checkbox" id="weed-${team}"><span class="swl"></span></label>`;
+  simTeams.appendChild(d);
+  SIMUI[team] = {nm:d.querySelector('.nm'), put:d.querySelector('.put'), meter:[...d.querySelectorAll('.meter i')], sc:d.querySelector('.sc'), bdg:d.querySelector('.bdg'), sw:d.querySelector('input'), swl:d.querySelector('.swl')};
+  SIMUI[team].put.addEventListener('click', () => simPlace(team));
+  SIMUI[team].sw.addEventListener('change', e => {
+    sim.lock[team] = e.target.checked;
+    simMsg(e.target.checked
+      ? () => L(`${tn(team)}の雑草ボトルが倒れた。${tn(team)}は立て直す（リトライなど）まで共通ゾーンに置けません。倒れた1本につき−15点。`, `${tn(team)}'s Weed bottle is down. ${tn(team)} can't place in the Common Zones until it's stood back up (e.g. with a retry). −15 per fallen bottle.`)
+      : () => L(`${tn(team)}の雑草ボトルが元どおり。また置けます。`, `${tn(team)}'s weeds are back up. ${tn(team)} can place again.`), e.target.checked ? 'ng' : '');
+    simDraw();
+  });
+}
+const sim = {z:[], lock:{red:false, blue:false}, win:null};
+let simLast = null;
+const opp = t => t === 'red' ? 'blue' : 'red';
+const own = team => sim.z.filter(x => x === team).length;
+const nextEmpty = () => { for (let k = 1; k <= 12; k++) if (!sim.z[k]) return k; return 0; };
+function simMsg(fn, cls) { simLast = {fn, cls}; const m = $('simMsg'); m.textContent = fn(); m.className = 'sim-msg' + (cls ? ' ' + cls : ''); }
+function simDraw() {
+  const nx = sim.win ? 0 : nextEmpty();
+  for (let k = 1; k <= 12; k++) {
+    zcells[k].className = 'zc' + (k === 12 ? ' twelve' : '') + (sim.z[k] ? ' ' + sim.z[k] : '') + (k === nx ? ' next' : '');
+    zcells[k].setAttribute('aria-label', L(`共通ゾーン${k}`, `Common Zone ${k}`) + (sim.z[k] ? ' · ' + tn(sim.z[k]) : ''));
+  }
+  for (const team of ['red', 'blue']) {
+    const n = own(team), U = SIMUI[team];
+    U.nm.textContent = tn(team);
+    U.put.textContent = L(`${tn(team)}が置く`, `${tn(team)} places`);
+    U.swl.textContent = L('雑草ボトルが倒れている', 'Weed bottle knocked over');
+    U.meter.forEach((el, i) => el.classList.toggle('on', i < n));
+    U.sc.innerHTML = L(`自分の色 <b>${n}</b> ゾーン<br>C点 <b>${n * 30}</b>`, `Own zones <b>${n}</b><br>C points <b>${n * 30}</b>`);
+    U.bdg.innerHTML = (sim.win === team ? `<span class="badge full">${L('満開', 'Full Bloom')}</span>` : n >= 5 ? `<span class="badge go">${L('五分咲き', 'Half Bloom')}</span>` : '') + (sim.lock[team] ? `<span class="badge lock">${L('配置不可', "Can't place")}</span>` : '');
+    U.sw.checked = sim.lock[team];
+  }
+}
+function shake(k) { const c = zcells[k]; if (!c) return; c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake'); }
+function simPlace(team) {
+  if (sim.win) { simMsg(() => L('もう満開です。「例の状態に戻す」か「空にする」でやり直せます。', 'Already in Full Bloom. Use "Load example" or "Clear" to start again.')); return; }
+  const k = nextEmpty();
+  if (sim.lock[team]) { simMsg(() => L(`置けません。${tn(team)}の雑草ボトルが倒れているあいだは、共通ゾーンに桜ボトルを置けません。`, `Can't place. While ${tn(team)}'s Weed bottle is down, ${tn(team)} can't put Sakura bottles in the Common Zones.`), 'ng'); shake(k); return; }
+  if (!k) { simMsg(() => L('12個すべて埋まっています。', 'All 12 zones are filled.')); return; }
+  if (k === 12 && own(team) < 5) { const n = own(team); simMsg(() => L(`12番は「五分咲き」になってから。${tn(team)}はいま${n}ゾーンなので、あと${5 - n}ゾーン必要です（相手のボトルをどけて自分の色に置き換える手もあります）。`, `Zone 12 needs Half Bloom first. ${tn(team)} has ${n} zones, so ${5 - n} more are needed (you could also remove an opponent's bottle and replace it with yours).`), 'ng'); shake(12); return; }
+  const before = own(team);
+  sim.z[k] = team;
+  if (k === 12) { sim.win = team; simMsg(() => L(`${tn(team)}が12番に置いて満開（+180）！ ロボットが合図して審判が確認すれば満開宣言、その場で${tn(team)}の勝ちです。`, `${tn(team)} places in zone 12: Full Bloom (+180)! Once the robot signals and the referee confirms, that's the Full Bloom Declaration and ${tn(team)} wins on the spot.`), 'win'); }
+  else if (before < 5 && own(team) >= 5) simMsg(() => L(`${tn(team)}が${k}番に置いた（+30）。自分の色が5ゾーンで五分咲き（+90）！ これで12番に置く資格ができました。`, `${tn(team)} places in zone ${k} (+30). Five zones in its color means Half Bloom (+90)! ${tn(team)} may now place in zone 12.`));
+  else simMsg(() => L(`${tn(team)}が${k}番に置いた（+30）。次に置けるのは${k + 1}番。`, `${tn(team)} places in zone ${k} (+30). Next open zone: ${k + 1}.`));
+  simDraw();
+}
+function simRemove(k) {
+  if (sim.win) { simMsg(() => L('もう満開です。リセットして試してください。', 'Already in Full Bloom. Reset to try again.')); return; }
+  const t = sim.z[k];
+  if (!t) {
+    const nx = nextEmpty();
+    simMsg(k === nx ? () => L(`${k}番はいま置ける場所です。上のボタンで置いてみましょう。`, `Zone ${k} is open now. Use the buttons to place a bottle.`) : () => L(`${k}番はまだ置けません。先に${nx}番を埋める必要があります。`, `Zone ${k} isn't open yet. Zone ${nx} has to be filled first.`));
+    if (k !== nx) shake(k); return;
+  }
+  sim.z[k] = null;
+  simMsg(() => L(`${tn(opp(t))}が${k}番の${tn(t)}の桜ボトルをどけた。${k}番が空いたので、次はまた${k}番から。それより上のボトルはそのまま残ります。`, `${tn(opp(t))} removed ${tn(t)}'s Sakura bottle from zone ${k}. Zone ${k} is empty again, so the next placement goes there. Bottles above it stay put.`));
+  simDraw();
+}
+function simExample() { sim.z = []; [[1,'red'],[2,'red'],[3,'blue'],[4,'red'],[5,'blue'],[6,'red']].forEach(([k, t]) => sim.z[k] = t); sim.lock = {red:false, blue:false}; sim.win = null; simMsg(() => L('例：赤4ゾーン・青2ゾーン。次に置けるのは7番だけ。赤があと1つ置けば五分咲きです。', 'Example: Red has 4 zones and Blue has 2. Only zone 7 is open. One more for Red means Half Bloom.')); simDraw(); }
+$('simEx').addEventListener('click', simExample);
+$('simClear').addEventListener('click', () => { sim.z = []; sim.lock = {red:false, blue:false}; sim.win = null; simMsg(() => L('空にしました。1番はいつでも置けます。', 'Cleared. Zone 1 is always open.')); simDraw(); });
+simExample();
+langHooks.push(() => { simDraw(); if (simLast) simMsg(simLast.fn, simLast.cls); });
+
+/* ================= DICE ================= */
+const dpips = $('dpips');
+const DP = {TL:[30,30],TR:[70,30],ML:[30,50],MR:[70,50],BL:[30,70],BR:[70,70],C:[50,50]};
+let face = 1, hold = 1, rollState = 0;
+function drawDice() { dpips.innerHTML = FACES[face].map(k => `<circle cx="${DP[k][0]}" cy="${DP[k][1]}" r="8"/>`).join(''); }
+function drawNote() {
+  const f = `<b class="num">${face}</b>`;
+  $('rollNote').innerHTML = rollState === 0 ? L(`いまの目：${f}（相手チームが置いた状態）`, `Current face: ${f} (as placed by the opponent)`)
+    : rollState === 1 ? L(`いまの目：${f}　初めて目を変えたので +20点`, `Current face: ${f} · first change, so +20`)
+    : L(`いまの目：${f}（2回目以降は点にならない）`, `Current face: ${f} (later changes score nothing)`);
+}
+const mr = $('mrobot');
+s('rect', {x:6, y:6, width:88, height:88, rx:14, class:'mr-body'}, mr);
+const mslots = [];
+for (let i = 0; i < 8; i++) mslots.push(s('circle', {cx:22 + (i % 4) * 18.7, cy:i < 4 ? 38 : 66, r:7.5, class:'mr-slot'}, mr));
+function drawHold() {
+  $('hOut').textContent = hold;
+  mslots.forEach((c, i) => c.setAttribute('class', 'mr-slot' + (i < hold ? (i < face ? ' on' : ' over') : '')));
+  const v = $('verdict');
+  if (hold <= face) { v.className = 'verdict ok'; v.textContent = L(`OK：出目が${face}なので${face}本まで持てます（いま${hold}本）。`, `OK: the face is ${face}, so you can hold up to ${face} (holding ${hold}).`); }
+  else { v.className = 'verdict ng'; v.textContent = L(`違反：${hold}本 ＞ 出目${face}。目より多く持つと強制リトライです。`, `Violation: ${hold} > face ${face}. Holding more than the face means a forced retry.`); }
+  $('hMinus').setAttribute('aria-label', L('1本減らす', 'One fewer'));
+  $('hPlus').setAttribute('aria-label', L('1本増やす', 'One more'));
+}
+$('rollBtn').addEventListener('click', () => {
+  const d = $('dsvg'); d.classList.remove('roll'); void d.getBoundingClientRect(); d.classList.add('roll');
+  let nf; do { nf = 1 + Math.floor(Math.random() * 6); } while (nf === face);
+  setTimeout(() => { face = nf; rollState = rollState === 0 ? 1 : 2; drawDice(); drawHold(); drawNote(); }, RM ? 0 : 320);
+});
+$('hMinus').addEventListener('click', () => { hold = Math.max(0, hold - 1); drawHold(); });
+$('hPlus').addEventListener('click', () => { hold = Math.min(8, hold + 1); drawHold(); });
+drawDice(); drawHold(); drawNote();
+langHooks.push(() => { drawHold(); drawNote(); });
+
+/* ================= QUIZ ================= */
+const Q = [
+  [['サイコロの目が3なのに、桜ボトルを4本つかんだ。','The dice face is 3, but the robot grabbed 4 Sakura bottles.'], 'foul', ['目の数より多いボトルを持つのは違反。強制リトライです。','Holding more bottles than the dice face is a violation: forced retry.'], '5.4'],
+  [['除草剤ボトルを投げて、相手の雑草ボトルを倒した。',"Threw a Herbicide bottle and knocked over an opponent's Weed bottle."], 'safe', ['これはルールで認められた妨害。倒された側は置けなくなり、1本−15点。',"That's blocking the rules allow. The other team can't place, and loses 15 per bottle."], ['用語「除草剤ボトル」','Terms: Herbicide bottle']],
+  [['共通ゾーンにある相手の桜ボトルを、アームでどかした。',"Pushed an opponent's Sakura bottle out of a Common Zone with the arm."], 'safe', ['共通ゾーンにある相手の桜ボトルは動かしてよいと書かれています。',"The rules say you may move the opponent's Sakura bottles in the Common Zones."], ['用語「共通ゾーン」','Terms: Common Zone']],
+  [['どかした相手の桜ボトルを、自分のコートに置いた。',"Put that removed opponent bottle down inside your own court."], 'foul', ['相手の桜ボトルを自コート内に置くのは違反です。',"Placing an opponent's Sakura bottle in your own court is a violation."], '5.5'],
+  [['アームの先が、相手コートの上に少しだけはみ出した。',"The tip of the arm stuck out slightly over the opponent's court."], 'foul', ['真上から見た影が少しでも重なれば「進入」。相手コートへの進入は違反です。',"If your footprint seen from above overlaps even slightly, you have entered. Entering the opponent's court is a violation."], ['用語「進入」・5.3','Terms: entry · 5.3']],
+  [['ロボットが自コート内の木枠にぶつかった。','The robot bumped into a wooden frame inside its own court.'], 'safe', ['自チームのコート内の木枠への接触は認められています。','Contact with the wooden frames inside your own court is allowed.'], ['用語「木枠」','Terms: wooden frame']],
+  [['ロボットが外周の木枠の上面に乗り上げた。','The robot climbed onto the top of the outer frame.'], 'foul', ['外周の木枠は、上面や外側への接触が認められていません。',"Touching the top or outside of the outer frame isn't allowed."], ['用語「木枠」・5.3','Terms: wooden frame · 5.3']],
+  [['わざと相手ロボットにぶつかった。',"Rammed the opponent's robot on purpose."], 'foul', ['相手ロボットへの意図的な接触は違反（強制リトライ）。',"Intentional contact with the opponent's robot is a violation (forced retry)."], '5.7'],
+  [['わざと相手ロボットを壊した。',"Broke the opponent's robot on purpose."], 'dq', ['相手ロボットを故意に破損させると失格。その時点で相手の勝ち、得点は0点。',"Intentionally damaging the opponent's robot is a disqualification: the opponent wins and you score 0."], '6.1.2'],
+  [['動かなくなったので、メンバーが審判の許可なくフィールドに手を入れて直した。',"The robot stalled, so a member reached into the field and fixed it without the referee's permission."], 'foul', ['許可なくフィールドに入ったりロボットに触れたりすると違反。まずリトライを宣言しましょう。','Entering the field or touching the robot without permission is a violation. Declare a retry first.'], '5.1'],
+  [['リトライを宣言して承認されたあと、メンバーがロボットを持ってスタートゾーンへ運んだ。','After a retry was declared and approved, a member carried the robot to the Start Zone.'], 'safe', ['リトライ中はロボットに触れることも、動かすことも認められています。','During a retry you may touch and move the robot.'], '4.4 · 4.5'],
+  [['審判の指示に何度も従わなかった。',"Repeatedly ignored the referee's instructions."], 'dq', ['審判の指示に繰り返し背くと失格です。','Repeatedly disobeying the referee is a disqualification.'], '6.1.3'],
+  [['ロボットがフィールドを大きく壊してしまった。','The robot badly damaged the field.'], 'dq', ['フィールドや周囲の環境、オブジェクトを著しく破損・汚損すると失格です。','Seriously damaging or soiling the field, its surroundings or objects is a disqualification.'], '6.1.1'],
+  [['自分の桜ボトルが相手コートに転がって、そこに置かれた状態になった。',"Your own Sakura bottle rolled into the opponent's court and ended up placed there."], 'foul', ['自チームの桜ボトルを相手コート内に配置すると違反です。',"Placing your own Sakura bottle in the opponent's court is a violation."], '5.6']
+];
+const QL = {safe:['セーフ','Safe'], foul:['違反','Violation'], dq:['失格','Disqualified']};
+const quiz = {i:0, ok:0, ans:null};
+function qProg() { $('qprog').textContent = quiz.i >= Q.length ? `${Q.length} / ${Q.length}` : `${quiz.i + 1} / ${Q.length}　` + L(`正解 ${quiz.ok}`, `correct ${quiz.ok}`); }
+function qRender(anim) {
+  const w = $('qwrap');
+  qProg();
+  if (quiz.i >= Q.length) {
+    w.innerHTML = `<div class="qcard${anim ? ' anim' : ''}"><p class="qtext">${L(`${Q.length}問中 ${quiz.ok}問 正解！`, `${quiz.ok} of ${Q.length} correct!`)}</p><p class="hint">${L('迷ったら「やり直しで済むか（違反）」「試合が終わるほど重大か（失格）」で考えると整理しやすいです。', 'When unsure, ask: is a do-over enough (violation), or is it serious enough to end the match (disqualification)?')}</p><button class="qnext show" type="button" id="qAgain">${L('もう一度', 'Try again')}</button></div>`;
+    $('qAgain').addEventListener('click', () => { quiz.i = 0; quiz.ok = 0; quiz.ans = null; qRender(true); });
+    return;
+  }
+  const [text] = Q[quiz.i];
+  w.innerHTML = `<div class="qcard${anim ? ' anim' : ''}"><p class="qtext">${tx(text)}</p><div class="qbtns">${['safe','foul','dq'].map(k => `<button class="qb ${k}" type="button" data-k="${k}">${tx(QL[k])}</button>`).join('')}</div><div class="qans"></div><button class="qnext" type="button">${L('次へ', 'Next')}</button></div>`;
+  w.querySelectorAll('.qb').forEach(b => b.addEventListener('click', () => {
+    if (quiz.ans) return;
+    quiz.ans = b.dataset.k;
+    if (quiz.ans === Q[quiz.i][1]) quiz.ok++;
+    qShowAns(true);
+  }));
+  w.querySelector('.qnext').addEventListener('click', () => { quiz.i++; quiz.ans = null; qRender(true); });
+  if (quiz.ans) qShowAns(false);
+}
+function qShowAns(anim) {
+  const w = $('qwrap');
+  const [, ans, why, ref] = Q[quiz.i];
+  const right = quiz.ans === ans;
+  w.querySelectorAll('.qb').forEach(x => {
+    x.disabled = true;
+    if (x.dataset.k === ans) x.classList.add('right');
+    if (!right && x.dataset.k === quiz.ans) x.classList.add('wrong', ...(anim ? ['anim'] : []));
+  });
+  const box = w.querySelector('.qans'), nx = w.querySelector('.qnext');
+  box.innerHTML = `<b>${right ? L('正解', 'Correct') : L('ざんねん', 'Not quite')}：${tx(QL[ans])}</b>　${tx(why)}<span class="ref" style="margin-left:6px">${L('ルール ', 'Rule ')}${tx(ref)}</span>`;
+  box.className = 'qans show' + (anim ? ' anim' : ''); nx.classList.add('show');
+  if (anim) nx.focus({preventScroll:true});
+  qProg();
+}
+qRender(false);
+langHooks.push(() => qRender(false));
+
+/* ================= RETRY STEPPER ================= */
+const rsteps = [...document.querySelectorAll('.rstep')];
+let ri = 0, rTimer = null, rManual = false;
+const rShow = i => rsteps.forEach((el, k) => el.classList.toggle('on', k === i));
+rsteps.forEach((el, i) => { el.tabIndex = 0; const go = () => { rManual = true; clearInterval(rTimer); ri = i; rShow(i); }; el.addEventListener('click', go); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); });
+rShow(0);
+if (!RM && 'IntersectionObserver' in window) {
+  new IntersectionObserver(es => es.forEach(e => {
+    if (rManual) return;
+    clearInterval(rTimer);
+    if (e.isIntersecting) rTimer = setInterval(() => { ri = (ri + 1) % rsteps.length; rShow(ri); }, 1900);
+  }), {threshold:.4}).observe($('rsteps'));
+}
+
+/* ================= NAV ================= */
+const navLinks = [...document.querySelectorAll('.navlinks a')];
+if ('IntersectionObserver' in window) {
+  const secs = navLinks.map(a => document.querySelector(a.getAttribute('href')));
+  const vis = new Map();
+  const io2 = new IntersectionObserver(es => {
+    es.forEach(e => vis.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));
+    let best = null, br = 0; vis.forEach((r, id) => { if (r > br) { br = r; best = id; } });
+    navLinks.forEach(a => {
+      const on = !!best && a.getAttribute('href') === '#' + best;
+      if ((a.getAttribute('aria-current') === 'true') === on) return;
+      a.setAttribute('aria-current', on ? 'true' : 'false');
+      if (on) { const nav = a.parentElement; nav.scrollTo({left:a.offsetLeft - nav.offsetLeft - nav.clientWidth / 2 + a.clientWidth / 2, behavior:RM ? 'auto' : 'smooth'}); }
+    });
+  }, {threshold:[0, .1, .2, .35, .5], rootMargin:'-60px 0px -30% 0px'});
+  secs.forEach(sec => sec && io2.observe(sec));
+}
+})();
+</script>
+
+</body></html>
