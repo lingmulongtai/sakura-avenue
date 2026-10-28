@@ -1,6 +1,6 @@
-# SAKURA AVENUE 図解
+# SAKURA AVENUE | Illustrated Guide
 
-SAKURA AVENUEのルールを、アニメーション・図解・シミュレーターで学べる非公式の解説ページです。日本語・英語の切り替えに対応しています。
+An unofficial illustrated guide to the Kansai Spring Robocon 2027 SAKURA AVENUE rules, with animations and interactive simulations. The site follows your browser's language preferences for English or Japanese, and remembers a manually selected language.
 
 **公開サイト:** https://lingmulongtai.github.io/sakura-avenue/
 
