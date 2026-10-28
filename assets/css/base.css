@@ -116,6 +116,12 @@ footer{padding-block:48px 56px;color:var(--muted);font-size:12.5px;line-height:1
 footer a{color:var(--sakura)}
 
 
+/* ---------- small shared components ---------- */
+.ref{font:700 11px/1 var(--f-num);padding:5px 8px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
 /* ---------- site header & footer (every page) ---------- */
 .sitebar{background:var(--bg);border-bottom:1px solid var(--line)}
 .sitebar.sticky{position:sticky;top:env(safe-area-inset-top,0px);z-index:20}

@@ -63,7 +63,6 @@
 .cap-title{font-size:19px;line-height:1.4;margin:0 0 8px;font-weight:900}
 .cap-body{font-size:14.5px;line-height:1.85}
 .refs{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.ref{font:700 11px/1 var(--f-num);padding:5px 8px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
 .scn-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 8px}
 .scn-head b{font-size:13px;font-weight:900}
 .scn-head span{font:700 11px/1 var(--f-num);color:var(--muted)}
