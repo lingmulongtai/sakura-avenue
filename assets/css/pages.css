@@ -38,7 +38,7 @@
 .calc-order h3,.calc-result h3{margin:0;font-size:15px;font-weight:900}
 .orow{display:grid;gap:6px}
 .orow .lb{font-size:13px;font-weight:700}
-.orow .lb small{font-weight:500;color:var(--muted);margin-left:4px}
+.orow .lb small{font-weight:500;font-size:12px;color:var(--muted);margin-left:4px}
 .calc-result{padding:14px 16px}
 .verdict-big{font-size:clamp(18px,4.6vw,22px);font-weight:900;margin:6px 0 4px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.4}
 .verdict-why{font-size:13.5px;color:var(--muted);margin:0 0 12px}
@@ -101,7 +101,7 @@
 .mx-ylab,.mx-xlab{font-size:11.5px;font-weight:700;color:var(--muted);margin:0 0 6px}
 .mx-xlab{text-align:right;margin:6px 0 0}
 .mx{display:grid;grid-template-columns:20px repeat(12,minmax(0,1fr));gap:2px}
-.mx-c{aspect-ratio:1;border:0;padding:0;border-radius:4px;background:var(--surface-2);cursor:pointer;display:grid;place-items:center;font:900 clamp(8px,1.6vw,11px)/1 var(--f-body);color:#fff;min-width:0}
+.mx-c{aspect-ratio:1;border:0;padding:0;border-radius:4px;background:var(--surface-2);cursor:pointer;display:grid;place-items:center;font:900 clamp(10px,2.7vw,12px)/1 var(--f-body);color:#fff;min-width:0}
 .mx-c.na{background:transparent;cursor:default}
 .mx-c.hb-r{background:color-mix(in srgb,var(--c-red) 24%,var(--surface-2))}
 .mx-c.hb-b{background:color-mix(in srgb,var(--c-blue) 24%,var(--surface-2))}
@@ -118,9 +118,41 @@
 .mx-details summary{cursor:pointer;font-weight:700;color:var(--muted)}
 .mx-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
 .mx-table th,.mx-table td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
-.trips{width:100%;min-width:460px;border-collapse:separate;border-spacing:2px;font-size:13px}
+.trips{width:100%;border-collapse:separate;border-spacing:2px;font-size:13px}
 .trips caption{text-align:left;font-weight:900;font-size:14px;padding:0 0 8px}
 .trips th{font-weight:700;color:var(--muted);text-align:left;padding:6px 8px;white-space:nowrap}
+.trips th[scope="row"]{white-space:normal;line-height:1.35}
+.trips th small{display:block;font-weight:500;font-size:11.5px}
 .trips thead th{text-align:center}
 .trips td{text-align:center;font:700 15px/1 var(--f-num);padding:11px 4px;border-radius:4px;color:var(--ink);background:color-mix(in srgb,var(--sakura) calc(var(--v) * 1%),var(--surface-2))}
 .trips td.dark{color:#fff}
+
+/* ---------- phones & touch screens ---------- */
+@media(max-width:599px){
+  .trips{font-size:12px;border-spacing:2px}
+  .trips th{padding:6px 4px}
+  .trips td{font-size:14px;padding:10px 2px}
+  .trips thead th{font-size:11.5px}
+  /* the search stays reachable while scrolling through 43 cards */
+  .gl-tools{position:sticky;top:0;z-index:15;background:var(--bg);margin:12px -16px 6px;padding:10px 16px 8px;border-bottom:1px solid var(--line);gap:8px}
+  .gl-search{max-width:none;padding:10px 12px}
+  #glCats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+  #glCats::-webkit-scrollbar{display:none}
+  #glCats .chip{flex:none}
+  .term{scroll-margin-top:150px}
+}
+@media (pointer:coarse){
+  .calc .crow .switch{padding:8px;margin:-8px}
+  .seg3 button{padding:10px 14px}
+  .watch{display:inline-block;padding-block:6px}
+}
+/* calculator: a result bar that follows you on phones while the full result is off screen */
+.calc-sticky{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;align-items:center;gap:10px;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--board);color:var(--board-ink);box-shadow:0 -6px 20px rgba(0,0,0,.18);transform:translateY(110%);transition:transform .25s ease-out}
+.calc-sticky.show{transform:none}
+.calc-sticky .sc{font:700 18px/1 var(--f-num);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.calc-sticky .sc i{font-style:normal;font-size:11px;font-family:var(--f-body);font-weight:900;color:#fff;border-radius:5px;padding:3px 6px}
+.calc-sticky .sc i.red{background:var(--red)} .calc-sticky .sc i.blue{background:var(--blue)}
+.calc-sticky .vd{flex:1 1 auto;min-width:0;font-size:12.5px;font-weight:700;line-height:1.35;overflow:hidden;text-overflow:ellipsis}
+.calc-sticky button{flex:none;border:0;border-radius:10px;padding:9px 12px;background:var(--sakura);color:#fff;font-weight:900;font-size:13px;cursor:pointer}
+@media(min-width:960px){.calc-sticky{display:none}}
+@media(max-width:959px){.calc-wrap-pad{height:64px}}
