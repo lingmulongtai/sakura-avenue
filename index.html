@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<!doctype html><html lang="en" data-lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>SAKURA AVENUE 図解</title>
 <meta name="description" content="関西春ロボコン2027の競技課題「SAKURA AVENUE」を、アニメーションと図解でわかりやすく紹介する非公式ガイド。">
 <link rel="canonical" href="https://lingmulongtai.github.io/sakura-avenue/">
@@ -19,6 +19,15 @@
 <meta name="twitter:image" content="https://lingmulongtai.github.io/sakura-avenue/assets/social-preview.png">
 <meta name="twitter:image:alt" content="SAKURA AVENUEのタイトルとフィールドの図解">
 <meta name="theme-color" content="#C9476F">
+<script>
+(() => {
+  const languages = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+  let language = languages.map(value => String(value || '').toLowerCase().split(/[-_]/)[0]).find(value => value === 'ja' || value === 'en') || 'en';
+  try { const saved = localStorage.getItem('sakura-avenue-lang'); if (saved === 'ja' || saved === 'en') language = saved; } catch (_) {}
+  document.documentElement.lang = language;
+  document.documentElement.dataset.lang = language;
+})();
+</script>
 </head><body>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -812,8 +821,7 @@ footer a{color:var(--sakura)}
 (() => {
 'use strict';
 /* ================= LANGUAGE ================= */
-let LANG = 'ja';
-try { const v = localStorage.getItem('sakura-avenue-lang'); if (v === 'en' || v === 'ja') LANG = v; } catch (_) {}
+let LANG = document.documentElement.dataset.lang;
 const L = (ja, en) => LANG === 'en' ? en : ja;
 const tx = p => Array.isArray(p) ? (LANG === 'en' ? p[1] : p[0]) : p;
 const langHooks = [];
@@ -823,9 +831,10 @@ function applyLangAttr() {
   document.querySelectorAll('.langsw button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
 }
 function setLang(l) {
+  if (l !== 'ja' && l !== 'en') return;
+  try { localStorage.setItem('sakura-avenue-lang', l); } catch (_) {}
   if (l === LANG) return;
   LANG = l;
-  try { localStorage.setItem('sakura-avenue-lang', l); } catch (_) {}
   applyLangAttr();
   langHooks.forEach(f => f());
 }
