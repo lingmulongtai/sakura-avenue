@@ -2,9 +2,6 @@
 .explore{display:grid;gap:14px}
 @media(min-width:900px){.explore{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:24px}}
 .explore .stage{max-width:620px}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .exp-desc{padding:14px 16px;margin-top:12px}
 .exp-desc h3{margin:0 0 4px;font-size:17px;font-weight:900}
 .exp-desc p{font-size:14.5px}
