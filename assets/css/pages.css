@@ -1,0 +1,54 @@
+/* Inner pages: strategy notes, score calculator, glossary. */
+
+/* ---------- shared controls ---------- */
+.seg3{justify-self:start;display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.seg3 button{border:0;border-left:1px solid var(--line);background:transparent;padding:7px 12px;font-weight:700;font-size:13px;cursor:pointer;color:var(--muted);white-space:nowrap}
+.seg3 button:first-child{border-left:0}
+.seg3 button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg3 button.red[aria-pressed="true"]{background:var(--red);color:#fff}
+.seg3 button.blue[aria-pressed="true"]{background:var(--blue);color:#fff}
+.wchip{display:inline-block;color:#fff;border-radius:8px;padding:1px 10px;font-weight:900}
+.wchip.red{background:var(--red)} .wchip.blue{background:var(--blue)} .wchip.none{background:var(--muted)}
+
+/* ---------- score calculator ---------- */
+.calc-pre{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:18px 0 0}
+.calc-pre .hint{font-weight:700}
+.calc{display:grid;gap:14px;margin-top:14px}
+.calc>*{min-width:0}
+@media(min-width:960px){.calc{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}}
+.calc-teams{display:grid;gap:12px}
+@media(min-width:600px){.calc-teams{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.calc-team{padding:12px 14px 6px;border-top:4px solid var(--line)}
+.calc-team.red{border-top-color:var(--red)} .calc-team.blue{border-top-color:var(--blue)}
+.calc-team h2{margin:0 0 4px;font-size:16px;font-weight:900;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.calc-team h2 .num{font-size:26px}
+.crow{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:4px 10px;align-items:center;padding:9px 0;border-top:1px dashed var(--line)}
+.ck{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font:700 12px/1 var(--f-num);background:var(--surface-2);color:var(--muted)}
+.crow.on .ck{background:var(--sakura);color:#fff}
+.crow.neg.on .ck{background:var(--bad)}
+.crow .lb{font-size:13.5px;font-weight:700;line-height:1.4}
+.crow .lb small{display:block;font-weight:500;font-size:11.5px;color:var(--muted)}
+.crow .switch{gap:0}
+.calc .switch input:checked{background:var(--sakura)}
+.calc .crow.dq .switch input:checked{background:var(--bad)}
+.calc .step button{width:36px;height:36px}
+.calc .step output{min-width:30px;font-size:16px}
+.calc-side{display:grid;gap:12px}
+.calc-order{padding:14px 16px;display:grid;gap:12px}
+.calc-order h3,.calc-result h3{margin:0;font-size:15px;font-weight:900}
+.orow{display:grid;gap:6px}
+.orow .lb{font-size:13px;font-weight:700}
+.orow .lb small{font-weight:500;color:var(--muted);margin-left:4px}
+.calc-result{padding:14px 16px}
+.verdict-big{font-size:clamp(18px,4.6vw,22px);font-weight:900;margin:6px 0 4px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.4}
+.verdict-why{font-size:13.5px;color:var(--muted);margin:0 0 12px}
+.ladder{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}
+.ladder li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:start;padding:8px 10px;border-radius:10px;background:var(--surface-2);font-size:13.5px;line-height:1.5}
+.ladder .n{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 11px/1 var(--f-num);background:var(--surface);color:var(--muted)}
+.ladder b{font-weight:700}
+.ladder small{display:block;color:var(--muted);font-size:12px}
+.ladder li.hit{background:var(--sakura-soft);outline:2px solid var(--sakura)}
+.ladder li.hit .n{background:var(--sakura);color:#fff}
+.ladder li.later{opacity:.45}
+.calc-warn{margin-top:10px;padding:9px 12px;border-radius:10px;background:var(--warn-soft);font-size:13px;line-height:1.6}
+.calc-warn:empty{display:none}

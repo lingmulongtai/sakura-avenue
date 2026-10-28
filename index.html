@@ -37,14 +37,24 @@
 <link rel="stylesheet" href="assets/css/guide.css">
 </head>
 <body>
-
+<!-- site-header:guide -->
+<header class="sitebar">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="26" height="26"><span>SAKURA AVENUE</span></a>
+    <nav class="pagelinks" aria-label="Site">
+      <a href="./" aria-current="page"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a>
+      <a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a>
+      <a href="calculator.html"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a>
+      <a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a>
+    </nav>
+    <div class="langsw" role="group" aria-label="Language"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+</header>
+<!-- /site-header -->
 <header class="hero">
   <div class="wrap">
     <div>
-      <div class="hero-top">
-        <p class="eyebrow"><span lang="ja">関西春ロボコン2027 競技課題</span><span lang="en">Kansai Spring Robocon 2027 rules</span> · ver.1.0.0</p>
-        <div class="langsw" role="group" aria-label="Language"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-      </div>
+      <p class="eyebrow"><span lang="ja">関西春ロボコン2027 競技課題</span><span lang="en">Kansai Spring Robocon 2027 rules</span> · ver.1.0.0</p>
       <h1 class="title"><span class="s1">SAKURA</span><span>AVENUE</span></h1>
     </div>
     <p class="lede"><span lang="ja">フィールド中央に並ぶ<b>12個の共通ゾーン</b>に、自分の色の桜ボトルを並べていく赤と青の1対1。並木を伸ばして、<b>12番目に桜ボトルを置いて「満開宣言」</b>したら勝ちです。</span><span lang="en">A one-on-one, Red vs Blue match: line up Sakura bottles in your color along the <b>12 Common Zones</b> down the middle of the field. Grow the avenue, then <b>place a bottle in zone 12 and make the Full Bloom Declaration</b> to win.</span></p>
@@ -383,13 +393,30 @@
     </div>
   </div>
 </section>
+<!-- ================= MORE ================= -->
+<section class="sec" id="more">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span lang="ja">もっと深く</span><span lang="en">Go deeper</span></p>
+      <h2><span lang="ja">ルールを読み込んだあとに</span><span lang="en">Once you know the rules</span></h2>
+    </div>
+    <div class="more-grid">
+      <a class="more card" href="strategy.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 19h16M6 15l4-5 4 3 4-7"/></svg></span><b><span lang="ja">戦略ノート</span><span lang="en">Strategy notes</span></b><span class="d"><span lang="ja">12番までの算数、サイコロと往復回数、妨害のタイミング、公式FAQで確かめたい点。</span><span lang="en">The math of reaching zone 12, dice faces and trips, when to block, and points to confirm in the official FAQ.</span></span><span class="go">strategy.html →</span></a>
+      <a class="more card" href="calculator.html"><span class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M16 11v4"/></svg></span><b><span lang="ja">得点計算</span><span lang="en">Score calculator</span></b><span class="d"><span lang="ja">試合終了時の状態から、得点の内訳とルール3.8の順番での勝敗を判定します。</span><span lang="en">Turn the end-of-match state into a score breakdown and a winner, following Rule 3.8's order.</span></span><span class="go">calculator.html →</span></a>
+      <a class="more card" href="glossary.html"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 1-4-4z"/><path d="M9 8h6M9 12h6"/></svg></span><b><span lang="ja">用語集</span><span lang="en">Glossary</span></b><span class="d"><span lang="ja">「進入」「回収」「五分咲き」など、ルールの言葉を検索できます。</span><span lang="en">Search the rulebook's terms, from "entry" and "collect" to "Half Bloom".</span></span><span class="go">glossary.html →</span></a>
+    </div>
+  </div>
+</section>
 </main>
 
+<!-- site-footer -->
 <footer>
   <div class="wrap">
+    <ul class="foot-links"><li><a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a></li><li><a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a></li><li><a href="calculator.html"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a></li><li><a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a></li><li><a href="docs/関西春ロボコン2027_ルールブック.pdf"><span lang="ja">ルールブック（PDF）</span><span lang="en">Rulebook (PDF, Japanese)</span></a></li></ul>
     <p><span lang="ja">出典：関西春ロボコン2027 競技課題「SAKURA AVENUE」ver.1.0.0（2026年10月1日、関西春ロボコン運営委員会）。このページは非公式の解説です。ルールの補足・変更やFAQは <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">公式ホームページ</a> で確認してください。</span><span lang="en">Source: Kansai Spring Robocon 2027 game rules "SAKURA AVENUE" ver.1.0.0 (October 1, 2026, Kansai Spring Robocon Organizing Committee). This is an unofficial explainer; the Japanese rulebook is authoritative. Check rule updates and the FAQ on the <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">official website</a>.</span></p>
   </div>
 </footer>
+<!-- /site-footer -->
 
 <script type="module" src="assets/js/pages/guide.js"></script>
 

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Score calculator | SAKURA AVENUE</title>
+<meta name="description" content="Work out the SAKURA AVENUE score breakdown and the winner from the state at the end of a match, following the rulebook's order.">
+<link rel="canonical" href="https://lingmulongtai.github.io/sakura-avenue/calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SAKURA AVENUE">
+<meta property="og:title" content="Score calculator | SAKURA AVENUE">
+<meta property="og:description" content="Work out the SAKURA AVENUE score breakdown and the winner from the state at the end of a match.">
+<meta property="og:url" content="https://lingmulongtai.github.io/sakura-avenue/calculator.html">
+<meta property="og:image" content="https://lingmulongtai.github.io/sakura-avenue/assets/social-preview-en.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#C9476F">
+<link rel="icon" href="assets/icons/favicon.ico" sizes="32x32">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script src="assets/js/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Azeret+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/guide.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<!-- site-header:calculator -->
+<header class="sitebar sticky">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="26" height="26"><span>SAKURA AVENUE</span></a>
+    <nav class="pagelinks" aria-label="Site">
+      <a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a>
+      <a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a>
+      <a href="calculator.html" aria-current="page"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a>
+      <a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a>
+    </nav>
+    <div class="langsw" role="group" aria-label="Language"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+</header>
+<!-- /site-header -->
+<main>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Rule 3.6 · 3.8 · 6.1 · <span lang="ja">得点計算</span><span lang="en">Score calculator</span></p>
+      <h1><span lang="ja">得点と勝敗を計算する</span><span lang="en">Work out the score and the winner</span></h1>
+      <p class="lead"><span lang="ja">試合が終わった時点の状態を入れると、得点の内訳と、ルール3.8の順番での勝敗を出します。練習試合の集計やルールの確認にどうぞ。図解ガイドの5試合も読み込めます。</span><span lang="en">Enter the state at the end of a match to get the score breakdown and the winner, decided in Rule 3.8's order. Handy for tallying practice matches or checking the rules. You can also load the five matches from the guide.</span></p>
+    </header>
+    <div class="calc-pre"><span class="hint"><span lang="ja">試合を読み込む</span><span lang="en">Load a match</span></span><div class="chips" id="calcPresets"></div></div>
+    <div class="calc">
+      <div class="calc-teams" id="calcTeams"></div>
+      <div class="calc-side">
+        <div class="card calc-result" id="calcResult" aria-live="polite"></div>
+        <div class="card calc-order" id="calcOrder"></div>
+      </div>
+    </div>
+    <div class="box card" style="margin-top:16px">
+      <h3><span lang="ja">数えかたのメモ</span><span lang="en">Notes on counting</span></h3>
+      <ul class="plain">
+        <li><span lang="ja">C（桜ボトル）とD（雑草ボトル）は試合終了時の状態で数えます。リトライで雑草を立て直せば、Dの減点は消えます。</span><span lang="en">C (Sakura bottles) and D (Weed bottles) count the state when the match ends. Standing a weed back up with a retry removes its D penalty.</span></li>
+        <li><span lang="ja">A・B・E・Fは「初めて」「達成する」ときの点なので、ここでは一度達成したら加点として扱います。五分咲きを達成した後に5ゾーン未満になった場合の扱いは、公式FAQで確認してください。</span><span lang="en">A, B, E and F are for doing something the first time or achieving it, so this page counts them once achieved. How Half Bloom points are treated if a team later drops below 5 zones is worth confirming in the official FAQ.</span></li>
+        <li><span lang="ja">失格したチームの得点は0点で、相手チームの勝ちです（6.1）。</span><span lang="en">A disqualified team scores 0 and the opponent wins (6.1).</span></li>
+      </ul>
+    </div>
+  </div>
+</main>
+<!-- site-footer -->
+<footer>
+  <div class="wrap">
+    <ul class="foot-links"><li><a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a></li><li><a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a></li><li><a href="calculator.html"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a></li><li><a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a></li><li><a href="docs/関西春ロボコン2027_ルールブック.pdf"><span lang="ja">ルールブック（PDF）</span><span lang="en">Rulebook (PDF, Japanese)</span></a></li></ul>
+    <p><span lang="ja">出典：関西春ロボコン2027 競技課題「SAKURA AVENUE」ver.1.0.0（2026年10月1日、関西春ロボコン運営委員会）。このページは非公式の解説です。ルールの補足・変更やFAQは <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">公式ホームページ</a> で確認してください。</span><span lang="en">Source: Kansai Spring Robocon 2027 game rules "SAKURA AVENUE" ver.1.0.0 (October 1, 2026, Kansai Spring Robocon Organizing Committee). This is an unofficial explainer; the Japanese rulebook is authoritative. Check rule updates and the FAQ on the <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">official website</a>.</span></p>
+  </div>
+</footer>
+<!-- /site-footer -->
+<script type="module" src="assets/js/pages/calculator.js"></script>
+</body>
+</html>
