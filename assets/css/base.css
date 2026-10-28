@@ -53,6 +53,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 h1,h2,h3{text-wrap:balance}
 p{margin:0}
 button{font:inherit;color:inherit}
+button,a,input,label,summary{touch-action:manipulation}
 button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--sakura);outline-offset:2px}
 .num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
 .nw{display:inline-block}
@@ -174,6 +175,21 @@ footer a{color:var(--sakura)}
 .more b{font-size:16px;font-weight:900}
 .more span.d{font-size:13.5px;color:var(--muted);line-height:1.65}
 .more .go{font:700 12px/1 var(--f-num);color:var(--sakura);margin-top:4px}
+
+/* ---------- phones & touch screens ---------- */
+@media(max-width:599px){
+  /* the site header already has the language switch; give the section links the room */
+  .nav .langsw{display:none}
+  .more{grid-template-columns:36px minmax(0,1fr);column-gap:12px;padding:14px}
+  .more .ic{grid-row:span 3}
+  .more .go{display:none}
+}
+@media (pointer:coarse){
+  .langsw button{padding:11px 14px;font-size:12.5px}
+  .chip{padding:8px 13px}
+  .toc a{padding:8px 13px}
+  .nav a,.pagelinks a{padding-block:8px}
+}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}

@@ -195,3 +195,18 @@
 .safety{margin-top:14px;padding:14px 16px;display:flex;gap:12px;align-items:center;background:var(--warn-soft);border-color:transparent}
 .safety svg{width:28px;height:28px;flex:none;fill:none;stroke:var(--warn);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .safety p{font-size:14px}
+
+/* ---------- phones ---------- */
+@media(max-width:899px){
+  /* one swipeable row of places right under the map, so the map, the chips and the description fit on one screen */
+  #expChips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px 2px}
+  #expChips::-webkit-scrollbar{display:none}
+  #expChips .chip{flex:none}
+  .exp-desc{margin-top:10px}
+}
+@media(max-width:599px){
+  .cubebox{padding:6px 16px 12px;gap:0}
+  .scene3d{transform:scale(.7);margin:-30px 0}
+  .dsvg{width:78px;height:78px}
+  .mini-robot{width:82px;height:82px}
+}
