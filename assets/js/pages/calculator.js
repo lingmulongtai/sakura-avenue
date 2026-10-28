@@ -128,6 +128,9 @@ function update() {
     ${bars}
     <ol class="ladder">${d.rungs.map((rg, i) => `<li class="${i === d.hit ? 'hit' : i > d.hit ? 'later' : ''}"><span class="n">${i ? i : '!'}</span><span><b>${tx(rg.t)}</b>${rg.why && i <= d.hit ? `<small>${rg.why}</small>` : ''}</span></li>`).join('')}</ol>
     <div class="calc-warn">${warn.join('<br>')}</div>`;
+  $('calcSticky').innerHTML = `<span class="sc"><i class="red">${tx(TNM.red)}</i>${total('red')}<span aria-hidden="true">–</span>${total('blue')}<i class="blue">${tx(TNM.blue)}</i></span>`
+    + `<span class="vd">${d.winner ? L(`${tx(TNM[d.winner])}の勝ち`, `${tx(TNM[d.winner])} wins`) : L('審判の判断', "Referee's call")}${d.hit < 5 ? ' · ' + tx(d.rungs[d.hit].t) : ''}</span>`
+    + `<button type="button" id="calcJump">${L('結果へ', 'Result')}</button>`;
 }
 
 $('calcTeams').addEventListener('change', e => {
@@ -157,6 +160,9 @@ $('calcPresets').addEventListener('click', e => {
   update();
 });
 function renderAll() { renderPresets(); renderTeams(); renderOrder(); update(); }
+// Phones: keep the score and verdict on screen while the full result card is scrolled away.
+$('calcSticky').addEventListener('click', e => { if (e.target.closest('#calcJump')) $('calcResult').scrollIntoView({behavior:'smooth', block:'start'}); });
+if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => $('calcSticky').classList.toggle('show', !en.isIntersecting), {threshold:0}).observe($('calcResult'));
 preset = 0; st = fromMatch(SCENARIOS[0]);
 renderAll();
 langHooks.push(renderAll);
