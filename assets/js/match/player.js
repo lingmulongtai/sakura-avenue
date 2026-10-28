@@ -365,9 +365,18 @@ function selectScenario(i, go) {
   pause(); scnIdx = i; loadScenario(i); T = 0; render(0); pickLabels();
   const b = pickBtns[i];
   if (pickEl.scrollWidth > pickEl.clientWidth) pickEl.scrollTo({left:b.offsetLeft - pickEl.offsetLeft - 16, behavior:RM ? 'auto' : 'smooth'});
-  if (go) play();
+  if (go) { play(); try { history.replaceState(null, '', '#match-' + (i + 1)); } catch (_) {} }
 }
-selectScenario(0, false);
+// Links such as index.html#match-2 open that match.
+function matchFromHash() {
+  const m = /^#match-(\d+)$/.exec(location.hash), i = m ? +m[1] - 1 : -1;
+  if (i < 0 || i >= SCENARIOS.length) return false;
+  if (i !== scnIdx || !SC) selectScenario(i, false);
+  $('match').scrollIntoView();
+  return true;
+}
+if (!matchFromHash()) selectScenario(0, false);
+window.addEventListener('hashchange', matchFromHash);
 langHooks.push(() => { fxText(); playerLabels(); pickLabels(); breakdown(); setPlayIcon(); curScene = -1; render(T); });
 if (!RM && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting && !everPlayed) { play(); io.disconnect(); } }); }, {threshold:.55});
