@@ -1,0 +1,16 @@
+{
+  "name": "SAKURA AVENUE | Illustrated Guide",
+  "short_name": "SAKURA AVENUE",
+  "description": "An unofficial illustrated guide to the Kansai Spring Robocon 2027 SAKURA AVENUE rules.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FBF6F7",
+  "theme_color": "#C9476F",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
