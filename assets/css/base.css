@@ -122,9 +122,21 @@ footer a{color:var(--sakura)}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 
+.prio{list-style:none;margin:0;padding:0;counter-reset:p}
+.prio li{counter-increment:p;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.prio li:last-child{border-bottom:0}
+.prio li::before{content:counter(p);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 12px/1 var(--f-num);background:var(--surface-2);color:var(--muted)}
+.prio li:first-child::before{background:var(--sakura);color:#fff}
+.prio li:first-child{font-weight:900}
+.box{padding:14px 16px}
+.box h3{margin:0 0 8px;font-size:16px;font-weight:900}
+.plain{margin:0;padding-left:1.2em;font-size:14.5px}
+.plain li{margin:3px 0}
+
 /* ---------- site header & footer (every page) ---------- */
 .sitebar{background:var(--bg);border-bottom:1px solid var(--line)}
 .sitebar.sticky{position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+@media(max-width:759px){.sitebar.sticky{position:static}}
 .sitebar .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;padding-block:10px}
 .brand{display:flex;align-items:center;gap:8px;margin-right:auto;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-size:15px;letter-spacing:.02em;white-space:nowrap}
 .brand img{width:26px;height:26px;border-radius:7px;display:block}
@@ -147,6 +159,7 @@ footer a{color:var(--sakura)}
 .toc a:hover{border-color:var(--sakura-2)}
 .callout{padding:12px 14px;border-radius:12px;background:var(--sakura-soft);font-size:14px;line-height:1.75;margin-top:12px}
 .callout b{font-weight:900}
+.callout a{color:var(--sakura);font-weight:700}
 .callout.warn{background:var(--warn-soft)}
 .prose{max-width:72ch}
 .prose p{margin:0 0 10px}

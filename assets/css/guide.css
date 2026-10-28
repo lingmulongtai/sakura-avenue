@@ -65,16 +65,6 @@
 .rules .rd{font-size:13px;color:var(--muted);line-height:1.6;display:block}
 .two{display:grid;gap:12px}
 @media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
-.prio{list-style:none;margin:0;padding:0;counter-reset:p}
-.prio li{counter-increment:p;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
-.prio li:last-child{border-bottom:0}
-.prio li::before{content:counter(p);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 12px/1 var(--f-num);background:var(--surface-2);color:var(--muted)}
-.prio li:first-child::before{background:var(--sakura);color:#fff}
-.prio li:first-child{font-weight:900}
-.box{padding:14px 16px}
-.box h3{margin:0 0 8px;font-size:16px;font-weight:900}
-.plain{margin:0;padding-left:1.2em;font-size:14.5px}
-.plain li{margin:3px 0}
 
 /* ---------- score ---------- */
 .srow{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
