@@ -17,6 +17,7 @@ PAGES = [
     ('strategy.html', 'strategy', '戦略ノート', 'Strategy'),
     ('calculator.html', 'calculator', '得点計算', 'Score calculator'),
     ('glossary.html', 'glossary', '用語集', 'Glossary'),
+    ('models.html', 'models', '3Dモデル', '3D models'),
 ]
 OFFICIAL = 'https://kansai-harurobo.org/kansai_harurobocon/'
 LANGSW = ('<div class="langsw" role="group" aria-label="Language">'

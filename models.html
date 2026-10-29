@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3D Model Studio | SAKURA AVENUE</title>
+<meta name="description" content="Explore and adjust a concept robot in 3D, or inspect your own GLB model locally.">
+<link rel="canonical" href="https://sakura-avenue.vercel.app/models.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SAKURA AVENUE">
+<meta property="og:title" content="3D Model Studio | SAKURA AVENUE">
+<meta property="og:description" content="Explore and adjust a concept robot in 3D, or inspect your own GLB model locally.">
+<meta property="og:url" content="https://sakura-avenue.vercel.app/models.html">
+<meta property="og:image" content="https://sakura-avenue.vercel.app/assets/social-preview-en.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#C9476F">
+<link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script src="assets/js/boot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Azeret+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/models.css">
+</head>
+<body>
+<!-- site-header:models -->
+<header class="sitebar sticky">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="26" height="26"><span>SAKURA AVENUE</span></a>
+    <nav class="pagelinks" aria-label="Site">
+      <a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a>
+      <a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a>
+      <a href="calculator.html"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a>
+      <a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a>
+      <a href="models.html" aria-current="page"><span lang="ja">3Dモデル</span><span lang="en">3D models</span></a>
+    </nav>
+    <div class="langsw" role="group" aria-label="Language"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+</header>
+<!-- /site-header -->
+<main class="wrap studio">
+  <header class="page-head studio-heading">
+    <p class="eyebrow">SAKURA AVENUE · 3D MODEL STUDIO</p>
+    <h1><span lang="ja">アイデアを、動かしてみる。</span><span lang="en">Ideas, in motion.</span></h1>
+    <p class="lead"><span lang="ja">形や動きを試しながら、機体のアイデアを育てる場所。ドラッグで回転、スクロールやピンチで拡大できます。</span><span lang="en">A place to explore a robot idea through shape and motion. Drag to orbit, and scroll or pinch to zoom.</span></p>
+  </header>
+  <div class="studio-grid">
+    <section class="viewport-card" aria-labelledby="viewer-title">
+      <div class="viewport-top"><div><span class="studio-kicker">MODEL VIEWER</span><h2 id="viewer-title"><span lang="ja">3Dプレビュー</span><span lang="en">3D preview</span></h2></div><span class="model-tag" id="model-kind"><span lang="ja">検討用モデル</span><span lang="en">Concept model</span></span></div>
+      <div class="viewport" id="viewport" tabindex="0" aria-label="3D model viewer">
+        <div id="viewer-error" class="viewer-error" hidden><span lang="ja">3D表示を開始できませんでした。WebGLに対応したブラウザでお試しください。</span><span lang="en">The 3D viewer could not start. Try a browser with WebGL support.</span></div>
+        <div class="viewer-hint"><span lang="ja">ドラッグで回転 · ピンチで拡大</span><span lang="en">Drag to orbit · Pinch to zoom</span></div>
+      </div>
+      <div class="viewport-actions">
+        <button class="studio-btn" id="reset-view" type="button"><span lang="ja">視点を戻す</span><span lang="en">Reset view</span></button>
+        <button class="studio-btn" id="show-concept" type="button"><span lang="ja">検討用モデルに戻る</span><span lang="en">Show concept</span></button>
+        <label class="studio-btn upload"><span lang="ja">GLBを開く</span><span lang="en">Open GLB</span><input id="model-file" type="file" accept=".glb,model/gltf-binary"></label>
+      </div>
+      <p class="studio-status" id="status" role="status"><span lang="ja">検討用モデルを表示中。実機の設計や競技規定を表すものではありません。</span><span lang="en">Showing a concept model. It does not represent a real robot or verified competition specifications.</span></p>
+    </section>
+    <aside class="control-card card" aria-labelledby="control-title">
+      <p class="studio-kicker">DESIGN & MOTION</p>
+      <h2 id="control-title"><span lang="ja">形と動き</span><span lang="en">Shape & motion</span></h2>
+      <p class="control-intro"><span lang="ja">検討用モデルの大きさと姿勢を調整できます。</span><span lang="en">Adjust the concept model's proportions and pose.</span></p>
+      <div id="concept-controls">
+        <label class="slider"><span><span lang="ja">車体の幅</span><span lang="en">Chassis width</span><output id="width-value">1.00×</output></span><input id="width" type="range" min="0.7" max="1.4" step="0.05" value="1"></label>
+        <label class="slider"><span><span lang="ja">車体の長さ</span><span lang="en">Chassis length</span><output id="depth-value">1.00×</output></span><input id="depth" type="range" min="0.7" max="1.4" step="0.05" value="1"></label>
+        <label class="slider"><span><span lang="ja">アームの長さ</span><span lang="en">Arm length</span><output id="arm-value">1.00×</output></span><input id="arm" type="range" min="0.7" max="1.5" step="0.05" value="1"></label>
+        <label class="slider"><span><span lang="ja">アームの角度</span><span lang="en">Arm angle</span><output id="angle-value">20°</output></span><input id="angle" type="range" min="0" max="65" step="1" value="20"></label>
+        <label class="slider"><span><span lang="ja">グリッパーの開き</span><span lang="en">Gripper opening</span><output id="grip-value">50%</output></span><input id="grip" type="range" min="0" max="100" step="1" value="50"></label>
+        <div class="control-buttons"><button class="studio-btn primary" id="animate" type="button" aria-pressed="false"><span lang="ja">動きを再生</span><span lang="en">Play motion</span></button><button class="studio-btn" id="reset-design" type="button"><span lang="ja">形を初期化</span><span lang="en">Reset design</span></button></div>
+        <button class="studio-btn export" id="export-glb" type="button"><span lang="ja">現在の姿勢をGLBで保存</span><span lang="en">Export current pose as GLB</span></button>
+        <p class="control-note"><span lang="ja">形状の調整はこのブラウザに保存されます。GLB書き出しは静止した現在の姿勢です。</span><span lang="en">Shape adjustments are saved in this browser. The GLB export is a static snapshot of the current pose.</span></p>
+      </div>
+      <div id="import-controls" hidden>
+        <p class="control-intro"><span lang="ja">読み込んだモデルにアニメーションがある場合、ここで再生できます。</span><span lang="en">Play an animation if one is included in the imported model.</span></p>
+        <label class="animation-label" for="animation-select"><span lang="ja">アニメーション</span><span lang="en">Animation</span></label>
+        <select id="animation-select" disabled></select>
+        <button class="studio-btn primary export" id="animation-play" type="button" disabled aria-pressed="false"><span lang="ja">再生 / 一時停止</span><span lang="en">Play / pause</span></button>
+      </div>
+      <div class="privacy-note"><strong><span lang="ja">自分のモデルを試す</span><span lang="en">Bring your own model</span></strong><p><span lang="ja">単一のGLBファイルを開けます。ファイルはこの端末内で読み込まれ、サーバーには送信されません。</span><span lang="en">Open a self-contained GLB file. It stays on your device and is not uploaded to a server.</span></p></div>
+    </aside>
+  </div>
+</main>
+<!-- site-footer -->
+<footer>
+  <div class="wrap">
+    <ul class="foot-links"><li><a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a></li><li><a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a></li><li><a href="calculator.html"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a></li><li><a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a></li><li><a href="models.html"><span lang="ja">3Dモデル</span><span lang="en">3D models</span></a></li><li><a href="docs/関西春ロボコン2027_ルールブック.pdf"><span lang="ja">ルールブック（PDF）</span><span lang="en">Rulebook (PDF, Japanese)</span></a></li></ul>
+    <p><span lang="ja">出典：関西春ロボコン2027 競技課題「SAKURA AVENUE」ver.1.0.0（2026年10月1日、関西春ロボコン運営委員会）。このページは非公式の解説です。ルールの補足・変更やFAQは <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">公式ホームページ</a> で確認してください。</span><span lang="en">Source: Kansai Spring Robocon 2027 game rules "SAKURA AVENUE" ver.1.0.0 (October 1, 2026, Kansai Spring Robocon Organizing Committee). This is an unofficial explainer; the Japanese rulebook is authoritative. Check rule updates and the FAQ on the <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">official website</a>.</span></p>
+  </div>
+</footer>
+<!-- /site-footer -->
+<script type="module" src="assets/js/pages/models.js"></script>
+</body>
+</html>
