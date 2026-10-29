@@ -32,7 +32,8 @@ def header(cur):
         for href, key, ja, en in PAGES)
     sticky = '' if cur == 'guide' else ' sticky'  # the guide has its own sticky section nav
     return ('<header class="sitebar%s">\n  <div class="wrap">\n'
-            '    <a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="26" height="26"><span>SAKURA AVENUE</span></a>\n'
+            '    <a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="28" height="28"><span class="brand-name">SAKURA AVENUE</span>'
+            '<span class="brand-tag"><span lang="ja">非公式ガイド</span><span lang="en">Unofficial guide</span></span></a>\n'
             '    <nav class="pagelinks" aria-label="Site">\n%s\n    </nav>\n    %s\n  </div>\n</header>\n') % (sticky, links, LANGSW)
 
 
@@ -47,7 +48,13 @@ def footer():
         '<span lang="en">Source: Kansai Spring Robocon 2027 game rules "SAKURA AVENUE" ver.1.0.0 (October 1, 2026, Kansai Spring Robocon Organizing Committee). '
         'This is an unofficial explainer; the Japanese rulebook is authoritative. Check rule updates and the FAQ on the '
         '<a href="%s" target="_blank" rel="noopener">official website</a>.</span></p>') % (OFFICIAL, OFFICIAL)
-    return '<footer>\n  <div class="wrap">\n    <ul class="foot-links">%s</ul>\n    %s\n  </div>\n</footer>\n' % (links, source)
+    about = ('<span lang="ja">関西春ロボコン2027の競技課題「SAKURA AVENUE」を、アニメーションと動かせる図で読み解く非公式ガイドです。</span>'
+             '<span lang="en">An unofficial guide to the Kansai Spring Robocon 2027 game "SAKURA AVENUE", told with animations and diagrams you can play with.</span>')
+    return ('<footer class="sitefoot">\n  <div class="wrap">\n    <div class="foot-grid">\n'
+            '      <div class="foot-brand"><a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="28" height="28">'
+            '<span class="brand-name">SAKURA AVENUE</span></a><p>%s</p></div>\n'
+            '      <nav aria-label="Footer"><ul class="foot-links">%s</ul></nav>\n'
+            '    </div>\n    <div class="foot-source">%s</div>\n  </div>\n</footer>\n') % (about, links, source)
 
 
 def main():

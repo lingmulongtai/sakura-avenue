@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>3D Model Studio | SAKURA AVENUE</title>
-<meta name="description" content="Explore and adjust a concept robot in 3D, or inspect your own GLB model locally.">
+<meta name="description" content="Explore a detailed concept robot for SAKURA AVENUE in 3D: adjust its size and pose, play the bottle-placing routine, check the size limits, or inspect your own GLB locally.">
 <link rel="canonical" href="https://sakura-avenue.vercel.app/models.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SAKURA AVENUE">
@@ -29,7 +29,7 @@
 <!-- site-header:models -->
 <header class="sitebar sticky">
   <div class="wrap">
-    <a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="26" height="26"><span>SAKURA AVENUE</span></a>
+    <a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="28" height="28"><span class="brand-name">SAKURA AVENUE</span><span class="brand-tag"><span lang="ja">非公式ガイド</span><span lang="en">Unofficial guide</span></span></a>
     <nav class="pagelinks" aria-label="Site">
       <a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a>
       <a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a>
@@ -41,55 +41,121 @@
   </div>
 </header>
 <!-- /site-header -->
-<main class="wrap studio">
-  <header class="page-head studio-heading">
-    <p class="eyebrow">SAKURA AVENUE · 3D MODEL STUDIO</p>
-    <h1><span lang="ja">アイデアを、動かしてみる。</span><span lang="en">Ideas, in motion.</span></h1>
-    <p class="lead"><span lang="ja">形や動きを試しながら、機体のアイデアを育てる場所。ドラッグで回転、スクロールやピンチで拡大できます。</span><span lang="en">A place to explore a robot idea through shape and motion. Drag to orbit, and scroll or pinch to zoom.</span></p>
-  </header>
-  <div class="studio-grid">
-    <section class="viewport-card" aria-labelledby="viewer-title">
-      <div class="viewport-top"><div><span class="studio-kicker">MODEL VIEWER</span><h2 id="viewer-title"><span lang="ja">3Dプレビュー</span><span lang="en">3D preview</span></h2></div><span class="model-tag" id="model-kind"><span lang="ja">検討用モデル</span><span lang="en">Concept model</span></span></div>
+<main class="studio">
+  <section class="wrap studio-head">
+    <div class="studio-intro">
+      <p class="eyebrow">3D Model Studio · Concept</p>
+      <h1><span lang="ja"><span class="nw">コンセプト機を、</span><span class="nw">動かしてみる。</span></span><span lang="en">A concept robot, in motion.</span></h1>
+      <p class="lead"><span lang="ja">アルミフレームの車体にメカナムホイール、旋回する昇降アームと6本積みのターンテーブル。寸法や姿勢を変えたり、ボトルを共通ゾーンに並べる動きを再生したりできます。</span><span lang="en">An aluminium-frame chassis on mecanum wheels, a rotating lift arm and a six-bottle carousel. Change its size and pose, or play the routine that lines bottles up in the Common Zones.</span></p>
+    </div>
+    <dl class="studio-specs">
+      <div><dt><span lang="ja">スタート姿勢の外形</span><span lang="en">Size at the start</span></dt><dd class="num">688 × 661 × 696<small>mm</small></dd></div>
+      <div><dt><span lang="ja">一度に運べる本数</span><span lang="en">Bottles per trip</span></dt><dd class="num">6<small><span lang="ja">本まで</span><span lang="en">max</span></small></dd></div>
+      <div><dt><span lang="ja">昇降 · 伸縮</span><span lang="en">Lift · reach</span></dt><dd class="num">320–640 · 260<small>mm</small></dd></div>
+      <div><dt><span lang="ja">足回り</span><span lang="en">Drive</span></dt><dd><span lang="ja">メカナム</span><span lang="en">Mecanum</span><small>× 4</small></dd></div>
+    </dl>
+  </section>
+  <section class="wrap studio-grid" aria-label="3D studio">
+    <div class="stage-card">
       <div class="viewport" id="viewport" tabindex="0" aria-label="3D model viewer">
         <div id="viewer-error" class="viewer-error" hidden><span lang="ja">3D表示を開始できませんでした。WebGLに対応したブラウザでお試しください。</span><span lang="en">The 3D viewer could not start. Try a browser with WebGL support.</span></div>
-        <div class="viewer-hint"><span lang="ja">ドラッグまたは矢印キーで回転 · ピンチまたは +/- で拡大縮小</span><span lang="en">Drag or use arrow keys to orbit · Pinch or +/- to zoom</span></div>
+        <div class="hud hud-top">
+          <span class="model-tag" id="model-kind"><span lang="ja">検討用モデル</span><span lang="en">Concept model</span></span>
+          <div class="view-switch" role="group" aria-label="Camera">
+            <button type="button" data-view="iso" aria-pressed="true"><span lang="ja">斜め</span><span lang="en">3/4</span></button><button type="button" data-view="front" aria-pressed="false"><span lang="ja">正面</span><span lang="en">Front</span></button><button type="button" data-view="side" aria-pressed="false"><span lang="ja">側面</span><span lang="en">Side</span></button><button type="button" data-view="top" aria-pressed="false"><span lang="ja">真上</span><span lang="en">Top</span></button>
+          </div>
+        </div>
+        <div class="hud hud-bottom">
+          <p class="viewer-hint"><span lang="ja">ドラッグまたは矢印キーで回転 · ピンチまたは +/- で拡大縮小</span><span lang="en">Drag or use arrow keys to orbit · Pinch or +/- to zoom</span></p>
+          <p class="dims-chip"><span class="dims-label">W × D × H</span><span id="dims" class="num">—</span></p>
+        </div>
+        <p class="concept-mark" aria-hidden="true">Concept</p>
       </div>
-      <div class="viewport-actions">
-        <button class="studio-btn" id="reset-view" type="button"><span lang="ja">視点を戻す</span><span lang="en">Reset view</span></button>
-        <button class="studio-btn" id="show-concept" type="button"><span lang="ja">検討用モデルに戻る</span><span lang="en">Show concept</span></button>
-        <label class="studio-btn upload"><span lang="ja">GLBを開く</span><span lang="en">Open GLB</span><input id="model-file" type="file" accept=".glb,model/gltf-binary"></label>
+      <div class="stage-bar">
+        <button class="studio-btn play" id="animate" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M7 4.5v15l13-7.5z"/><path class="i-stop" d="M6 6h4.5v12H6zM13.5 6H18v12h-4.5z"/></svg><span class="when-off"><span lang="ja">ボトルを並べる動きを再生</span><span lang="en">Play the placing routine</span></span><span class="when-on"><span lang="ja">止める</span><span lang="en">Stop</span></span></button>
+        <div class="stage-tools">
+          <button class="studio-btn" id="reset-view" type="button"><span lang="ja">視点を戻す</span><span lang="en">Reset view</span></button>
+          <button class="studio-btn" id="show-concept" type="button"><span lang="ja">検討用モデルに戻る</span><span lang="en">Show concept</span></button>
+          <label class="studio-btn upload"><span lang="ja">GLBを開く</span><span lang="en">Open GLB</span><input id="model-file" type="file" accept=".glb,model/gltf-binary"></label>
+        </div>
       </div>
       <p class="studio-status" id="status" role="status"><span lang="ja">検討用モデルを表示中。実機の設計や競技規定を表すものではありません。</span><span lang="en">Showing a concept model. It does not represent a real robot or verified competition specifications.</span></p>
-    </section>
-    <aside class="control-card card" aria-labelledby="control-title">
-      <p class="studio-kicker">DESIGN & MOTION</p>
-      <h2 id="control-title"><span lang="ja">形と動き</span><span lang="en">Shape & motion</span></h2>
-      <p class="control-intro"><span lang="ja">検討用モデルの大きさと姿勢を調整できます。</span><span lang="en">Adjust the concept model's proportions and pose.</span></p>
+    </div>
+    <aside class="panel" aria-labelledby="control-title">
+      <h2 class="visually-hidden" id="control-title"><span lang="ja">形と動き</span><span lang="en">Shape and motion</span></h2>
       <div id="concept-controls">
-        <label class="slider"><span><span lang="ja">車体の幅</span><span lang="en">Chassis width</span><output id="width-value">1.00×</output></span><input id="width" type="range" min="0.7" max="1.4" step="0.05" value="1"></label>
-        <label class="slider"><span><span lang="ja">車体の長さ</span><span lang="en">Chassis length</span><output id="depth-value">1.00×</output></span><input id="depth" type="range" min="0.7" max="1.4" step="0.05" value="1"></label>
-        <label class="slider"><span><span lang="ja">アームの長さ</span><span lang="en">Arm length</span><output id="arm-value">1.00×</output></span><input id="arm" type="range" min="0.7" max="1.5" step="0.05" value="1"></label>
-        <label class="slider"><span><span lang="ja">アームの角度</span><span lang="en">Arm angle</span><output id="angle-value">20°</output></span><input id="angle" type="range" min="0" max="65" step="1" value="20"></label>
-        <label class="slider"><span><span lang="ja">グリッパーの開き</span><span lang="en">Gripper opening</span><output id="grip-value">50%</output></span><input id="grip" type="range" min="0" max="100" step="1" value="50"></label>
-        <div class="control-buttons"><button class="studio-btn primary" id="animate" type="button" aria-pressed="false"><span lang="ja">動きを再生</span><span lang="en">Play motion</span></button><button class="studio-btn" id="reset-design" type="button"><span lang="ja">形を初期化</span><span lang="en">Reset design</span></button></div>
-        <button class="studio-btn export" id="export-glb" type="button"><span lang="ja">現在の姿勢をGLBで保存</span><span lang="en">Export current pose as GLB</span></button>
-        <p class="control-note"><span lang="ja">形状の調整はこのブラウザに保存されます。GLB書き出しは静止した現在の姿勢です。</span><span lang="en">Shape adjustments are saved in this browser. The GLB export is a static snapshot of the current pose.</span></p>
+        <section class="panel-sec">
+          <header class="panel-head"><p class="studio-kicker">Pose</p><h3><span lang="ja">姿勢</span><span lang="en">Pose</span></h3></header>
+          <div class="presets" role="group" aria-label="Pose presets">
+            <button type="button" class="preset" data-preset="start"><span lang="ja">スタート</span><span lang="en">Start</span></button><button type="button" class="preset" data-preset="pick"><span lang="ja">積み込み</span><span lang="en">Pick</span></button><button type="button" class="preset" data-preset="place"><span lang="ja">設置</span><span lang="en">Place</span></button>
+          </div>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">アームの高さ</span><span lang="en">Arm height</span></span><output id="lift-value"></output></span><input id="lift" type="range" min="320" max="640" step="5" value="540"></label>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">アームの伸び</span><span lang="en">Arm reach</span></span><output id="reach-value"></output></span><input id="reach" type="range" min="0" max="260" step="5" value="150"></label>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">旋回</span><span lang="en">Turret</span></span><output id="yaw-value"></output></span><input id="yaw" type="range" min="-180" max="180" step="1" value="-45"></label>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">グリッパーの開き</span><span lang="en">Gripper opening</span></span><output id="grip-value"></output></span><input id="grip" type="range" min="0" max="100" step="1" value="60"></label>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">ターンテーブル</span><span lang="en">Carousel</span></span><output id="turn-value"></output></span><input id="turn" type="range" min="0" max="359" step="1" value="0"></label>
+        </section>
+        <section class="panel-sec">
+          <header class="panel-head"><p class="studio-kicker">Build</p><h3><span lang="ja">車体</span><span lang="en">Build</span></h3></header>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">フレームの幅</span><span lang="en">Frame width</span></span><output id="width-value"></output></span><input id="width" type="range" min="540" max="640" step="10" value="560"></label>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">フレームの奥行き</span><span lang="en">Frame depth</span></span><output id="depth-value"></output></span><input id="depth" type="range" min="540" max="640" step="10" value="600"></label>
+          <label class="slider"><span class="slider-head"><span><span lang="ja">積んでいる桜ボトル</span><span lang="en">Sakura bottles loaded</span></span><output id="bottles-value"></output></span><input id="bottles" type="range" min="0" max="6" step="1" value="6"></label>
+          <div class="field-row"><span><span lang="ja">チームの色</span><span lang="en">Team colour</span></span><div class="seg" role="group" aria-label="Team"><button type="button" data-team="red" aria-pressed="true"><i class="sw red"></i><span lang="ja">赤</span><span lang="en">Red</span></button><button type="button" data-team="blue" aria-pressed="false"><i class="sw blue"></i><span lang="ja">青</span><span lang="en">Blue</span></button></div></div>
+        </section>
+        <div class="panel-actions">
+          <button class="studio-btn" id="reset-design" type="button"><span lang="ja">初期状態に戻す</span><span lang="en">Reset</span></button>
+          <button class="studio-btn dark" id="export-glb" type="button"><span lang="ja">今の姿勢をGLBで保存</span><span lang="en">Export pose as GLB</span></button>
+        </div>
       </div>
       <div id="import-controls" hidden>
-        <p class="control-intro"><span lang="ja">読み込んだモデルにアニメーションがある場合、ここで再生できます。</span><span lang="en">Play an animation if one is included in the imported model.</span></p>
-        <label class="animation-label" for="animation-select"><span lang="ja">アニメーション</span><span lang="en">Animation</span></label>
-        <select id="animation-select" disabled></select>
-        <button class="studio-btn primary export" id="animation-play" type="button" disabled aria-pressed="false"><span lang="ja">再生 / 一時停止</span><span lang="en">Play / pause</span></button>
+        <section class="panel-sec">
+          <header class="panel-head"><p class="studio-kicker">Animation</p><h3><span lang="ja">アニメーション</span><span lang="en">Animation</span></h3></header>
+          <p class="control-intro"><span lang="ja">読み込んだモデルにアニメーションがある場合、ここで再生できます。</span><span lang="en">Play an animation if one is included in the imported model.</span></p>
+          <label class="animation-label" for="animation-select"><span lang="ja">アニメーション</span><span lang="en">Animation</span></label>
+          <select id="animation-select" disabled></select>
+          <button class="studio-btn dark wide" id="animation-play" type="button" disabled aria-pressed="false"><span lang="ja">再生 / 一時停止</span><span lang="en">Play / pause</span></button>
+        </section>
       </div>
+      <section class="panel-sec">
+        <header class="panel-head"><p class="studio-kicker">Rule 8.4 · 8.5</p><h3><span lang="ja">サイズ制限チェック</span><span lang="en">Size check</span></h3></header>
+        <ul class="fit-list">
+          <li id="fit-start" data-fit="yes"><span class="fit-name"><span lang="ja">スタート時</span><span lang="en">At the start</span><small>700 mm<span lang="ja">立方</span><span lang="en"> cube</span></small></span><span class="fit-verdict"></span></li>
+          <li id="fit-match" data-fit="yes"><span class="fit-name"><span lang="ja">競技中</span><span lang="en">During the match</span><small>1000 mm<span lang="ja">立方</span><span lang="en"> cube</span></small></span><span class="fit-verdict"></span></li>
+        </ul>
+        <div class="field-row"><span><span lang="ja">枠を表示</span><span lang="en">Show cube</span></span><div class="seg" role="group" aria-label="Size limit cube"><button type="button" data-envelope="0" aria-pressed="true"><span lang="ja">なし</span><span lang="en">Off</span></button><button type="button" data-envelope="700" aria-pressed="false">700</button><button type="button" data-envelope="1000" aria-pressed="false">1000</button></div></div>
+        <p class="control-note"><span lang="ja">今の姿勢の幅×奥行き×高さで判定する目安です。GLBは1単位を1mとして測ります。</span><span lang="en">A rough check from the current width, depth and height. GLB files are measured with one unit as one metre.</span></p>
+      </section>
       <div class="privacy-note"><strong><span lang="ja">自分のモデルを試す</span><span lang="en">Bring your own model</span></strong><p><span lang="ja">単一のGLBファイルを開けます。ファイルはこの端末内で読み込まれ、サーバーには送信されません。</span><span lang="en">Open a self-contained GLB file. It stays on your device and is not uploaded to a server.</span></p></div>
     </aside>
-  </div>
+  </section>
+  <section class="wrap parts-sec" aria-labelledby="parts-title">
+    <div class="sec-head">
+      <p class="eyebrow">Anatomy</p>
+      <h2 id="parts-title"><span lang="ja">機体のつくり</span><span lang="en">How it is built</span></h2>
+      <p class="lead"><span lang="ja">項目を選ぶと、その部分だけを浮かび上がらせて近づきます。もう一度押すと全体に戻ります。</span><span lang="en">Pick a part to isolate it and move in close. Press it again to see the whole robot.</span></p>
+    </div>
+    <div class="parts" id="parts">
+        <button class="part" type="button" data-part="frame" aria-pressed="false"><span class="part-no">01</span><b><span lang="ja">車体フレーム</span><span lang="en">Chassis frame</span></b><span class="part-d"><span lang="ja">20mm角のアルミフレームを箱型に組み、角はピンクのプレートで補強。上段に旋回マストとターンテーブル、下段に電装を収めます。</span><span lang="en">A box of 20 mm aluminium extrusion braced with pink corner plates. The top deck carries the turret and carousel; the electronics sit underneath.</span></span><span class="part-spec">20 × 20 / 20 × 40 mm</span></button>
+        <button class="part" type="button" data-part="drive" aria-pressed="false"><span class="part-no">02</span><b><span lang="ja">メカナム足回り</span><span lang="en">Mecanum drive</span></b><span class="part-d"><span lang="ja">直径127mmのメカナムホイール4輪。回転の組み合わせで前後・横・斜めに動けるので、共通ゾーンに沿って横へずれながら置けます。</span><span lang="en">Four 127 mm mecanum wheels. Mixing their spin moves the robot forward, sideways or diagonally, so it can slide along the Common Zones while placing.</span></span><span class="part-spec">φ127 mm × 4</span></button>
+        <button class="part" type="button" data-part="lift" aria-pressed="false"><span class="part-no">03</span><b><span lang="ja">旋回・昇降マスト</span><span lang="en">Turret & lift</span></b><span class="part-d"><span lang="ja">旋回台の上に、リニアガイド2本とタイミングベルトの昇降マスト。ケーブルはドラッグチェーンでまとめます。</span><span lang="en">A belt-driven lift on two linear rails, standing on a turntable. A drag chain keeps the cables tidy.</span></span><span class="part-spec">360° · 320–640 mm</span></button>
+        <button class="part" type="button" data-part="arm" aria-pressed="false"><span class="part-no">04</span><b><span lang="ja">伸縮アームとグリッパー</span><span lang="en">Arm & gripper</span></b><span class="part-d"><span lang="ja">マストの横に伸縮アーム。先端から下ろしたグリッパーがボトルの胴をはさむので、台の上でも床でも同じ持ち方で置けます。</span><span lang="en">A telescoping arm beside the mast. The gripper hangs below its tip and holds the bottle body, so it grips the same way on the carousel and on the floor.</span></span><span class="part-spec">0–260 mm</span></button>
+        <button class="part" type="button" data-part="carousel" aria-pressed="false"><span class="part-no">05</span><b><span lang="ja">ターンテーブル</span><span lang="en">Carousel</span></b><span class="part-d"><span lang="ja">6本分のポケットを持つ回転台。サイコロの目が6なら6本まで持てるので、往復を減らせます。</span><span lang="en">A turntable with six pockets. With a 6 on the die the robot may hold six bottles at once, which saves trips.</span></span><span class="part-spec">6 pockets</span></button>
+        <button class="part" type="button" data-part="bottles" aria-pressed="false"><span class="part-no">06</span><b><span lang="ja">桜ボトル</span><span lang="en">Sakura bottles</span></b><span class="part-d"><span lang="ja">500mlの炭酸水ボトルにスーパーボールを入れて計150g。キャップにチームの色（赤／青）のテープ。</span><span lang="en">A 500 ml sparkling-water bottle with super balls, 150 g in total, with tape in the team colour (red or blue) on the cap.</span></span><span class="part-spec">150 g</span></button>
+        <button class="part" type="button" data-part="power" aria-pressed="false"><span class="part-no">07</span><b><span lang="ja">電装</span><span lang="en">Electronics</span></b><span class="part-d"><span lang="ja">バッテリー2本、ブレーカー、電源分配、マイコンとモータードライバー。バッテリーは公称24V以下、ブレーカーなどの電流制限を入れます。</span><span lang="en">Two batteries, a breaker, power distribution, a controller and motor drivers. Batteries stay at 24 V nominal or less, with a breaker or other current limiting.</span></span><span class="part-spec">≤ 24 V</span></button>
+        <button class="part" type="button" data-part="safety" aria-pressed="false"><span class="part-no">08</span><b><span lang="ja">非常停止と表示灯</span><span lang="en">E-stop & signal</span></b><span class="part-d"><span lang="ja">黄色の台座に、赤いプッシュロック・ターンリセット式の非常停止。押すと全ての駆動用電源を切ります。表示灯は動作中に点滅。</span><span lang="en">A red push-lock, turn-reset button on a solid yellow base that cuts all drive power. The signal tower blinks while the robot runs.</span></span><span class="part-spec">Rule 8</span></button>
+        <button class="part" type="button" data-part="dice" aria-pressed="false"><span class="part-no">09</span><b><span lang="ja">サイコロ操作</span><span lang="en">Dice tool</span></b><span class="part-d"><span lang="ja">前面のスライドに付いたパドルで、サイコロを押したり転がしたりして目を変えます（得点B）。</span><span lang="en">A paddle on a front slide nudges and rolls the die to change its face (score B).</span></span><span class="part-spec">Score B</span></button>
+    </div>
+    <p class="note"><span lang="ja">※ 検討用のモデルです。寸法はルールブックの制限（700mm・1000mm立方、ロゴ100mm以内など）を意識していますが、強度・重量（20kg以下）・配線などは検証していません。</span><span lang="en">* A study model. Its dimensions keep the rulebook's limits in mind (the 700 mm and 1000 mm cubes, logos within 100 mm and so on), but strength, weight (20 kg or less) and wiring have not been checked.</span></p>
+  </section>
 </main>
 <!-- site-footer -->
-<footer>
+<footer class="sitefoot">
   <div class="wrap">
-    <ul class="foot-links"><li><a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a></li><li><a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a></li><li><a href="calculator.html"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a></li><li><a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a></li><li><a href="models.html"><span lang="ja">3Dモデル</span><span lang="en">3D models</span></a></li><li><a href="docs/関西春ロボコン2027_ルールブック.pdf"><span lang="ja">ルールブック（PDF）</span><span lang="en">Rulebook (PDF, Japanese)</span></a></li></ul>
-    <p><span lang="ja">出典：関西春ロボコン2027 競技課題「SAKURA AVENUE」ver.1.0.0（2026年10月1日、関西春ロボコン運営委員会）。このページは非公式の解説です。ルールの補足・変更やFAQは <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">公式ホームページ</a> で確認してください。</span><span lang="en">Source: Kansai Spring Robocon 2027 game rules "SAKURA AVENUE" ver.1.0.0 (October 1, 2026, Kansai Spring Robocon Organizing Committee). This is an unofficial explainer; the Japanese rulebook is authoritative. Check rule updates and the FAQ on the <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">official website</a>.</span></p>
+    <div class="foot-grid">
+      <div class="foot-brand"><a class="brand" href="./"><img src="assets/icons/favicon.svg" alt="" width="28" height="28"><span class="brand-name">SAKURA AVENUE</span></a><p><span lang="ja">関西春ロボコン2027の競技課題「SAKURA AVENUE」を、アニメーションと動かせる図で読み解く非公式ガイドです。</span><span lang="en">An unofficial guide to the Kansai Spring Robocon 2027 game "SAKURA AVENUE", told with animations and diagrams you can play with.</span></p></div>
+      <nav aria-label="Footer"><ul class="foot-links"><li><a href="./"><span lang="ja">図解ガイド</span><span lang="en">Guide</span></a></li><li><a href="strategy.html"><span lang="ja">戦略ノート</span><span lang="en">Strategy</span></a></li><li><a href="calculator.html"><span lang="ja">得点計算</span><span lang="en">Score calculator</span></a></li><li><a href="glossary.html"><span lang="ja">用語集</span><span lang="en">Glossary</span></a></li><li><a href="models.html"><span lang="ja">3Dモデル</span><span lang="en">3D models</span></a></li><li><a href="docs/関西春ロボコン2027_ルールブック.pdf"><span lang="ja">ルールブック（PDF）</span><span lang="en">Rulebook (PDF, Japanese)</span></a></li></ul></nav>
+    </div>
+    <div class="foot-source"><p><span lang="ja">出典：関西春ロボコン2027 競技課題「SAKURA AVENUE」ver.1.0.0（2026年10月1日、関西春ロボコン運営委員会）。このページは非公式の解説です。ルールの補足・変更やFAQは <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">公式ホームページ</a> で確認してください。</span><span lang="en">Source: Kansai Spring Robocon 2027 game rules "SAKURA AVENUE" ver.1.0.0 (October 1, 2026, Kansai Spring Robocon Organizing Committee). This is an unofficial explainer; the Japanese rulebook is authoritative. Check rule updates and the FAQ on the <a href="https://kansai-harurobo.org/kansai_harurobocon/" target="_blank" rel="noopener">official website</a>.</span></p></div>
   </div>
 </footer>
 <!-- /site-footer -->

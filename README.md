@@ -12,7 +12,7 @@ An unofficial illustrated guide to the Kansai Spring Robocon 2027 SAKURA AVENUE 
 | `strategy.html` | 戦略ノート。12番までの算数（ゾーン数の組み合わせ図）、サイコロと往復回数、妨害、同点時の決まり方、公式FAQで確かめたい点 |
 | `calculator.html` | 得点計算。試合終了時の状態から得点の内訳と勝敗（ルール3.8の順）を出す |
 | `glossary.html` | 用語集。ルールブックの用語を検索・分類で引ける |
-| `models.html` | 3Dモデル。検討用モデルの形状や姿勢、アームとグリッパーの動きを試せる。単一GLBの読み込み・アニメーション再生にも対応 |
+| `models.html` | 3Dモデル。実寸で作った検討用ロボット（アルミフレーム・メカナムホイール・旋回昇降アーム・6本積みターンテーブル）の寸法や姿勢を変え、ボトルを共通ゾーンに並べる動きを再生できる。700mm/1000mm立方のサイズ制限チェック、部位ごとの表示、単一GLBの読み込み・アニメーション再生にも対応 |
 
 ## 構成
 
@@ -23,7 +23,7 @@ index.html, strategy.html, calculator.html, glossary.html, models.html
 site.webmanifest
 assets/
   css/
-    base.css      色・文字・レイアウト・共通ヘッダー/フッター・共通部品（全ページ）
+    base.css      色・文字・レイアウト・共通ヘッダー/フッター・共通部品・トップのヒーロー（全ページ）
     match.css     試合プレーヤーとフィールド図
     guide.css     図解ガイドの各セクション
     pages.css     戦略ノート・得点計算・用語集
@@ -34,7 +34,13 @@ assets/
     match/        timeline.js・block.js（元の試合）・compiler.js・scenarios/・player.js
     guide/        図解ガイドの各セクション
     pages/        各ページの入口（models.jsを含む）
-    models/       検討用3Dモデルの形状
+    models/       3Dスタジオ
+      kit.js      部品（アルミフレーム断面・メカナムホイール・ペットボトル・モーターなど）と結合処理
+      concept.js  検討用ロボットの組み立てと姿勢の切り替え（寸法はメートル単位）
+      stage.js    照明・反射・影・背景と描画
+      motion.js   ボトルを並べる動きの時間割（時刻から姿勢を計算する）
+      zones.js    デモ用の共通ゾーン（木枠）
+  img/            トップページのロボット画像（3Dモデルから書き出したもの）
   icons/          ファビコン・ホーム画面用アイコン
 docs/             ルールブック（PDF）
 tools/
@@ -56,9 +62,9 @@ python -m http.server 8000 --bind 127.0.0.1 --directory dist
 
 ブラウザーで http://127.0.0.1:8000/ を開きます。
 
-ブラウザー検証には、初回のみ `npx playwright install chromium` を実行し、`npm test` を使います。3D表示やGLBの入出力、既存ページの操作を確認します。
+ブラウザー検証には、初回のみ `npx playwright install chromium` を実行し、`npm test` を使います。3D表示、姿勢・サイズ制限チェック、デモ再生、GLBの入出力、既存ページの操作を確認します。インストール済みのChromiumを使う場合は `CHROMIUM_PATH=/path/to/chromium npm test` とします。
 
-3Dページの検討用モデルは実機の設計や競技規定を再現したものではありません。調整値はブラウザ内に保存され、現在の姿勢をGLBとして書き出せます。単一のGLBを開く場合も、ファイルはブラウザ内で処理されます。外部ファイルを参照するGLBや、未対応の圧縮形式は使用できません。読み込んだGLB自体はページを閉じると保持されません。
+3Dページの検討用モデルは実機の設計や競技規定を再現したものではありません。寸法はルールブックの制限（スタート時700mm立方・競技中1000mm立方、ロゴ100mm以内）を意識していますが、強度・重量・配線は検証していません。トップページの `assets/img/concept-robot.webp` はこのモデルを描画した画像なので、形を大きく変えたときは撮り直してください。調整値はブラウザ内に保存され、現在の姿勢をGLBとして書き出せます。単一のGLBを開く場合も、ファイルはブラウザ内で処理されます。外部ファイルを参照するGLBや、未対応の圧縮形式は使用できません。読み込んだGLB自体はページを閉じると保持されません。
 
 ## よくある変更
 
