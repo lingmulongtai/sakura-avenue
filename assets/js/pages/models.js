@@ -8,6 +8,9 @@ import { makeConcept } from '../models/concept.js';
 const $ = id => document.getElementById(id);
 const viewport = $('viewport');
 const status = $('status');
+function updateViewerLabel() { viewport.setAttribute('aria-label', L('3Dモデル。矢印キーで回転、プラスとマイナスキーで拡大縮小', '3D model. Use arrow keys to orbit and plus and minus to zoom')); }
+langHooks.push(updateViewerLabel);
+updateViewerLabel();
 let statusText = () => L('検討用モデルを表示中。実機の設計や競技規定を表すものではありません。', 'Showing a concept model. It does not represent a real robot or verified competition specifications.');
 function setStatus(text) { statusText = text; status.textContent = statusText(); }
 langHooks.push(() => { status.textContent = statusText(); });
@@ -35,6 +38,22 @@ if (renderer) {
   controls.minDistance = 0.3;
   controls.maxDistance = 100;
   controls.maxPolarAngle = Math.PI * 0.49;
+  viewport.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-'].includes(event.key)) return;
+    event.preventDefault();
+    const spherical = new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));
+    if (event.key === 'ArrowLeft') spherical.theta -= 0.15;
+    if (event.key === 'ArrowRight') spherical.theta += 0.15;
+    if (event.key === 'ArrowUp') spherical.phi -= 0.15;
+    if (event.key === 'ArrowDown') spherical.phi += 0.15;
+    if (event.key === '+' || event.key === '=') spherical.radius *= 0.85;
+    if (event.key === '-') spherical.radius /= 0.85;
+    spherical.phi = THREE.MathUtils.clamp(spherical.phi, 0.05, controls.maxPolarAngle);
+    spherical.radius = THREE.MathUtils.clamp(spherical.radius, controls.minDistance, controls.maxDistance);
+    camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));
+    camera.lookAt(controls.target);
+    controls.update();
+  });
   scene.add(new THREE.HemisphereLight(0xffffff, 0xc6b0a8, 2));
   const light = new THREE.DirectionalLight(0xffffff, 2.5);
   light.position.set(4, 7, 5);
