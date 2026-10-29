@@ -119,6 +119,21 @@ const hash = b => createHash('sha256').update(b).digest('hex');
     }
     assert.deepEqual(errors,[]);
     await context.close();
+    for (const [locale, expected] of [['ja-JP','ja'],['en-US','en'],['fr-FR','en']]) {
+      const localeContext=await browser.newContext({locale});
+      const localePage=await localeContext.newPage();
+      for (const route of ['', 'models.html']) {
+        await localePage.goto(new URL(route,base).href,{waitUntil:'domcontentloaded'});
+        assert.equal(await localePage.locator('html').getAttribute('lang'),expected,`${route} ${locale}`);
+      }
+      await localeContext.close();
+    }
+    const blockedContext=await browser.newContext({locale:'ja-JP'});
+    await blockedContext.addInitScript(()=>Object.defineProperty(window,'localStorage',{configurable:true,get(){throw new Error('blocked');}}));
+    const blockedPage=await blockedContext.newPage();
+    await blockedPage.goto(new URL('models.html',base).href,{waitUntil:'domcontentloaded'});
+    assert.equal(await blockedPage.locator('html').getAttribute('lang'),'ja');
+    await blockedContext.close();
     console.log('PASS: WebGL render, shape & pose, persistence, motion, GLB export/import, animation, external resource rejection, language, existing pages and interactions, and mobile layout');
   } finally { await browser.close(); if (server) await new Promise(resolve => server.close(resolve)); }
 })().catch(e=>{console.error(e); process.exitCode=1});
