@@ -1,8 +1,8 @@
 # SAKURA AVENUE | Illustrated Guide
 
-An unofficial illustrated guide to the Kansai Spring Robocon 2027 SAKURA AVENUE rules, with animations and interactive simulations. The site follows your browser's language preferences for English or Japanese, and remembers a manually selected language.
+An unofficial illustrated guide to the Kansai Spring Robocon 2027 SAKURA AVENUE rules, with animations, interactive simulations, and a 3D concept studio. The site follows your browser's language preferences for English or Japanese, and remembers a manually selected language.
 
-**公開サイト:** https://lingmulongtai.github.io/sakura-avenue/
+**公開サイト:** https://sakura-avenue.vercel.app/
 
 ## ページ
 
@@ -12,13 +12,14 @@ An unofficial illustrated guide to the Kansai Spring Robocon 2027 SAKURA AVENUE 
 | `strategy.html` | 戦略ノート。12番までの算数（ゾーン数の組み合わせ図）、サイコロと往復回数、妨害、同点時の決まり方、公式FAQで確かめたい点 |
 | `calculator.html` | 得点計算。試合終了時の状態から得点の内訳と勝敗（ルール3.8の順）を出す |
 | `glossary.html` | 用語集。ルールブックの用語を検索・分類で引ける |
+| `models.html` | 3Dモデル。検討用モデルの形状や姿勢、アームとグリッパーの動きを試せる。単一GLBの読み込み・アニメーション再生にも対応 |
 
 ## 構成
 
-ビルドは不要です。HTML・CSS・JavaScript（ESモジュール）をGitHub Pagesがそのまま配信します。
+既存ページは静的なHTML・CSS・JavaScript（ESモジュール）です。3DモデルページはThree.jsを使い、ビルド時に必要なコードを束ねて `dist/` に出力します。
 
 ```
-index.html, strategy.html, calculator.html, glossary.html
+index.html, strategy.html, calculator.html, glossary.html, models.html
 site.webmanifest
 assets/
   css/
@@ -26,29 +27,36 @@ assets/
     match.css     試合プレーヤーとフィールド図
     guide.css     図解ガイドの各セクション
     pages.css     戦略ノート・得点計算・用語集
+    models.css    3Dモデルページ
   js/
     boot.js       描画前に表示言語を決める（<head>で読み込む）
     core/         i18n.js（言語切り替え）・util.js（DOM補助）・field.js（フィールド図）
     match/        timeline.js・block.js（元の試合）・compiler.js・scenarios/・player.js
     guide/        図解ガイドの各セクション
-    pages/        各ページの入口（guide.js, strategy.js, calculator.js, glossary.js）
+    pages/        各ページの入口（models.jsを含む）
+    models/       検討用3Dモデルの形状
   icons/          ファビコン・ホーム画面用アイコン
 docs/             ルールブック（PDF）
 tools/
   sync_chrome.py  全ページの共通ヘッダー/フッターを書き換える
+  build.mjs       静的ページと3Dビューアーをdist/に出力する
 ```
 
 フォントはGoogle Fontsから読み込みます。取得できない場合はシステムフォントを使用します。
 
 ## ローカルで確認
 
-ESモジュールを使うため、ファイルを直接開く（`file://`）のではなく、ローカルサーバー経由で開いてください。リポジトリのルートで次を実行します。
+Node.js 22以降とPython 3を使用します。リポジトリのルートで次を実行してください。
 
 ```sh
-python -m http.server 8000 --bind 127.0.0.1
+npm ci
+npm run build
+python -m http.server 8000 --bind 127.0.0.1 --directory dist
 ```
 
 ブラウザーで http://127.0.0.1:8000/ を開きます。
+
+3Dページの検討用モデルは実機の設計や競技規定を再現したものではありません。調整値はブラウザ内に保存され、現在の姿勢をGLBとして書き出せます。単一のGLBを開く場合も、ファイルはブラウザ内で処理されます。外部ファイルを参照するGLBや、未対応の圧縮形式は使用できません。読み込んだGLB自体はページを閉じると保持されません。
 
 ## よくある変更
 
@@ -70,6 +78,6 @@ python -m http.server 8000 --bind 127.0.0.1
 
 ## 公開・更新
 
-GitHub Pagesの公開元は `main` ブランチのルート (`/`) です。`main` にpushすると、自動的に再公開されます。`.nojekyll` により、Jekyllの処理をせずにファイルをそのまま配信します。
+GitHubの `main` ブランチをVercelに接続しています。`npm ci` と `npm run build` が実行され、`dist/` が公開されます。
 
 本ページは非公式の解説です。ルールの出典・注意事項はページ内の表記を参照してください。
