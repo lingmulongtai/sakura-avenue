@@ -6,9 +6,9 @@ const fs = require('node:fs');
 const http = require('node:http');
 
 function animatedGLB(external = false) {
-  const floats = new Float32Array([0,0,0, 1,0,0, 0,1,0, 0,1, 0,0,0, 0,1,0]);
+  const floats = new Float32Array([0,-1,0, 1,-1,0, 0,0,0, 0,1, 0,0,0, 0,1,0]);
   const bin = Buffer.from(floats.buffer);
-  const json = {asset:{version:'2.0'},scene:0,scenes:[{nodes:[0]}],nodes:[{mesh:0}],meshes:[{primitives:[{attributes:{POSITION:0}}]}],buffers:[external ? {byteLength:bin.length,uri:'https://example.invalid/buffer.bin'} : {byteLength:bin.length}],bufferViews:[{buffer:0,byteOffset:0,byteLength:36},{buffer:0,byteOffset:36,byteLength:8},{buffer:0,byteOffset:44,byteLength:24}],accessors:[{bufferView:0,componentType:5126,count:3,type:'VEC3',min:[0,0,0],max:[1,1,0]},{bufferView:1,componentType:5126,count:2,type:'SCALAR',min:[0],max:[1]},{bufferView:2,componentType:5126,count:2,type:'VEC3'}],animations:[{name:'Lift',samplers:[{input:1,output:2,interpolation:'LINEAR'}],channels:[{sampler:0,target:{node:0,path:'translation'}}]}]};
+  const json = {asset:{version:'2.0'},scene:0,scenes:[{nodes:[0]}],nodes:[{mesh:0}],meshes:[{primitives:[{attributes:{POSITION:0},material:0}]}],materials:[{doubleSided:true,pbrMetallicRoughness:{baseColorFactor:[0,0.25,1,1],metallicFactor:0,roughnessFactor:1}}],buffers:[external ? {byteLength:bin.length,uri:'https://example.invalid/buffer.bin'} : {byteLength:bin.length}],bufferViews:[{buffer:0,byteOffset:0,byteLength:36},{buffer:0,byteOffset:36,byteLength:8},{buffer:0,byteOffset:44,byteLength:24}],accessors:[{bufferView:0,componentType:5126,count:3,type:'VEC3',min:[0,-1,0],max:[1,0,0]},{bufferView:1,componentType:5126,count:2,type:'SCALAR',min:[0],max:[1]},{bufferView:2,componentType:5126,count:2,type:'VEC3'}],animations:[{name:'Lift',samplers:[{input:1,output:2,interpolation:'LINEAR'}],channels:[{sampler:0,target:{node:0,path:'translation'}}]}]};
   let raw = Buffer.from(JSON.stringify(json));
   const pad = (4 - raw.length % 4) % 4;
   raw = Buffer.concat([raw,Buffer.alloc(pad,0x20)]);
@@ -68,6 +68,16 @@ const hash = b => createHash('sha256').update(b).digest('hex');
     assert.equal(await page.locator('#animation-play').isDisabled(),true);
     await page.locator('#model-file').setInputFiles({name:'animated.glb',mimeType:'model/gltf-binary',buffer:animatedGLB()});
     await page.waitForFunction(()=>document.querySelector('#animation-select').options[0]?.text==='Lift');
+    const screenshot=await page.locator('#viewport canvas').screenshot();
+    const bluePixels=await page.evaluate(async data=>{
+      const image=new Image(); image.src='data:image/png;base64,'+data; await image.decode();
+      const canvas=document.createElement('canvas'); canvas.width=image.width; canvas.height=image.height;
+      const context=canvas.getContext('2d'); context.drawImage(image,0,0);
+      const pixels=context.getImageData(0,0,canvas.width,canvas.height).data; let count=0;
+      for(let i=0;i<pixels.length;i+=4) if(pixels[i+2]>pixels[i]*1.3 && pixels[i+2]>pixels[i+1]*1.2) count++;
+      return count;
+    },screenshot.toString('base64'));
+    assert.ok(bluePixels>300,`Imported model below the origin should be visible; blue pixels: ${bluePixels}`);
     assert.equal(await page.locator('#animation-play').isEnabled(),true);
     await page.locator('#animation-play').click();
     assert.equal(await page.locator('#animation-play').getAttribute('aria-pressed'),'true');

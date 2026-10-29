@@ -67,14 +67,25 @@ if (renderer) {
   const exporter = new GLTFExporter();
   let pendingLoad = 0;
   const dispose = object => {
+    const geometries = new Set(), materials = new Set(), textures = new Set(), bitmaps = new Set(), skeletons = new Set();
     object.traverse(item => {
-      item.geometry?.dispose();
+      if (item.geometry) geometries.add(item.geometry);
+      if (item.skeleton) skeletons.add(item.skeleton);
       for (const material of Array.isArray(item.material) ? item.material : [item.material]) {
         if (!material) continue;
-        for (const value of Object.values(material)) if (value?.isTexture) value.dispose();
-        material.dispose();
+        materials.add(material);
+        for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
       }
     });
+    for (const texture of textures) {
+      const image = texture.source?.data;
+      if (typeof ImageBitmap !== 'undefined' && image instanceof ImageBitmap) bitmaps.add(image);
+      texture.dispose();
+    }
+    for (const bitmap of bitmaps) bitmap.close();
+    for (const material of materials) material.dispose();
+    for (const geometry of geometries) geometry.dispose();
+    for (const skeleton of skeletons) skeleton.dispose();
   };
   function updateInputs() {
     for (const key of Object.keys(defaults)) {
@@ -94,6 +105,8 @@ if (renderer) {
     const center = bounds.getCenter(new THREE.Vector3());
     const size = bounds.getSize(new THREE.Vector3());
     const extent = Math.max(size.x, size.y, size.z, 0.1);
+    floor.position.y = bounds.min.y - extent * 0.005;
+    grid.position.y = floor.position.y + extent * 0.001;
     controls.target.copy(center);
     controls.minDistance = extent * 0.15;
     controls.maxDistance = extent * 12;
