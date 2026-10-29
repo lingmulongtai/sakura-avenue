@@ -146,6 +146,7 @@ footer a{color:var(--sakura)}
 .pagelinks a{flex:none;text-decoration:none;color:var(--muted);font-size:13px;font-weight:700;padding:6px 10px;border-radius:8px;white-space:nowrap}
 .pagelinks a:hover{color:var(--ink)}
 .pagelinks a[aria-current="page"]{color:var(--ink);background:var(--surface-2)}
+@media(max-width:500px){.pagelinks{flex-wrap:wrap;overflow:visible}}
 @media(min-width:760px){.pagelinks{order:0;flex:0 1 auto;margin:0}}
 .foot-links{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 12px;padding:0;list-style:none;font-weight:700}
 .foot-links a{color:var(--ink);text-decoration:none}

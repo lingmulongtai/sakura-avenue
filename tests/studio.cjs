@@ -102,6 +102,11 @@ const hash = b => createHash('sha256').update(b).digest('hex');
       return link.left >= nav.left - 1 && link.right <= nav.right + 1;
     }, null, { timeout: 3000 }).catch(async error => { console.log(await page.evaluate(() => {const n=document.querySelector('.pagelinks'); const a=n.querySelector('[aria-current="page"]'); return {nav:n.getBoundingClientRect().toJSON(), link:a.getBoundingClientRect().toJSON(), scrollLeft:n.scrollLeft, scrollWidth:n.scrollWidth, clientWidth:n.clientWidth};})); throw error; });
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    await page.setViewportSize({width:320,height:844});
+    for (const link of await page.locator('.pagelinks a').all()) {
+      const box=await link.boundingBox();
+      assert.ok(box && box.x>=0 && box.x+box.width<=320,`Navigation item clipped: ${await link.textContent()}`);
+    }
     await page.goto(base,{waitUntil:'networkidle'});
     assert.equal(await page.locator('html').getAttribute('lang'),'ja');
     assert.ok(await page.locator('.pagelinks a[href="models.html"]').count());
