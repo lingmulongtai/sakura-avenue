@@ -1,2 +1,5 @@
 .codex/
 .codex-remote-attachments/
+node_modules/
+dist/
+.vercel/
