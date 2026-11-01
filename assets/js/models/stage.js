@@ -3,6 +3,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { HorizontalBlurShader } from 'three/addons/shaders/HorizontalBlurShader.js';
 import { VerticalBlurShader } from 'three/addons/shaders/VerticalBlurShader.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 
 // A photo-studio scene: soft environment light, a key light with soft shadows, blurred contact shadows
 // and a seamless backdrop. Rendering happens on demand through invalidate().
@@ -172,12 +176,27 @@ export function createStage(container, { alpha = false } = {}) {
   scheme?.addEventListener?.('change', applyTheme);
   applyTheme();
 
+  // Ambient occlusion grounds every joint and pocket. The composer renders into a multisampled
+  // target so edges stay antialiased; slow devices drop the pass (see quality below).
+  const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 }));
+  composer.addPass(new RenderPass(scene, camera));
+  const ao = new GTAOPass(scene, camera, 1, 1);
+  ao.updateGtaoMaterial({ radius: 0.06, distanceExponent: 1.4, thickness: 0.6, scale: 1, samples: 16 });
+  ao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 6, rings: 2, samples: 16 });
+  ao.blendIntensity = 0.9;
+  composer.addPass(ao);
+  composer.addPass(new OutputPass());
+  const quality = { ao: matchMedia('(min-width: 700px)').matches, slow: 0, last: 0 };
+  ao.enabled = quality.ao;
+
   function resize() {
     const width = container.clientWidth, height = container.clientHeight;
     if (!width || !height) return;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
+    composer.setPixelRatio(renderer.getPixelRatio());
+    composer.setSize(width, height);
     invalidate();
   }
   new ResizeObserver(resize).observe(container);
@@ -191,7 +210,16 @@ export function createStage(container, { alpha = false } = {}) {
     render() {
       if (!dirty && !shadowDirty) return false;
       if (shadowDirty) contact.update(scene, [catcher, ...this.shadowExclude]);
-      renderer.render(scene, camera);
+      // Quality step: if back-to-back frames keep taking longer than ~30 fps, drop AO, then pixel ratio.
+      const now = performance.now(), gap = now - quality.last;
+      quality.last = now;
+      if (gap < 100) quality.slow = gap > 34 ? quality.slow + 1 : Math.max(quality.slow - 1, 0);
+      if (quality.slow > 45) {
+        quality.slow = 0;
+        if (ao.enabled) ao.enabled = false;
+        else if (renderer.getPixelRatio() > 1) { renderer.setPixelRatio(1); resize(); }
+      }
+      composer.render();
       dirty = shadowDirty = false;
       return true;
     },
