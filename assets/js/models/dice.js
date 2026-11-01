@@ -1,6 +1,6 @@
-// The 150 mm sponge die (score B) and the routine that tips it with the front paddle.
-// As with the placing demo, the plan is a pure function of time: the die's tilt is solved from where
-// the pusher is, so the pad never passes through the die and the die never moves on its own early.
+// The 150 mm sponge die (score B) and the routine that tips it with the gripper.
+// As with the placing demo, the plan is a pure function of time: the die's tilt is solved from how far
+// the arm has reached, so the gripper never passes through the die and the die never moves early.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
@@ -65,7 +65,7 @@ export function makeDie() {
   };
 }
 
-// Tilt (rad) of the die when the pusher has travelled `p` metres past first contact. The pad touches
+// Tilt (rad) of the die when the gripper has travelled `p` metres past first contact. It touches
 // the near face at height h; tipping about the far edge moves that point to z = -s cos t + h sin t.
 function tiltFor(p, h) {
   const target = -DIE + p;
@@ -77,52 +77,59 @@ function tiltFor(p, h) {
   return lo;
 }
 
-export function planDice(rig) {
-  const T = rig.tool;
-  const dieX = -0.05;                 // die centre, off to one side so the paddle has to slide
-  const gap = 0.018;                  // pad to die at zero stroke
-  const homeZ = T.padZ + gap + DIE;   // far bottom edge (the pivot) when the die is home
-  const tip = 48 / R2D;               // past this the die's weight carries it over
-  const contact = gap * 1000;
-  const stroke = contact + (-DIE * Math.cos(tip) + T.padY * Math.sin(tip) + DIE) * 1000;
-  const paddleTo = dieX * 1000, paddleHome = T.padX * 1000;
+export function planDice(rig, start) {
+  const L = rig.layout;
+  // With the turret at 0° the arm points straight ahead and the gripper runs along z at x = M.x + ox.
+  const dieX = L.M.x + L.ox;
+  const front = 0.03;                    // gripper centre to the face of its closed fingers
+  const zAt = reach => L.M.z + L.lz0 + reach / 1000 + front;
+  const nearZ = zAt(0) + 0.105;          // near face of the die at home
+  const homeZ = nearZ + DIE;             // far bottom edge (the pivot)
+  const h = 0.12;                        // push this high on the near face
+  const lift = (h + L.drop) * 1000;      // the hold point of the gripper sits `drop` below the arm
+  const tip = 48 / R2D;                  // past this the die's weight carries it over
+  const contact = (nearZ - zAt(0)) * 1000;
+  const stroke = contact + (-DIE * Math.cos(tip) + h * Math.sin(tip) + DIE) * 1000;
+  const clear = 520, approach = contact - 30;
 
-  // [t0, t1, key, from, to]: one move per row, minimum-jerk like the placing routine.
+  // [t0, t1, key, to]: each joint moves from wherever its previous row left it, minimum-jerk.
   const rows = [
-    [0, 0.9, 'paddle', paddleHome, paddleTo],
-    [0.9, 1.5, 'push', 0, contact],
-    [1.5, 2.9, 'push', contact, stroke],
-    [3.4, 4.1, 'push', stroke, 0],
-    [3.6, 4.4, 'paddle', paddleTo, paddleHome],
-    [4.4, 5.8, 'drive', 0, DIE],
+    [0, 0.8, 'lift', Math.max(start.lift, clear)], [0, 0.6, 'reach', 0], [0, 0.6, 'grip', 0],
+    [0.6, 1.7, 'yaw', 0],
+    [1.7, 2.6, 'lift', lift], [1.9, 2.6, 'reach', approach],
+    [2.6, 3.1, 'reach', contact],
+    [3.1, 4.5, 'reach', stroke],
+    [5.0, 5.5, 'reach', approach], [5.3, 6.1, 'lift', clear], [5.8, 6.4, 'reach', 0],
+    [6.4, 7.8, 'drive', DIE],
   ];
-  const fall = [2.9, 3.3];            // free tip from 48° to 90°, accelerating
-  const duration = 6.8;
+  const fall = [4.5, 4.9];
+  const duration = 8.6;
   const phases = [
-    { phase: 'aim', cycle: -1, t0: 0, t1: 0.9 },
-    { phase: 'push', cycle: -1, t0: 0.9, t1: 2.9 },
-    { phase: 'roll', cycle: -1, t0: 2.9, t1: 3.4 },
-    { phase: 'retract', cycle: -1, t0: 3.4, t1: 4.4 },
-    { phase: 'drive', cycle: -1, t0: 4.4, t1: 5.8 },
-    { phase: 'rest', cycle: -1, t0: 5.8, t1: duration },
+    { phase: 'aim', cycle: -1, t0: 0, t1: 2.6 },
+    { phase: 'push', cycle: -1, t0: 2.6, t1: 4.5 },
+    { phase: 'roll', cycle: -1, t0: 4.5, t1: 5.0 },
+    { phase: 'retract', cycle: -1, t0: 5.0, t1: 6.4 },
+    { phase: 'drive', cycle: -1, t0: 6.4, t1: 7.8 },
+    { phase: 'rest', cycle: -1, t0: 7.8, t1: duration },
   ];
-  const sample = (key, t, rest) => {
-    let v = rest, speed = 0;
-    for (const [t0, t1, k, from, to] of rows) {
+  const sample = (key, t) => {
+    let v = key === 'drive' ? 0 : start[key], speed = 0;
+    for (const [t0, t1, k, to] of rows) {
       if (k !== key) continue;
       if (t >= t1) { v = to; continue; }
-      if (t > t0) { const p = (t - t0) / (t1 - t0); v = from + (to - from) * smooth(p); speed = speedOf(p); }
+      if (t > t0) { const p = (t - t0) / (t1 - t0); v = v + (to - v) * smooth(p); speed = speedOf(p); }
       break;
     }
     return [v, speed];
   };
-
   const mm = v => `${Math.round(v)} mm`;
+
   return {
     duration, phases, cycles: 1, dieX, homeZ,
     lanes: [
-      ['パドル位置', 'Paddle', mm, q => q.tool.paddle, q => q.activity.paddle],
-      ['押し出し', 'Pusher', mm, q => q.tool.push, q => q.activity.push],
+      ['旋回', 'Turret', v => `${Math.round(v)}°`, q => q.pose.yaw, q => q.activity.yaw],
+      ['昇降', 'Lift', mm, q => q.pose.lift, q => q.activity.lift],
+      ['伸縮', 'Reach', mm, q => q.pose.reach, q => q.activity.reach],
       ['サイコロの傾き', 'Die tilt', v => `${Math.round(v)}°`, q => q.tilt * R2D, q => q.activity.tilt],
       ['前進', 'Drive', mm, q => q.travel * 1000, q => q.drive],
     ],
@@ -130,17 +137,18 @@ export function planDice(rig) {
     stat: { ja: 'サイコロの目', en: 'Die face', value: q => q.face ?? '—', total: q => q.changed ? '+20' : '' },
     at(time) {
       const t = Math.min(Math.max(time, 0), duration);
-      const [paddle, aPaddle] = sample('paddle', t, paddleHome);
-      const [push, aPush] = sample('push', t, 0);
-      const [drive, aDrive] = sample('drive', t, 0);
-      let tilt = tiltFor(Math.max(push - contact, 0) / 1000, T.padY), aTilt = 0;
+      const pose = { turn: start.turn }, activity = {};
+      for (const key of ['yaw', 'lift', 'reach', 'grip']) [pose[key], activity[key]] = sample(key, t);
+      const [travel, drive] = sample('drive', t);
+      let tilt = tiltFor(Math.max(pose.reach - contact, 0) / 1000, h);
+      activity.tilt = activity.reach && pose.reach > contact ? activity.reach : 0;
       if (t >= fall[0]) {
         const p = Math.min((t - fall[0]) / (fall[1] - fall[0]), 1);
         tilt = tip + (Math.PI / 2 - tip) * p * p;
-        aTilt = p < 1 ? p : 0;
-      } else if (aPush && push > contact) aTilt = aPush;
+        activity.tilt = p < 1 ? p : 0;
+      }
       const phase = phases.find(p => t <= p.t1) || phases[phases.length - 1];
-      return { tool: { paddle, push }, activity: { paddle: aPaddle, push: aPush, tilt: aTilt }, drive: aDrive, travel: drive, tilt, rolled: t >= fall[1], phase };
+      return { pose, activity, drive, travel, tilt, rolled: t >= fall[1], phase };
     },
   };
 }

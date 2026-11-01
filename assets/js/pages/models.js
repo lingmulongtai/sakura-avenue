@@ -390,7 +390,7 @@ function studio(stage) {
   let routine = 'place', die = null, dieFace = 1, dieChanged = false;
   const dieBase = new THREE.Quaternion(), dieNow = new THREE.Quaternion();
   const ROLL = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
-  const newPlan = from => routine === 'dice' ? planDice(rig) : planDemo(rig, from, rig.bottles.length);
+  const newPlan = from => routine === 'dice' ? planDice(rig, from) : planDemo(rig, from, rig.bottles.length);
   function startDemo() {
     if (!rig) return;
     poseTween = null;
@@ -410,8 +410,8 @@ function studio(stage) {
   // Pull back to a view that keeps the row of zones in frame (and the lifted parts when exploded).
   function demoView() {
     if (routine === 'dice') {
-      const target = new THREE.Vector3(-0.02, 0.16, rig.tool.padZ - 0.05);
-      flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.75, 0.45, 0.85).normalize(), 1.35 + explode.target * 0.4), 1.1);
+      const target = new THREE.Vector3(demo.plan.dieX + 0.1, 0.22, demo.plan.homeZ - 0.2);
+      flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.75, 0.45, 0.85).normalize(), 1.65 + explode.target * 0.4), 1.1);
       document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', 'false'));
       return;
     }
@@ -429,7 +429,6 @@ function studio(stage) {
     zones.group.visible = false;
     zones.group.position.x = 0;
     if (die) die.group.visible = false;
-    rig.setTool({});
     rig.wheels.forEach(w => { w.wheel.rotation.x = 0; });
     rig.lamp.emissiveIntensity = 0.25;
     setAccent(null);
@@ -440,7 +439,7 @@ function studio(stage) {
     if (demo.time > demo.plan.duration) {
       rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
       if (routine === 'dice') dieBase.premultiply(ROLL);
-      demo = { plan: newPlan(routine === 'dice' ? null : demo.plan.at(demo.plan.duration).pose), time: 0 };
+      demo = { plan: newPlan(demo.plan.at(demo.plan.duration).pose), time: 0 };
       scope.setPlan(demo.plan);
     }
     const s = demo.plan.at(demo.time);
@@ -453,7 +452,7 @@ function studio(stage) {
     stage.invalidate(true);
   }
   function stepDie(s) {
-    rig.setTool(s.tool);
+    rig.setPose(s.pose);
     // Once it has fallen, the die rests on its next face with the pivot one die-width further on,
     // and the robot drives up to it: the scene stays continuous through the loop.
     const body = die.group.children[0];
