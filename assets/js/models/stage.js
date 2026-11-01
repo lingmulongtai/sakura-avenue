@@ -94,7 +94,7 @@ export function createStage(container, { alpha = false } = {}) {
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1.02;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.prepend(renderer.domElement);
 
   const scene = new THREE.Scene();
@@ -125,10 +125,11 @@ export function createStage(container, { alpha = false } = {}) {
   const key = new THREE.DirectionalLight(0xfff4ea, 2.5);
   key.position.set(1.1, 4.2, 1.6);
   key.castShadow = true;
-  key.shadow.mapSize.set(2048, 2048);
-  key.shadow.radius = 7;
-  key.shadow.bias = -0.0012;
-  key.shadow.normalBias = 0.02;
+  // Big map on desktop, normal bias rather than depth bias: no acne crawling over moving parts.
+  const shadowSize = Math.min(renderer.capabilities.maxTextureSize, matchMedia('(min-width: 900px)').matches ? 4096 : 2048);
+  key.shadow.mapSize.set(shadowSize, shadowSize);
+  key.shadow.bias = -0.0002;
+  key.shadow.normalBias = 0.012;
   Object.assign(key.shadow.camera, { left: -1.4, right: 1.4, top: 1.4, bottom: -1.4, near: 0.5, far: 8 });
   scene.add(key, key.target);
   const rim = new THREE.DirectionalLight(0xf3e6ff, 1.1);
