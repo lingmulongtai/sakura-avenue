@@ -132,3 +132,32 @@
   .seg button{padding:8px 13px}
   .slider input{height:32px}
 }
+
+/* live console under the viewer: every number and trace reads the motion plan */
+.scope{margin-top:14px;padding:14px 16px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.scope-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 22px;margin-bottom:10px}
+.scope-kicker{display:block;font:700 9.5px/1.2 var(--f-num);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.scope-phase{flex:1 1 160px;min-width:0}
+.scope-phase b{font-size:22px;font-weight:900;letter-spacing:-.01em;color:var(--ph,var(--ink));transition:color .25s}
+.scope-phase .num{margin-left:8px;font:700 12px var(--f-num);color:var(--muted)}
+.scope-stat b{font:700 22px/1 var(--f-num);letter-spacing:-.02em}
+.scope-stat small{margin-left:3px;font:500 11.5px var(--f-num);color:var(--muted)}
+.scope-speed{margin-left:auto}
+.scope-chart{display:block;width:100%;height:132px}
+.scope-track{position:relative;height:30px;margin-top:6px}
+.scope-phases{position:absolute;inset:7px 0;display:flex;gap:1px;border-radius:6px;overflow:hidden}
+.scope-phases i{flex:none;height:100%;background:var(--ph);opacity:.32;transition:opacity .2s}
+.scope-phases i.on{opacity:.9}
+.scope-phases i.done{opacity:.6}
+.scope-track input{position:absolute;inset:0;width:100%;height:100%;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:ew-resize}
+.scope-track input::-webkit-slider-runnable-track{height:100%;background:transparent}
+.scope-track input::-moz-range-track{height:100%;background:transparent}
+.scope-track input::-webkit-slider-thumb{-webkit-appearance:none;width:4px;height:30px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 3px var(--surface)}
+.scope-track input::-moz-range-thumb{width:4px;height:30px;border:0;border-radius:2px;background:var(--ink);box-shadow:0 0 0 3px var(--surface)}
+.scope-track input:focus-visible{outline:3px solid var(--sakura);outline-offset:2px;border-radius:6px}
+[data-phase="ready"],[data-phase="rest"]{--ph:var(--seg-a)}
+[data-phase="pick"]{--ph:var(--sakura)}
+[data-phase="carry"]{--ph:var(--seg-b)}
+[data-phase="place"]{--ph:var(--ok)}
+[data-phase="strafe"]{--ph:var(--blue)}
+@media(max-width:599px){.scope{padding:12px 12px 10px}.scope-phase b,.scope-stat b{font-size:18px}.scope-speed{margin-left:0}.scope-chart{height:120px}}

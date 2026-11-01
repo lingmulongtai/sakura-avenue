@@ -71,6 +71,19 @@
         </div>
         <p class="concept-mark" aria-hidden="true">Concept</p>
       </div>
+      <div class="scope" id="scope" hidden>
+        <div class="scope-head">
+          <div class="scope-phase" aria-live="polite"><span class="scope-kicker">Phase</span><b id="scope-phase">—</b><span class="num" id="scope-cycle"></span></div>
+          <div class="scope-stat"><span class="scope-kicker"><span lang="ja">並べた本数</span><span lang="en">Placed</span></span><b class="num" id="scope-placed">0</b><small class="num" id="scope-count"></small></div>
+          <div class="scope-stat"><span class="scope-kicker">Time</span><b class="num" id="scope-time">0.0</b><small class="num" id="scope-duration"></small></div>
+          <div class="seg scope-speed" role="group" aria-label="Speed"><button type="button" data-speed="0.25" aria-pressed="false">¼×</button><button type="button" data-speed="0.5" aria-pressed="false">½×</button><button type="button" data-speed="1" aria-pressed="true">1×</button></div>
+        </div>
+        <canvas class="scope-chart" id="scope-chart" aria-hidden="true"></canvas>
+        <div class="scope-track">
+          <div class="scope-phases" id="scope-phases" aria-hidden="true"></div>
+          <input id="scope-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="Timeline">
+        </div>
+      </div>
       <div class="stage-bar">
         <button class="studio-btn play" id="animate" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M7 4.5v15l13-7.5z"/><path class="i-stop" d="M6 6h4.5v12H6zM13.5 6H18v12h-4.5z"/></svg><span class="when-off"><span lang="ja">ボトルを並べる動きを再生</span><span lang="en">Play the placing routine</span></span><span class="when-on"><span lang="ja">止める</span><span lang="en">Stop</span></span></button>
         <div class="stage-tools">
