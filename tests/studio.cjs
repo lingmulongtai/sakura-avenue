@@ -82,8 +82,15 @@ const hash = b => createHash('sha256').update(b).digest('hex');
     await page.locator('#animate').click();
     assert.equal(await page.locator('#animate').getAttribute('aria-pressed'),'true');
     await changes(await shot());
+    // The console reads the same plan: scrubbing moves the clock, speed buttons toggle.
+    assert.equal(await page.locator('#scope').isVisible(),true);
+    await page.locator('#scope-scrub').fill('600');
+    await page.waitForFunction(()=>Number(document.querySelector('#scope-time').textContent)>15,null,{timeout:10000});
+    await page.locator('[data-speed="0.5"]').click();
+    assert.equal(await page.locator('[data-speed="0.5"]').getAttribute('aria-pressed'),'true');
     await page.locator('#animate').click();
     assert.equal(await page.locator('#animate').getAttribute('aria-pressed'),'false');
+    assert.equal(await page.locator('#scope').isHidden(),true);
     const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#export-glb').click()]);
     const exported=await download.path();
     await page.locator('#model-file').setInputFiles({name:'exported.glb',mimeType:'model/gltf-binary',buffer:fs.readFileSync(exported)});
