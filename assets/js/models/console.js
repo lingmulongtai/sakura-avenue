@@ -78,6 +78,7 @@ export function createConsole({ onScrub, onSpeed }) {
 
   api.setPlan = next => {
     plan = next;
+    shown = null; // the last frame belongs to the previous plan's lanes
     lanes = plan.lanes || PLACE_LANES;
     series = lanes.map(() => new Float32Array(SAMPLES + 1));
     for (let i = 0; i <= SAMPLES; i++) {
