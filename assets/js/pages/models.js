@@ -32,6 +32,16 @@ if (stage) studio(stage);
 
 function studio(stage) {
   const { scene, camera, controls, renderer } = stage;
+  // The subsystem rail repeats the Anatomy list as compact buttons beside the stage.
+  for (const entry of document.querySelectorAll('.part[data-part]')) {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'part-chip';
+    chip.dataset.part = entry.dataset.part;
+    chip.setAttribute('aria-pressed', 'false');
+    chip.innerHTML = `<i>${entry.querySelector('.part-no').textContent}</i>${entry.querySelector('b').innerHTML}`;
+    $('part-rail').append(chip);
+  }
   renderer.localClippingEnabled = true;
   const ease = p => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
 

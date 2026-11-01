@@ -66,7 +66,7 @@
           </div>
         </div>
         <div class="hud hud-bottom">
-          <p class="viewer-hint"><span lang="ja">ドラッグまたは矢印キーで回転 · ピンチまたは +/- で拡大縮小</span><span lang="en">Drag or use arrow keys to orbit · Pinch or +/- to zoom</span></p>
+          <div class="display-switch" role="group" aria-label="Display"><button type="button" data-display="solid" aria-pressed="true"><span lang="ja">通常</span><span lang="en">Solid</span></button><button type="button" data-display="xray" aria-pressed="false"><span lang="ja">透視</span><span lang="en">X-ray</span></button><button type="button" data-display="explode" aria-pressed="false"><span lang="ja">分解</span><span lang="en">Exploded</span></button><button type="button" data-display="cut" aria-pressed="false"><span lang="ja">断面</span><span lang="en">Cutaway</span></button></div>
           <p class="dims-chip"><span class="dims-label">W × D × H</span><span id="dims" class="num">—</span></p>
         </div>
         <p class="concept-mark" aria-hidden="true">Concept</p>
@@ -86,14 +86,14 @@
           <input id="scope-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="Timeline">
         </div>
       </div>
+      <div class="part-rail" id="part-rail" role="group" aria-label="Subsystems"></div>
       <div class="stage-bar">
         <button class="studio-btn play" id="animate" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M7 4.5v15l13-7.5z"/><path class="i-stop" d="M6 6h4.5v12H6zM13.5 6H18v12h-4.5z"/></svg><span class="when-off"><span lang="ja">動きを再生</span><span lang="en">Play routine</span></span><span class="when-on"><span lang="ja">止める</span><span lang="en">Stop</span></span></button>
         <div class="seg routine-switch" role="group" aria-label="Routine"><button type="button" data-routine="place" aria-pressed="true"><span lang="ja">ボトルを並べる</span><span lang="en">Place bottles</span></button><button type="button" data-routine="dice" aria-pressed="false"><span lang="ja">サイコロを転がす</span><span lang="en">Roll the die</span></button></div>
-        <div class="seg display-switch" role="group" aria-label="Display"><button type="button" data-display="solid" aria-pressed="true"><span lang="ja">通常</span><span lang="en">Solid</span></button><button type="button" data-display="xray" aria-pressed="false"><span lang="ja">透視</span><span lang="en">X-ray</span></button><button type="button" data-display="explode" aria-pressed="false"><span lang="ja">分解</span><span lang="en">Exploded</span></button><button type="button" data-display="cut" aria-pressed="false"><span lang="ja">断面</span><span lang="en">Cutaway</span></button></div>
         <div class="stage-tools">
-          <button class="studio-btn" id="reset-view" type="button"><span lang="ja">視点を戻す</span><span lang="en">Reset view</span></button>
-          <button class="studio-btn" id="show-concept" type="button"><span lang="ja">検討用モデルに戻る</span><span lang="en">Show concept</span></button>
-          <label class="studio-btn upload"><span lang="ja">GLBを開く</span><span lang="en">Open GLB</span><input id="model-file" type="file" accept=".glb,model/gltf-binary"></label>
+          <button class="studio-btn quiet" id="reset-view" type="button"><span lang="ja">視点を戻す</span><span lang="en">Reset view</span></button>
+          <button class="studio-btn quiet" id="show-concept" type="button"><span lang="ja">検討用モデルに戻る</span><span lang="en">Show concept</span></button>
+          <label class="studio-btn quiet upload"><span lang="ja">GLBを開く</span><span lang="en">Open GLB</span><input id="model-file" type="file" accept=".glb,model/gltf-binary"></label>
         </div>
       </div>
       <p class="studio-status" id="status" role="status"><span lang="ja">検討用モデルを表示中。実機の設計や競技規定を表すものではありません。</span><span lang="en">Showing a concept model. It does not represent a real robot or verified competition specifications.</span></p>
