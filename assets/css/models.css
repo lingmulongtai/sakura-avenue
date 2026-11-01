@@ -2,16 +2,27 @@
 :root{/* the stage is a pale studio in both themes */--stage-a:#F6F1EC;--stage-b:#E9E1DA;--stage-c:#D9CEC5;--hud-bg:rgba(255,255,255,.72);--hud-line:rgba(255,255,255,.7);--hud-ink:#3A2C26;--hud-muted:#7A6A63}
 
 .studio{padding-bottom:8px}
-.studio-head{display:grid;gap:24px;padding-block:48px 28px}
-@media(min-width:960px){.studio-head{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:end;gap:48px;padding-block:60px 32px}}
-.studio-head h1{font-size:clamp(32px,6.4vw,56px);line-height:1.12;margin:0 0 16px;font-weight:900;letter-spacing:-.025em}
-.studio-head .lead{font-size:15.5px;line-height:1.85}
-.studio-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin:0;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.studio-specs div{background:var(--surface);padding:13px 15px}
-.studio-specs dt{font-size:11.5px;color:var(--muted);line-height:1.4}
-.studio-specs dd{margin:4px 0 0;font:700 16px/1.3 var(--f-num);letter-spacing:-.01em}
-.studio-specs dd small{font:500 11px var(--f-body);color:var(--muted);margin-left:4px}
-@media(max-width:599px){.studio-specs dd{font-size:13.5px;letter-spacing:-.03em}.studio-specs div{padding:11px 12px}}
+/* page head: an editorial headline at a light weight, and the specs as a quiet stat strip */
+.studio-head{display:grid;gap:22px;padding-block:44px 26px}
+@media(min-width:960px){.studio-head{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:end;gap:56px;padding-block:72px 36px}}
+.studio-head h1{font-size:clamp(34px,5.6vw,72px);line-height:1.02;margin:0 0 18px;font-weight:500;letter-spacing:-.045em}
+.studio-head h1 .muted{color:var(--muted)}
+.studio-head .lead{font-size:15px;line-height:1.85;max-width:34rem;color:var(--muted)}
+.studio-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 24px;margin:0}
+.studio-specs div{border-top:1px solid var(--line);padding-top:12px}
+.studio-specs dt{font:700 10px/1.3 var(--f-num);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.studio-specs dt span[lang="ja"]{letter-spacing:.04em}
+.studio-specs dd{margin:6px 0 0;font:500 20px/1.2 var(--f-num);letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.studio-specs dd small{font:500 11px var(--f-body);color:var(--muted);margin-left:5px;letter-spacing:0}
+@media(max-width:599px){.studio-specs dd{font-size:16px}}
+/* entrance: eyebrow, headline, lead, specs, then the stage settles */
+@keyframes rise{from{opacity:0;transform:translateY(24px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes settle{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+.studio-intro>*,.studio-specs>div{animation:rise .9s cubic-bezier(.22,1,.36,1) both}
+.studio-intro .eyebrow{animation-delay:.05s}.studio-intro h1{animation-delay:.18s}.studio-intro .lead{animation-delay:.32s}
+.studio-specs>div:nth-child(1){animation-delay:.42s}.studio-specs>div:nth-child(2){animation-delay:.5s}.studio-specs>div:nth-child(3){animation-delay:.58s}.studio-specs>div:nth-child(4){animation-delay:.66s}
+.studio-grid .viewport{animation:settle 1.6s cubic-bezier(.16,1,.3,1) .35s both}
+@media (prefers-reduced-motion:reduce){.studio-intro>*,.studio-specs>div,.studio-grid .viewport{animation:none}}
 
 .studio-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
 @media(min-width:1000px){.studio-grid{grid-template-columns:minmax(0,1fr) 340px;gap:22px}}
