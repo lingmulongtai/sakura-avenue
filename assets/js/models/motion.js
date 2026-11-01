@@ -1,8 +1,16 @@
 // Pick-and-place demo for the concept robot: take each bottle from the carousel, set it in the next
-// Common Zone, then strafe one zone along. Everything is a pure function of time, so scrubbing works.
+// Common Zone, then strafe one zone along. Everything is a pure function of time, so scrubbing works,
+// and the robot, the bottles, the charts and the timeline all read the same plan.
 const R2D = 180 / Math.PI;
-const ease = p => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-const lerp = (a, b, t) => a + (b - a) * t;
+// Minimum-jerk profile: starts and stops with zero speed and zero acceleration, so moves never snap.
+const smooth = p => p * p * p * (p * (p * 6 - 15) + 10);
+const speedOf = p => 30 * p * p * (1 - p) * (1 - p) / 1.875; // d(smooth)/dp scaled so the peak is 1
+
+export const JOINTS = ['yaw', 'lift', 'reach', 'grip', 'turn'];
+export const PHASES = {
+  ready: ['準備', 'Ready'], pick: ['取る', 'Pick'], carry: ['運ぶ', 'Carry'],
+  place: ['置く', 'Place'], strafe: ['横へ移動', 'Strafe'], rest: ['一周', 'Loop'],
+};
 
 export function planDemo(rig, start, count) {
   const L = rig.layout;
@@ -21,57 +29,83 @@ export function planDemo(rig, start, count) {
   const turnFor = k => toMast * R2D - L.slotDeg(k);
   const cycles = Math.max(count, 1);
 
-  // Keyframes: [duration, changes, event]
-  const keys = [];
+  // Steps: [duration, changes, phase, overlap, event]. A step starts `overlap` seconds before the
+  // previous one ends, so independent joints blend (the arm retracts while it rises, the turret swings
+  // while it reaches out). One joint never runs two moves at once: it waits for its own last move.
+  const steps = [];
   const ready = k => ({ yaw: pick.yaw, lift: liftPick, reach: 0, grip: OPEN, turn: turnFor(k) });
-  keys.push([0.7, { lift: Math.max(start.lift, liftClear), reach: 0, grip: OPEN }]);
-  keys.push([1.0, ready(0)]);
+  steps.push([0.8, { lift: Math.max(start.lift, liftClear), reach: 0, grip: OPEN }, 'ready', 0]);
+  steps.push([1.1, ready(0), 'ready', 0.2]);
   for (let k = 0; k < cycles; k++) {
-    keys.push([0.7, { reach: pick.reach }]);
-    keys.push([0.35, { grip: CLOSED }, ['grab', k]]);
-    keys.push([0.45, { lift: liftCarry }]);
-    keys.push([0.4, { reach: 0 }]);
-    keys.push([1.0, { yaw: place.yaw }]);
-    keys.push([0.7, { reach: place.reach, turn: turnFor(k + 1) }]);
-    keys.push([0.7, { lift: liftPlace }]);
-    keys.push([0.35, { grip: OPEN }, ['release', k]]);
-    keys.push([0.45, { lift: liftClear }]);
-    keys.push([0.4, { reach: 0 }]);
-    keys.push([1.3, { yaw: pick.yaw, lift: liftPick }, ['strafe', k]]);
+    const first = steps.length;
+    steps.push([0.75, { reach: pick.reach }, 'pick', 0]);
+    steps.push([0.35, { grip: CLOSED }, 'pick', 0, ['grab', k]]);
+    steps.push([0.5, { lift: liftCarry }, 'carry', 0]);
+    steps.push([0.55, { reach: 0 }, 'carry', 0.1]);
+    steps.push([1.1, { yaw: place.yaw, turn: turnFor(k + 1) }, 'carry', 0.3]);
+    steps.push([0.8, { reach: place.reach }, 'carry', 0.4]);
+    steps.push([0.8, { lift: liftPlace }, 'place', 0.25]);
+    steps.push([0.35, { grip: OPEN }, 'place', 0, ['release', k]]);
+    steps.push([0.5, { lift: liftClear }, 'place', 0]);
+    steps.push([0.5, { reach: 0 }, 'place', 0.25]);
+    steps.push([1.4, { yaw: pick.yaw, lift: liftPick, shift: k + 1 }, 'strafe', 0.15]);
+    for (let i = first; i < steps.length; i++) steps[i].cycle = k;
   }
-  keys.push([1.8, {}]);
+  steps.push([1.6, {}, 'rest', 0]);
 
-  // Resolve keyframes into absolute segments.
-  let t = 0, pose = { ...start };
-  const segments = [], grabbed = [], released = [], strafes = [];
-  for (const [duration, change, event] of keys) {
-    const from = { ...pose };
-    pose = { ...pose, ...change };
-    segments.push({ t0: t, t1: t + duration, from, to: { ...pose } });
-    if (event?.[0] === 'grab') grabbed[event[1]] = t + duration;
-    if (event?.[0] === 'release') released[event[1]] = t;
-    if (event?.[0] === 'strafe') strafes.push([t, t + duration]);
-    t += duration;
+  // Resolve the steps into one track of moves per joint, plus the phase strip for the timeline.
+  const tracks = Object.fromEntries([...JOINTS, 'shift'].map(j => [j, []]));
+  const value = { ...start, shift: 0 }, free = {};
+  const phases = [], grabbed = [], released = [];
+  let cursor = 0;
+  for (const step of steps) {
+    const [duration, change, phase, overlap, event] = step;
+    const t0 = Math.max(cursor - overlap, 0);
+    let t1 = t0 + duration;
+    for (const [joint, to] of Object.entries(change)) {
+      const a = Math.max(t0, free[joint] || 0), b = a + duration;
+      if (to !== value[joint]) tracks[joint].push({ t0: a, t1: b, from: value[joint], to });
+      value[joint] = to; free[joint] = b; t1 = Math.max(t1, b);
+    }
+    if (event?.[0] === 'grab') grabbed[event[1]] = t1;
+    if (event?.[0] === 'release') released[event[1]] = t0;
+    const cycle = step.cycle ?? -1;
+    const last = phases[phases.length - 1];
+    if (last && last.phase === phase && last.cycle === cycle) last.t1 = Math.max(last.t1, t1);
+    else phases.push({ phase, cycle, t0: last ? Math.max(last.t1, t0) : 0, t1 });
+    cursor = Math.max(cursor, t1);
   }
-  const duration = t;
+  const duration = cursor;
+  phases[phases.length - 1].t1 = duration;
+
+  // Value and speed (0 to 1) of one joint at time t.
+  const sample = (joint, t) => {
+    const track = tracks[joint];
+    let v = joint === 'shift' ? 0 : start[joint], speed = 0;
+    for (const m of track) {
+      if (t >= m.t1) { v = m.to; continue; }
+      if (t > m.t0) { const p = (t - m.t0) / (m.t1 - m.t0); v = m.from + (m.to - m.from) * smooth(p); speed = speedOf(p); }
+      break;
+    }
+    return [v, speed];
+  };
 
   return {
-    duration,
+    duration, phases, cycles,
     pick, place,
     at(time) {
       const tt = Math.min(Math.max(time, 0), duration);
-      const seg = segments.find(s => tt <= s.t1) || segments[segments.length - 1];
-      const p = ease(Math.min(Math.max((tt - seg.t0) / (seg.t1 - seg.t0), 0), 1));
-      const pose = {};
-      for (const key of Object.keys(seg.to)) pose[key] = lerp(seg.from[key], seg.to[key], p);
-      let shift = 0;
-      for (const [a, b] of strafes) shift += tt >= b ? 1 : tt > a ? ease((tt - a) / (b - a)) : 0;
+      const pose = {}, activity = {};
+      for (const j of JOINTS) [pose[j], activity[j]] = sample(j, tt);
+      const [shift, drive] = sample('shift', tt);
       const bottles = [];
       for (let k = 0; k < count; k++) {
         const state = tt < grabbed[k] ? 'slot' : tt < released[k] ? 'held' : 'placed';
         bottles.push({ state, spin: (turnFor(k) - pick.yaw) / R2D });
       }
-      return { pose, offset: -shift * L.pitch, bottles, placeYaw: place.yaw / R2D };
+      const phase = phases.find(p => tt <= p.t1) || phases[phases.length - 1];
+      const placed = bottles.filter(b => b.state === 'placed').length;
+      return { pose, activity, drive, offset: -shift * L.pitch, bottles, placed, phase, placeYaw: place.yaw / R2D };
     },
   };
 }
