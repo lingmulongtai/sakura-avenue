@@ -9,13 +9,13 @@ export function makeMaterials(team) {
   const std = (name, o) => Object.assign(new THREE.MeshStandardMaterial(o), { name });
   const phys = (name, o) => Object.assign(new THREE.MeshPhysicalMaterial(o), { name });
   return {
-    alu: std('Anodized aluminium', { color: 0xbcc1c7, metalness: 1, roughness: 0.3 }),
+    alu: std('Anodized aluminium', { color: 0xbcc1c7, metalness: 1, roughness: 0.48 }),
     sheet: std('Aluminium sheet', { color: 0x8f959b, metalness: 0.75, roughness: 0.58 }),
-    steel: std('Stainless steel', { color: 0xe1e3e6, metalness: 1, roughness: 0.18 }),
-    black: std('Black anodized', { color: 0x1c1e21, metalness: 0.6, roughness: 0.4 }),
+    steel: std('Stainless steel', { color: 0xd6d9dd, metalness: 1, roughness: 0.45 }),
+    black: std('Black anodized', { color: 0x1c1e21, metalness: 0.6, roughness: 0.48 }),
     plastic: std('Black plastic', { color: 0x141517, metalness: 0, roughness: 0.5 }),
     rubber: std('Rubber', { color: 0x2b2c2f, metalness: 0, roughness: 0.88 }),
-    pink: std('Sakura anodized', { color: 0xe9a3b7, metalness: 0.55, roughness: 0.3 }),
+    pink: std('Sakura anodized', { color: 0xe9a3b7, metalness: 0.55, roughness: 0.45 }),
     panel: phys('Black composite panel', { color: 0x111214, metalness: 0.1, roughness: 0.35, clearcoat: 0.6, clearcoatRoughness: 0.25 }),
     pom: std('POM gear', { color: 0x232427, metalness: 0, roughness: 0.38 }),
     yellow: std('E-stop yellow', { color: 0xf2c014, metalness: 0, roughness: 0.42 }),
@@ -24,7 +24,7 @@ export function makeMaterials(team) {
     pcb: std('Circuit board', { color: 0x175a3b, metalness: 0.15, roughness: 0.45 }),
     pcbBlue: std('Driver board', { color: 0x1b3f8f, metalness: 0.15, roughness: 0.45 }),
     chip: std('Chip', { color: 0x1a1a1c, metalness: 0.2, roughness: 0.35 }),
-    gold: std('Contacts', { color: 0xd9b25a, metalness: 1, roughness: 0.3 }),
+    gold: std('Contacts', { color: 0xd9b25a, metalness: 1, roughness: 0.45 }),
     wrap: phys('Battery wrap', { color: 0x1d1f23, metalness: 0, roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.3 }),
     label: std('Battery label', { color: 0x3f6fb5, metalness: 0, roughness: 0.4 }),
     xt: std('Yellow connector', { color: 0xf0b81c, metalness: 0, roughness: 0.4 }),
