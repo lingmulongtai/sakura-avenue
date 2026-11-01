@@ -371,6 +371,8 @@ export function buildConcept({ width, depth, bottles: loaded, team }) {
   const rig = {
     layout: { M, C, ring: RING, ox: OX, lz0: LZ0, drop: DROP, grab: GRAB, seat: SEAT, deck: DECK, place: { x: M.x, z: D / 2 + 0.208 }, pitch: 0.507, reachMax: RANGES.reach[1] * MM, slotDeg: k => k * 60 },
     wheels, bottles, slots, holder, lamp: m.lens,
+    // The group each pose key moves; the console tints the one that is working.
+    joints: { yaw: turret, lift: carriage, reach: inner, grip: gripper, turn: table },
     setPose({ lift, reach, yaw, grip, turn }) {
       turret.rotation.y = yaw * DEG;
       carriage.position.y = lift * MM - DECK;
