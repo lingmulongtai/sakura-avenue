@@ -1,7 +1,5 @@
 /* 3D model studio */
-:root{--stage-a:#F6F1EC;--stage-b:#E9E1DA;--stage-c:#D9CEC5;--hud-bg:rgba(255,255,255,.72);--hud-line:rgba(255,255,255,.7);--hud-ink:#3A2C26;--hud-muted:#7A6A63}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--stage-a:#2F2925;--stage-b:#221D1A;--stage-c:#141110;--hud-bg:rgba(24,19,17,.62);--hud-line:rgba(255,255,255,.08);--hud-ink:#EDE1DB;--hud-muted:#B3A29A}}
-:root[data-theme="dark"]{--stage-a:#2F2925;--stage-b:#221D1A;--stage-c:#141110;--hud-bg:rgba(24,19,17,.62);--hud-line:rgba(255,255,255,.08);--hud-ink:#EDE1DB;--hud-muted:#B3A29A}
+:root{/* the stage is a pale studio in both themes */--stage-a:#F6F1EC;--stage-b:#E9E1DA;--stage-c:#D9CEC5;--hud-bg:rgba(255,255,255,.72);--hud-line:rgba(255,255,255,.7);--hud-ink:#3A2C26;--hud-muted:#7A6A63}
 
 .studio{padding-bottom:8px}
 .studio-head{display:grid;gap:24px;padding-block:48px 28px}

@@ -161,20 +161,8 @@ export function createStage(container, { alpha = false } = {}) {
   const invalidate = (shadows = false) => { dirty = true; if (shadows) shadowDirty = true; };
   controls.addEventListener('change', () => invalidate());
 
-  const scheme = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
-  const isDark = () => {
-    const theme = document.documentElement.dataset.theme;
-    return theme ? theme === 'dark' : !!scheme?.matches;
-  };
-  const applyTheme = () => {
-    const dark = isDark();
-    paintBackdrop(dark);
-    catcher.material.opacity = dark ? 0.32 : 0.16;
-    contact.plane.material.opacity = dark ? 0.8 : 0.62;
-    invalidate();
-  };
-  scheme?.addEventListener?.('change', applyTheme);
-  applyTheme();
+  // The studio stays pale in both page themes: on a dark stage the black panels and wheels disappear.
+  paintBackdrop(false);
 
   // Ambient occlusion grounds every joint and pocket. The composer renders into a multisampled
   // target so edges stay antialiased; slow devices drop the pass (see quality below).
