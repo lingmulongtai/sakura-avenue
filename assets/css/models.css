@@ -212,3 +212,7 @@
 .parts-sec .sec-head h2{font-weight:500;letter-spacing:-.04em}
 .part.reveal{transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1),border-color .2s,background .2s}
 .part.reveal:not(.in){opacity:0;transform:translateY(28px)}
+[data-phase="forward"]{--ph:var(--sakura)}
+[data-phase="sideways"]{--ph:var(--blue)}
+[data-phase="diagonal"]{--ph:var(--seg-b)}
+[data-phase="turn"]{--ph:var(--ok)}
