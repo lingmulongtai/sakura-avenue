@@ -102,6 +102,7 @@ function studio(stage) {
     rig.setPose(pose());
     zones = makeZones(rig.layout);
     scene.add(zones.group);
+    prepareAccent();
     // The long rails upset the blurred contact-shadow pass; they keep their key-light shadow.
     stage.shadowExclude = [envelope.group, zones.frames];
     applyHighlight();
@@ -187,6 +188,43 @@ function studio(stage) {
     flyTo(target, target.clone().addScaledVector(direction, distance));
   }
   document.querySelectorAll('[data-part]').forEach(b => b.addEventListener('click', () => { if (kind === 'concept') focus(b.dataset.part); }));
+
+  /* ---------- accent on the joint that is moving ---------- */
+  // Each joint gets its own copies of the materials it owns (not those of the joints it carries),
+  // so its glow can follow how fast it moves.
+  const ACCENT = new THREE.Color(0xff3d7f);
+  let accents = {};
+  function prepareAccent() {
+    accents = {};
+    for (const [key, joint] of Object.entries(rig.joints)) {
+      const copies = new Map();
+      const visit = o => {
+        if (o !== joint && (o.userData.joint || o.userData.part === 'bottles')) return;
+        if (o.isMesh && o.material?.emissive) {
+          if (!copies.has(o.material)) {
+            const copy = o.material.clone();
+            copy.userData.base = { color: copy.emissive.clone(), intensity: copy.emissiveIntensity };
+            copies.set(o.material, copy);
+          }
+          o.material = copies.get(o.material);
+        }
+        o.children.forEach(visit);
+      };
+      visit(joint);
+      accents[key] = { materials: [...copies.values()], level: 0 };
+    }
+  }
+  function setAccent(activity) {
+    for (const [key, accent] of Object.entries(accents)) {
+      const level = activity ? Math.min(activity[key] * 1.4, 1) : 0;
+      if (Math.abs(level - accent.level) < 0.01) continue;
+      accent.level = level;
+      for (const m of accent.materials) {
+        m.emissive.copy(m.userData.base.color).lerp(ACCENT, level);
+        m.emissiveIntensity = m.userData.base.intensity + (0.55 - m.userData.base.intensity) * level;
+      }
+    }
+  }
 
   /* ---------- camera ---------- */
   let camTween = null, home = { target: new THREE.Vector3(0, 0.33, 0), radius: 0.62 };
@@ -290,6 +328,7 @@ function studio(stage) {
     zones.group.position.x = 0;
     rig.wheels.forEach(w => { w.wheel.rotation.x = 0; });
     rig.lamp.emissiveIntensity = 0.25;
+    setAccent(null);
     if (restore) { rig.setPose(pose()); measure(); stage.invalidate(true); }
   }
   function stepDemo(dt) {
@@ -303,6 +342,7 @@ function studio(stage) {
     zones.group.position.x = s.offset;
     rig.wheels.forEach(w => { w.wheel.rotation.x = w.spin * -s.offset / 0.0635; });
     rig.bottles.forEach((b, k) => setBottle(b, k, s.bottles[k].state, s.bottles[k].spin, s.placeYaw));
+    setAccent(s.activity);
     rig.lamp.emissiveIntensity = 0.55 + 0.45 * Math.sin(demo.time * 7);
     if (++frameCount % 8 === 0) measure();
     stage.invalidate(frameCount % 3 === 0);
