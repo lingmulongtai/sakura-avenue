@@ -10,6 +10,7 @@ export const JOINTS = ['yaw', 'lift', 'reach', 'grip', 'turn'];
 export const PHASES = {
   ready: ['準備', 'Ready'], pick: ['取る', 'Pick'], carry: ['運ぶ', 'Carry'],
   place: ['置く', 'Place'], strafe: ['横へ移動', 'Strafe'], rest: ['一周', 'Loop'],
+  aim: ['狙う', 'Aim'], push: ['押す', 'Push'], roll: ['転がる', 'Roll'], retract: ['戻す', 'Retract'], drive: ['近づく', 'Drive up'],
 };
 
 export function planDemo(rig, start, count) {

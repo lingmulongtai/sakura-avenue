@@ -117,8 +117,17 @@ export function planDice(rig) {
     return [v, speed];
   };
 
+  const mm = v => `${Math.round(v)} mm`;
   return {
     duration, phases, cycles: 1, dieX, homeZ,
+    lanes: [
+      ['パドル位置', 'Paddle', mm, q => q.tool.paddle, q => q.activity.paddle],
+      ['押し出し', 'Pusher', mm, q => q.tool.push, q => q.activity.push],
+      ['サイコロの傾き', 'Die tilt', v => `${Math.round(v)}°`, q => q.tilt * R2D, q => q.activity.tilt],
+      ['前進', 'Drive', mm, q => q.travel * 1000, q => q.drive],
+    ],
+    // The page fills in face (the number on top) and changed (score B, +20 the first time).
+    stat: { ja: 'サイコロの目', en: 'Die face', value: q => q.face ?? '—', total: q => q.changed ? '+20' : '' },
     at(time) {
       const t = Math.min(Math.max(time, 0), duration);
       const [paddle, aPaddle] = sample('paddle', t, paddleHome);
