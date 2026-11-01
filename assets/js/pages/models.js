@@ -6,6 +6,7 @@ import { createStage } from '../models/stage.js';
 import { buildConcept, RANGES, BUILD_KEYS, POSE_KEYS } from '../models/concept.js';
 import { planDemo } from '../models/motion.js';
 import { makeZones } from '../models/zones.js';
+import { createConsole } from '../models/console.js';
 
 const $ = id => document.getElementById(id);
 const viewport = $('viewport');
@@ -102,6 +103,7 @@ function studio(stage) {
     rig.setPose(pose());
     zones = makeZones(rig.layout);
     scene.add(zones.group);
+    prepareAccent();
     // The long rails upset the blurred contact-shadow pass; they keep their key-light shadow.
     stage.shadowExclude = [envelope.group, zones.frames];
     applyHighlight();
@@ -188,6 +190,43 @@ function studio(stage) {
   }
   document.querySelectorAll('[data-part]').forEach(b => b.addEventListener('click', () => { if (kind === 'concept') focus(b.dataset.part); }));
 
+  /* ---------- accent on the joint that is moving ---------- */
+  // Each joint gets its own copies of the materials it owns (not those of the joints it carries),
+  // so its glow can follow how fast it moves.
+  const ACCENT = new THREE.Color(0xff3d7f);
+  let accents = {};
+  function prepareAccent() {
+    accents = {};
+    for (const [key, joint] of Object.entries(rig.joints)) {
+      const copies = new Map();
+      const visit = o => {
+        if (o !== joint && (o.userData.joint || o.userData.part === 'bottles')) return;
+        if (o.isMesh && o.material?.emissive) {
+          if (!copies.has(o.material)) {
+            const copy = o.material.clone();
+            copy.userData.base = { color: copy.emissive.clone(), intensity: copy.emissiveIntensity };
+            copies.set(o.material, copy);
+          }
+          o.material = copies.get(o.material);
+        }
+        o.children.forEach(visit);
+      };
+      visit(joint);
+      accents[key] = { materials: [...copies.values()], level: 0 };
+    }
+  }
+  function setAccent(activity) {
+    for (const [key, accent] of Object.entries(accents)) {
+      const level = activity ? Math.min(activity[key] * 1.4, 1) : 0;
+      if (Math.abs(level - accent.level) < 0.01) continue;
+      accent.level = level;
+      for (const m of accent.materials) {
+        m.emissive.copy(m.userData.base.color).lerp(ACCENT, level);
+        m.emissiveIntensity = m.userData.base.intensity + (0.55 - m.userData.base.intensity) * level;
+      }
+    }
+  }
+
   /* ---------- camera ---------- */
   let camTween = null, home = { target: new THREE.Vector3(0, 0.33, 0), radius: 0.62 };
   const VIEWS = { iso: [0.56, 0.4, 0.72], front: [0, 0.16, 1], side: [1, 0.16, 0], top: [0, 1, 0.0001] };
@@ -247,7 +286,8 @@ function studio(stage) {
   });
 
   /* ---------- pose presets and the demo ---------- */
-  let poseTween = null, demo = null, frameCount = 0;
+  let poseTween = null, demo = null, frameCount = 0, speed = 1;
+  const scope = createConsole({ onScrub: time => { if (demo) demo.time = time; }, onSpeed: value => { speed = value; } });
   function presetPose(name) {
     const plan = planDemo(rig, pose(), 1);
     if (name === 'start') return { yaw: 90, lift: 540, reach: 0, grip: 0 };
@@ -273,6 +313,7 @@ function studio(stage) {
     poseTween = null;
     if (focusPart) { focusPart = null; applyHighlight(); }
     demo = { plan: planDemo(rig, pose(), rig.bottles.length), time: 0 };
+    scope.setPlan(demo.plan);
     zones.group.visible = true;
     $('animate').setAttribute('aria-pressed', 'true');
     // Pull back to a view that keeps the row of zones in frame.
@@ -284,26 +325,31 @@ function studio(stage) {
     if (!demo) return;
     demo = null;
     $('animate').setAttribute('aria-pressed', 'false');
+    scope.hide();
     if (!rig) return;
     rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
     zones.group.visible = false;
     zones.group.position.x = 0;
     rig.wheels.forEach(w => { w.wheel.rotation.x = 0; });
     rig.lamp.emissiveIntensity = 0.25;
+    setAccent(null);
     if (restore) { rig.setPose(pose()); measure(); stage.invalidate(true); }
   }
   function stepDemo(dt) {
-    demo.time += dt;
+    if (!scope.holding) demo.time += dt * speed;
     if (demo.time > demo.plan.duration) {
       rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
       demo = { plan: planDemo(rig, demo.plan.at(demo.plan.duration).pose, rig.bottles.length), time: 0 };
+      scope.setPlan(demo.plan);
     }
     const s = demo.plan.at(demo.time);
     rig.setPose(s.pose);
     zones.group.position.x = s.offset;
     rig.wheels.forEach(w => { w.wheel.rotation.x = w.spin * -s.offset / 0.0635; });
     rig.bottles.forEach((b, k) => setBottle(b, k, s.bottles[k].state, s.bottles[k].spin, s.placeYaw));
-    rig.lamp.emissiveIntensity = 0.55 + 0.45 * Math.sin(demo.time * 7);
+    setAccent(s.activity);
+    if (frameCount % 2 === 0) scope.update(demo.time, s);
+    rig.lamp.emissiveIntensity = 0.55 + 0.45 * Math.sin(performance.now() / 1000 * 7);
     if (++frameCount % 8 === 0) measure();
     stage.invalidate(frameCount % 3 === 0);
   }
@@ -428,6 +474,15 @@ function studio(stage) {
 
   /* ---------- render loop ---------- */
   showConcept();
+  // The routine plays by itself the first time the viewer comes into view; any control hands it over.
+  if (!RM && 'IntersectionObserver' in window) {
+    const watch = new IntersectionObserver(entries => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      watch.disconnect();
+      if (kind === 'concept' && !demo && !viewport.classList.contains('used')) startDemo();
+    }, { threshold: 0.5 });
+    watch.observe(viewport);
+  }
   let last = performance.now();
   function frame(now) {
     requestAnimationFrame(frame);
