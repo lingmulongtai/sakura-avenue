@@ -104,6 +104,7 @@ function studio(stage) {
     zones = makeZones(rig.layout);
     scene.add(zones.group);
     prepareAccent();
+    setExplode(explode.value);
     // The long rails upset the blurred contact-shadow pass; they keep their key-light shadow.
     stage.shadowExclude = [envelope.group, zones.frames];
     applyHighlight();
@@ -131,7 +132,10 @@ function studio(stage) {
   const bounds = new THREE.Box3(), size = new THREE.Vector3(), centre = new THREE.Vector3();
   function measure() {
     if (!current) return;
+    const exploded = kind === 'concept' && explode.value;
+    if (exploded) setExplode(0);
     bounds.setFromObject(current, true);
+    if (exploded) setExplode(exploded);
     if (bounds.isEmpty()) return;
     bounds.getSize(size);
     bounds.getCenter(centre);
@@ -195,8 +199,29 @@ function studio(stage) {
   document.querySelectorAll('[data-part]').forEach(b => b.addEventListener('click', () => { if (kind === 'concept') focus(b.dataset.part); }));
 
   /* ---------- display modes ---------- */
+  // Exploded: each top-level part group steps away from the frame along its own offset (metres).
+  const EXPLODE = { drive: [0, -0.2, 0], power: [0, -0.1, 0], carousel: [0, 0.17, 0], lift: [0, 0.32, 0], safety: [0, 0.12, -0.08], dice: [0, 0, 0.24] };
+  const explode = { value: 0, progress: 0, target: 0 };
+  function setExplode(a) {
+    explode.value = a;
+    if (kind !== 'concept' || !current) return;
+    for (const g of current.children) {
+      const d = EXPLODE[g.userData.part];
+      if (!d) continue;
+      g.userData.home ??= g.position.clone();
+      g.position.set(g.userData.home.x + d[0] * a, g.userData.home.y + d[1] * a, g.userData.home.z + d[2] * a);
+    }
+  }
+  const explodedHome = () => ({ target: homeBase.target.clone().add(new THREE.Vector3(0, 0.06, 0)), radius: homeBase.radius * 1.4 });
   function setDisplay(mode) {
     display = mode;
+    const target = mode === 'explode' ? 1 : 0;
+    if (target !== explode.target) {
+      explode.target = target;
+      home = target ? explodedHome() : homeBase;
+      if (demo) demoView(); else view('iso');
+    }
+    if (RM) { explode.progress = explode.target; setExplode(explode.target); }
     document.querySelectorAll('[data-display]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.display === mode)));
     applyHighlight();
   }
@@ -240,7 +265,7 @@ function studio(stage) {
   }
 
   /* ---------- camera ---------- */
-  let camTween = null, home = { target: new THREE.Vector3(0, 0.33, 0), radius: 0.62 };
+  let camTween = null, home = { target: new THREE.Vector3(0, 0.33, 0), radius: 0.62 }, homeBase = home;
   const VIEWS = { iso: [0.56, 0.4, 0.72], front: [0, 0.16, 1], side: [1, 0.16, 0], top: [0, 1, 0.0001] };
   function flyTo(target, position, duration = 0.8) {
     if (RM || !duration) {
@@ -268,6 +293,8 @@ function studio(stage) {
     const sphere = box.getBoundingSphere(new THREE.Sphere());
     const extent = Math.max(sphere.radius, 0.05);
     home = { target: kind === 'concept' ? new THREE.Vector3(0, box.min.y + (box.max.y - box.min.y) * 0.44, 0) : sphere.center.clone(), radius: kind === 'concept' ? extent * 0.86 : extent };
+    homeBase = home;
+    if (explode.target) home = explodedHome();
     stage.setGround(box.min.y - extent * 0.002);
     controls.minDistance = extent * 0.3;
     controls.maxDistance = extent * 12;
@@ -328,9 +355,12 @@ function studio(stage) {
     scope.setPlan(demo.plan);
     zones.group.visible = true;
     $('animate').setAttribute('aria-pressed', 'true');
-    // Pull back to a view that keeps the row of zones in frame.
-    const target = new THREE.Vector3(rig.layout.place.x - 0.25, 0.2, rig.layout.place.z * 0.5);
-    flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.2, 0.6, 1).normalize(), home.radius / Math.sin(THREE.MathUtils.degToRad(camera.fov) / 2) * 1.3), 1.1);
+    demoView();
+  }
+  // Pull back to a view that keeps the row of zones in frame (and the lifted parts when exploded).
+  function demoView() {
+    const target = new THREE.Vector3(rig.layout.place.x - 0.25, 0.2 + explode.target * 0.14, rig.layout.place.z * 0.5);
+    flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.2, 0.6, 1).normalize(), homeBase.radius / Math.sin(THREE.MathUtils.degToRad(camera.fov) / 2) * (1.3 + explode.target * 0.35)), 1.1);
     document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', 'false'));
   }
   function stopDemo(restore = true) {
@@ -518,6 +548,12 @@ function studio(stage) {
       if (p >= 1) { Object.assign(state, poseTween.to); poseTween = null; saveState(); updateInputs(); }
       else for (const k of POSE_KEYS) showValue(k, next[k]);
       measure();
+      stage.invalidate(true);
+    }
+    if (explode.progress !== explode.target) {
+      const step = dt / 0.7;
+      explode.progress = explode.progress < explode.target ? Math.min(explode.progress + step, 1) : Math.max(explode.progress - step, 0);
+      setExplode(ease(explode.progress));
       stage.invalidate(true);
     }
     if (demo && kind === 'concept') stepDemo(dt);
