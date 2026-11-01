@@ -3,23 +3,23 @@
 import { L } from '../core/i18n.js';
 import { PHASES } from './motion.js';
 
-const LANES = [
-  ['yaw', '旋回', 'Turret', v => `${Math.round(v)}°`],
-  ['lift', '昇降', 'Lift', v => `${Math.round(v)} mm`],
-  ['reach', '伸縮', 'Reach', v => `${Math.round(v)} mm`],
-  ['grip', 'グリッパー', 'Gripper', v => `${Math.round(v)}%`],
-  ['turn', 'ターンテーブル', 'Carousel', v => `${Math.round(((v % 360) + 360) % 360)}°`],
-  ['drive', '横移動', 'Strafe', v => `${Math.round(v * 1000)} mm`],
+// A lane is [label ja, label en, format, value(state), activity(state)]. A plan may bring its own.
+const joint = key => [s => s.pose[key], s => s.activity[key]];
+export const PLACE_LANES = [
+  ['旋回', 'Turret', v => `${Math.round(v)}°`, ...joint('yaw')],
+  ['昇降', 'Lift', v => `${Math.round(v)} mm`, ...joint('lift')],
+  ['伸縮', 'Reach', v => `${Math.round(v)} mm`, ...joint('reach')],
+  ['グリッパー', 'Gripper', v => `${Math.round(v)}%`, ...joint('grip')],
+  ['ターンテーブル', 'Carousel', v => `${Math.round(((v % 360) + 360) % 360)}°`, ...joint('turn')],
+  ['横移動', 'Strafe', v => `${Math.round(v * 1000)} mm`, s => -s.offset, s => s.drive],
 ];
 const SAMPLES = 480;
-const valueOf = (s, key) => key === 'drive' ? -s.offset : s.pose[key];
-const activityOf = (s, key) => key === 'drive' ? s.drive : s.activity[key];
 
 export function createConsole({ onScrub, onSpeed }) {
   const $ = id => document.getElementById(id);
   const root = $('scope'), canvas = $('scope-chart'), strip = $('scope-phases'), scrub = $('scope-scrub');
   const g = canvas.getContext('2d');
-  let plan = null, series = [], ranges = [], blocks = [], shown = null, colors = {};
+  let plan = null, lanes = PLACE_LANES, series = [], ranges = [], blocks = [], shown = null, colors = {};
   const api = { holding: false };
 
   const readColors = () => {
@@ -40,12 +40,12 @@ export function createConsole({ onScrub, onSpeed }) {
     if (!W || !H) return;
     const dpr = W / canvas.clientWidth, narrow = canvas.clientWidth < 520;
     const left = (narrow ? 64 : 104) * dpr, right = (narrow ? 50 : 66) * dpr;
-    const pw = W - left - right, h = H / LANES.length, pad = 4 * dpr;
+    const pw = W - left - right, h = H / lanes.length, pad = 4 * dpr;
     const head = left + pw * time / plan.duration;
     g.clearRect(0, 0, W, H);
-    LANES.forEach(([key, ja, en, format], n) => {
+    lanes.forEach(([ja, en, format, valueOf, activityOf], n) => {
       const y0 = n * h, [lo, hi] = ranges[n], data = series[n];
-      const active = activityOf(s, key) > 0.04;
+      const active = activityOf(s) > 0.04;
       const yOf = v => y0 + h - pad - (v - lo) / (hi - lo) * (h - pad * 2);
       g.fillStyle = colors.line; g.fillRect(left, y0 + h - 0.5 * dpr, pw, dpr);
       g.textBaseline = 'middle';
@@ -64,7 +64,7 @@ export function createConsole({ onScrub, onSpeed }) {
       g.beginPath(); g.rect(left, y0, head - left, h); g.clip();
       g.lineWidth = 1.6 * dpr; g.strokeStyle = active ? colors.sakura : colors.ink; g.stroke(path);
       g.restore();
-      const v = valueOf(s, key);
+      const v = valueOf(s);
       g.beginPath(); g.arc(head, yOf(v), (active ? 3.4 : 2.6) * dpr, 0, Math.PI * 2);
       g.fillStyle = active ? colors.sakura : colors.ink; g.fill();
       g.font = `700 ${(narrow ? 10 : 11) * dpr}px ${colors['f-num']}`;
@@ -78,10 +78,11 @@ export function createConsole({ onScrub, onSpeed }) {
 
   api.setPlan = next => {
     plan = next;
-    series = LANES.map(() => new Float32Array(SAMPLES + 1));
+    lanes = plan.lanes || PLACE_LANES;
+    series = lanes.map(() => new Float32Array(SAMPLES + 1));
     for (let i = 0; i <= SAMPLES; i++) {
       const s = plan.at(i / SAMPLES * plan.duration);
-      LANES.forEach(([key], n) => { series[n][i] = valueOf(s, key); });
+      lanes.forEach(([, , , valueOf], n) => { series[n][i] = valueOf(s); });
     }
     ranges = series.map(data => {
       let lo = Infinity, hi = -Infinity;
@@ -108,8 +109,11 @@ export function createConsole({ onScrub, onSpeed }) {
     phase.textContent = L(...PHASES[p.phase]);
     phase.parentElement.dataset.phase = p.phase;
     $('scope-cycle').textContent = p.cycle >= 0 ? `${p.cycle + 1} / ${plan.cycles}` : '';
-    $('scope-placed').textContent = String(s.placed);
-    $('scope-count').textContent = `/ ${s.bottles.length}`;
+    // The headline number: bottles placed, or the die's top face, whichever the routine reports.
+    const stat = plan.stat || { ja: '並べた本数', en: 'Placed', value: q => q.placed, total: q => `/ ${q.bottles.length}` };
+    $('scope-stat-label').textContent = L(stat.ja, stat.en);
+    $('scope-placed').textContent = String(stat.value(s));
+    $('scope-count').textContent = stat.total(s);
     $('scope-time').textContent = time.toFixed(1);
     plan.phases.forEach((q, n) => {
       blocks[n].classList.toggle('on', q === p);
