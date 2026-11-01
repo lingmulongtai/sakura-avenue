@@ -161,3 +161,6 @@
 [data-phase="place"]{--ph:var(--ok)}
 [data-phase="strafe"]{--ph:var(--blue)}
 @media(max-width:599px){.scope{padding:12px 12px 10px}.scope-phase b,.scope-stat b{font-size:18px}.scope-speed{margin-left:0}.scope-chart{height:120px}}
+.display-switch{order:2}
+.stage-bar .stage-tools{order:3}
+@media(max-width:599px){.display-switch{order:3;width:100%}.display-switch button{flex:1;justify-content:center}.stage-bar .stage-tools{order:2}}
