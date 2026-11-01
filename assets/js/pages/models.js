@@ -431,7 +431,7 @@ function studio(stage) {
     if (frameCount % 2 === 0) scope.update(demo.time, s);
     rig.lamp.emissiveIntensity = 0.55 + 0.45 * Math.sin(performance.now() / 1000 * 7);
     if (++frameCount % 8 === 0) measure();
-    stage.invalidate(frameCount % 3 === 0);
+    stage.invalidate(true);
   }
   $('animate').addEventListener('click', () => { if (demo) stopDemo(); else startDemo(); });
 
