@@ -6,6 +6,7 @@ import { createStage } from '../models/stage.js';
 import { buildConcept, RANGES, BUILD_KEYS, POSE_KEYS } from '../models/concept.js';
 import { planDemo } from '../models/motion.js';
 import { makeZones } from '../models/zones.js';
+import { createConsole } from '../models/console.js';
 
 const $ = id => document.getElementById(id);
 const viewport = $('viewport');
@@ -285,7 +286,8 @@ function studio(stage) {
   });
 
   /* ---------- pose presets and the demo ---------- */
-  let poseTween = null, demo = null, frameCount = 0;
+  let poseTween = null, demo = null, frameCount = 0, speed = 1;
+  const scope = createConsole({ onScrub: time => { if (demo) demo.time = time; }, onSpeed: value => { speed = value; } });
   function presetPose(name) {
     const plan = planDemo(rig, pose(), 1);
     if (name === 'start') return { yaw: 90, lift: 540, reach: 0, grip: 0 };
@@ -311,6 +313,7 @@ function studio(stage) {
     poseTween = null;
     if (focusPart) { focusPart = null; applyHighlight(); }
     demo = { plan: planDemo(rig, pose(), rig.bottles.length), time: 0 };
+    scope.setPlan(demo.plan);
     zones.group.visible = true;
     $('animate').setAttribute('aria-pressed', 'true');
     // Pull back to a view that keeps the row of zones in frame.
@@ -322,6 +325,7 @@ function studio(stage) {
     if (!demo) return;
     demo = null;
     $('animate').setAttribute('aria-pressed', 'false');
+    scope.hide();
     if (!rig) return;
     rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
     zones.group.visible = false;
@@ -332,10 +336,11 @@ function studio(stage) {
     if (restore) { rig.setPose(pose()); measure(); stage.invalidate(true); }
   }
   function stepDemo(dt) {
-    demo.time += dt;
+    if (!scope.holding) demo.time += dt * speed;
     if (demo.time > demo.plan.duration) {
       rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
       demo = { plan: planDemo(rig, demo.plan.at(demo.plan.duration).pose, rig.bottles.length), time: 0 };
+      scope.setPlan(demo.plan);
     }
     const s = demo.plan.at(demo.time);
     rig.setPose(s.pose);
@@ -343,7 +348,8 @@ function studio(stage) {
     rig.wheels.forEach(w => { w.wheel.rotation.x = w.spin * -s.offset / 0.0635; });
     rig.bottles.forEach((b, k) => setBottle(b, k, s.bottles[k].state, s.bottles[k].spin, s.placeYaw));
     setAccent(s.activity);
-    rig.lamp.emissiveIntensity = 0.55 + 0.45 * Math.sin(demo.time * 7);
+    if (frameCount % 2 === 0) scope.update(demo.time, s);
+    rig.lamp.emissiveIntensity = 0.55 + 0.45 * Math.sin(performance.now() / 1000 * 7);
     if (++frameCount % 8 === 0) measure();
     stage.invalidate(frameCount % 3 === 0);
   }
