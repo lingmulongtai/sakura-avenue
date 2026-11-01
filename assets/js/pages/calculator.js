@@ -1,4 +1,5 @@
 // Score calculator: the end-of-match state in, the breakdown and the Rule 3.8 decision out.
+import '../core/reveal.js';
 import {L, tx, langHooks} from '../core/i18n.js';
 import {$} from '../core/util.js';
 import {TEAMS, TNM, other} from '../match/timeline.js';

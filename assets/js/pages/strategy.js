@@ -1,4 +1,5 @@
 // Strategy notes: the zone-split matrix (who may place in zone 12 for every Red/Blue split of zones 1–11).
+import '../core/reveal.js';
 import {L, langHooks} from '../core/i18n.js';
 import {$} from '../core/util.js';
 

@@ -1,4 +1,5 @@
 // Entry point for index.html. Order matters only for the language hooks each section registers.
+import '../core/reveal.js';
 import '../match/player.js';
 import '../guide/explorer.js';
 import '../guide/hero.js';

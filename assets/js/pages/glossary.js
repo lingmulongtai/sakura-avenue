@@ -1,4 +1,5 @@
 // Glossary: filter the term cards by category and by a search that ignores case, width and kana type.
+import '../core/reveal.js';
 import {L, langHooks} from '../core/i18n.js';
 import {$} from '../core/util.js';
 
