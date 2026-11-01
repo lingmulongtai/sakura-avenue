@@ -21,6 +21,15 @@ let statusText = conceptStatus;
 function setStatus(text) { statusText = text; status.textContent = statusText(); }
 langHooks.push(() => { status.textContent = statusText(); });
 
+// Anatomy cards rise in as they scroll into view, a row at a time.
+if (!RM && 'IntersectionObserver' in window) {
+  const cards = [...document.querySelectorAll('.parts .part')];
+  const reveal = new IntersectionObserver(entries => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
+  }, { threshold: 0.15 });
+  cards.forEach((card, i) => { card.style.transitionDelay = `${(i % 3) * 0.08}s`; card.classList.add('reveal'); reveal.observe(card); });
+}
+
 let stage;
 try {
   stage = createStage(viewport);
