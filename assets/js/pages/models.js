@@ -474,6 +474,15 @@ function studio(stage) {
 
   /* ---------- render loop ---------- */
   showConcept();
+  // The routine plays by itself the first time the viewer comes into view; any control hands it over.
+  if (!RM && 'IntersectionObserver' in window) {
+    const watch = new IntersectionObserver(entries => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      watch.disconnect();
+      if (kind === 'concept' && !demo && !viewport.classList.contains('used')) startDemo();
+    }, { threshold: 0.5 });
+    watch.observe(viewport);
+  }
   let last = performance.now();
   function frame(now) {
     requestAnimationFrame(frame);
