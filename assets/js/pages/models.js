@@ -198,6 +198,7 @@ function studio(stage) {
   function focus(part) {
     focusPart = focusPart === part ? null : part;
     applyHighlight();
+    showCallout(focusPart);
     if (!focusPart) { view('iso'); return; }
     const box = new THREE.Box3();
     current.traverse(o => { if (o.isMesh && o.userData.part === focusPart) box.expandByObject(o, false); });
@@ -208,6 +209,45 @@ function studio(stage) {
     flyTo(target, target.clone().addScaledVector(direction, distance));
   }
   document.querySelectorAll('[data-part]').forEach(b => b.addEventListener('click', () => { if (kind === 'concept') focus(b.dataset.part); }));
+
+  /* ---------- callout ---------- */
+  // The card copies the part's own entry from the Anatomy list; the leader line is re-aimed every frame
+  // at the part's centre on screen, so it follows the camera and the moving joints.
+  const callout = $('callout'), calloutLine = $('callout-line');
+  const anchor = new THREE.Vector3(), partBox = new THREE.Box3();
+  function showCallout(part) {
+    const entry = part && document.querySelector(`.part[data-part="${part}"]`);
+    callout.classList.toggle('on', !!entry);
+    calloutLine.classList.toggle('on', !!entry);
+    callout.dataset.part = part || '';
+    if (!entry) return;
+    $('callout-no').textContent = entry.querySelector('.part-no').textContent;
+    $('callout-title').innerHTML = entry.querySelector('b').innerHTML;
+    $('callout-text').innerHTML = entry.querySelector('.part-d').innerHTML;
+    $('callout-spec').textContent = entry.querySelector('.part-spec').textContent;
+    aimCallout();
+  }
+  function aimCallout() {
+    const part = callout.dataset.part;
+    if (!part || !current) return;
+    partBox.makeEmpty();
+    current.traverse(o => { if (o.isMesh && o.userData.part === part) partBox.expandByObject(o); });
+    if (partBox.isEmpty()) return;
+    partBox.getCenter(anchor).project(camera);
+    const vw = viewport.clientWidth, vh = viewport.clientHeight;
+    const x = (anchor.x + 1) / 2 * vw, y = (1 - anchor.y) / 2 * vh;
+    const card = callout.getBoundingClientRect(), box = viewport.getBoundingClientRect();
+    const narrow = vw < 600;
+    // Leave the card from its right edge (or its top edge on phones), with one elbow.
+    const sx = narrow ? card.left - box.left + 28 : card.right - box.left;
+    const sy = narrow ? card.top - box.top : card.top - box.top + 26;
+    const ex = narrow ? sx : sx + Math.max(Math.min((x - sx) * 0.35, 60), 16);
+    const ey = narrow ? Math.min(y + 20, sy - 16) : sy;
+    calloutLine.querySelector('polyline').setAttribute('points', `${sx},${sy} ${ex},${ey} ${x},${y}`);
+    const dot = calloutLine.querySelector('circle');
+    dot.setAttribute('cx', x); dot.setAttribute('cy', y);
+  }
+  langHooks.push(() => showCallout(callout.dataset.part || null));
 
   /* ---------- display modes ---------- */
   // Exploded: each top-level part group steps away from the frame along its own offset (metres).
@@ -394,7 +434,7 @@ function studio(stage) {
   function startDemo() {
     if (!rig) return;
     poseTween = null;
-    if (focusPart) { focusPart = null; applyHighlight(); }
+    if (focusPart) { focusPart = null; applyHighlight(); showCallout(null); }
     demo = { plan: newPlan(pose()), time: 0 };
     scope.setPlan(demo.plan);
     zones.group.visible = routine === 'place';
@@ -643,7 +683,7 @@ function studio(stage) {
     if (demo && kind === 'concept') stepDemo(dt);
     if (mixer && action && !action.paused) { mixer.update(dt); if (++frameCount % 15 === 0) measure(); stage.invalidate(true); }
     controls.update();
-    stage.render();
+    if (stage.render() && callout.dataset.part) aimCallout();
   }
   requestAnimationFrame(frame);
 }
