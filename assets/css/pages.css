@@ -78,7 +78,7 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-red:#F04A60;--c-blue:#5B85F2}}
 :root[data-theme="dark"]{--c-red:#F04A60;--c-blue:#5B85F2}
 .st-sec{padding-block:44px 4px;scroll-margin-top:110px}
-.st-sec h2{font-size:clamp(22px,5.4vw,30px);line-height:1.35;margin:0 0 10px;font-weight:900}
+.st-sec h2{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:0 0 12px;font-weight:500;letter-spacing:-.04em}
 .st-grid{display:grid;gap:12px;margin-top:14px}
 @media(min-width:860px){.st-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .facts2,.faq-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
