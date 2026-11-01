@@ -7,6 +7,7 @@ import { buildConcept, RANGES, BUILD_KEYS, POSE_KEYS } from '../models/concept.j
 import { planDemo } from '../models/motion.js';
 import { makeZones } from '../models/zones.js';
 import { createConsole } from '../models/console.js';
+import { makeDie, planDice, DIE } from '../models/dice.js';
 
 const $ = id => document.getElementById(id);
 const viewport = $('viewport');
@@ -292,7 +293,7 @@ function studio(stage) {
   }
   function setAccent(activity) {
     for (const [key, accent] of Object.entries(accents)) {
-      const level = activity ? Math.min(activity[key] * 1.4, 1) : 0;
+      const level = activity ? Math.min((activity[key] || 0) * 1.4, 1) : 0;
       if (Math.abs(level - accent.level) < 0.01) continue;
       accent.level = level;
       for (const m of accent.materials) {
@@ -385,18 +386,35 @@ function studio(stage) {
     if (where === 'held') { rig.holder.add(bottle); bottle.position.set(0, 0, 0); bottle.rotation.set(0, spin, 0); }
     if (where === 'placed') { zones.floor.add(bottle); bottle.position.set(rig.layout.place.x + k * rig.layout.pitch, 0, rig.layout.place.z); bottle.rotation.set(0, placeYaw + spin, 0); }
   }
+  // Routines: placing bottles in the Common Zones, or tipping the die to change its face (score B).
+  let routine = 'place', die = null, dieFace = 1, dieChanged = false;
+  const dieBase = new THREE.Quaternion(), dieNow = new THREE.Quaternion();
+  const ROLL = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
+  const newPlan = from => routine === 'dice' ? planDice(rig) : planDemo(rig, from, rig.bottles.length);
   function startDemo() {
     if (!rig) return;
     poseTween = null;
     if (focusPart) { focusPart = null; applyHighlight(); }
-    demo = { plan: planDemo(rig, pose(), rig.bottles.length), time: 0 };
+    demo = { plan: newPlan(pose()), time: 0 };
     scope.setPlan(demo.plan);
-    zones.group.visible = true;
+    zones.group.visible = routine === 'place';
+    if (routine === 'dice') {
+      if (!die) { die = makeDie(); scene.add(die.group); }
+      die.group.visible = true;
+      dieBase.identity(); dieFace = 1; dieChanged = false;
+      die.group.position.set(demo.plan.dieX, 0, demo.plan.homeZ);
+    }
     $('animate').setAttribute('aria-pressed', 'true');
     demoView();
   }
   // Pull back to a view that keeps the row of zones in frame (and the lifted parts when exploded).
   function demoView() {
+    if (routine === 'dice') {
+      const target = new THREE.Vector3(-0.02, 0.16, rig.tool.padZ - 0.05);
+      flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.75, 0.45, 0.85).normalize(), 1.35 + explode.target * 0.4), 1.1);
+      document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      return;
+    }
     const target = new THREE.Vector3(rig.layout.place.x - 0.25, 0.2 + explode.target * 0.14, rig.layout.place.z * 0.5);
     flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.2, 0.6, 1).normalize(), homeBase.radius / Math.sin(THREE.MathUtils.degToRad(camera.fov) / 2) * (1.3 + explode.target * 0.35)), 1.1);
     document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', 'false'));
@@ -410,6 +428,8 @@ function studio(stage) {
     rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
     zones.group.visible = false;
     zones.group.position.x = 0;
+    if (die) die.group.visible = false;
+    rig.setTool({});
     rig.wheels.forEach(w => { w.wheel.rotation.x = 0; });
     rig.lamp.emissiveIntensity = 0.25;
     setAccent(null);
@@ -419,20 +439,47 @@ function studio(stage) {
     if (!scope.holding) demo.time += dt * speed;
     if (demo.time > demo.plan.duration) {
       rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
-      demo = { plan: planDemo(rig, demo.plan.at(demo.plan.duration).pose, rig.bottles.length), time: 0 };
+      if (routine === 'dice') dieBase.premultiply(ROLL);
+      demo = { plan: newPlan(routine === 'dice' ? null : demo.plan.at(demo.plan.duration).pose), time: 0 };
       scope.setPlan(demo.plan);
     }
     const s = demo.plan.at(demo.time);
-    rig.setPose(s.pose);
-    zones.group.position.x = s.offset;
-    rig.wheels.forEach(w => { w.wheel.rotation.x = w.spin * -s.offset / 0.0635; });
-    rig.bottles.forEach((b, k) => setBottle(b, k, s.bottles[k].state, s.bottles[k].spin, s.placeYaw));
+    if (routine === 'dice') stepDie(s);
+    else stepPlace(s);
     setAccent(s.activity);
     if (frameCount % 2 === 0) scope.update(demo.time, s);
     rig.lamp.emissiveIntensity = 0.55 + 0.45 * Math.sin(performance.now() / 1000 * 7);
     if (++frameCount % 8 === 0) measure();
     stage.invalidate(true);
   }
+  function stepDie(s) {
+    rig.setTool(s.tool);
+    // Once it has fallen, the die rests on its next face with the pivot one die-width further on,
+    // and the robot drives up to it: the scene stays continuous through the loop.
+    const body = die.group.children[0];
+    dieNow.copy(dieBase);
+    if (s.rolled) dieNow.premultiply(ROLL);
+    body.quaternion.copy(dieNow);
+    die.group.rotation.x = s.rolled ? 0 : s.tilt;
+    die.group.position.z = demo.plan.homeZ + (s.rolled ? DIE : 0) - s.travel;
+    rig.wheels.forEach(w => { w.wheel.rotation.x = s.travel / 0.0635; });
+    s.face = die.top(dieNow);
+    if (s.face !== dieFace) dieChanged = true;
+    s.changed = dieChanged;
+  }
+  function stepPlace(s) {
+    rig.setPose(s.pose);
+    zones.group.position.x = s.offset;
+    rig.wheels.forEach(w => { w.wheel.rotation.x = w.spin * -s.offset / 0.0635; });
+    rig.bottles.forEach((b, k) => setBottle(b, k, s.bottles[k].state, s.bottles[k].spin, s.placeYaw));
+  }
+  document.querySelectorAll('[data-routine]').forEach(b => b.addEventListener('click', () => {
+    if (kind !== 'concept') return;
+    routine = b.dataset.routine;
+    document.querySelectorAll('[data-routine]').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+    stopDemo();
+    startDemo();
+  }));
   $('animate').addEventListener('click', () => { if (demo) stopDemo(); else startDemo(); });
 
   /* ---------- controls ---------- */

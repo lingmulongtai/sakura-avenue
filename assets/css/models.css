@@ -164,3 +164,9 @@
 .display-switch{order:2}
 .stage-bar .stage-tools{order:3}
 @media(max-width:599px){.display-switch{order:3;width:100%}.display-switch button{flex:1;justify-content:center}.stage-bar .stage-tools{order:2}}
+[data-phase="aim"]{--ph:var(--seg-a)}
+[data-phase="push"]{--ph:var(--sakura)}
+[data-phase="roll"]{--ph:var(--seg-b)}
+[data-phase="retract"]{--ph:var(--ok)}
+[data-phase="drive"]{--ph:var(--blue)}
+.routine-switch{order:1}
