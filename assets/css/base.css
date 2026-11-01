@@ -155,10 +155,10 @@ button:focus-visible,[tabindex]:focus-visible,a:focus-visible{outline:3px solid 
 /* ---------- sections ---------- */
 .sec{padding-block:64px 8px;scroll-margin-top:56px}
 .sec-head{max-width:740px;margin-bottom:24px}
-.sec-head h2{font-size:clamp(24px,5.8vw,34px);line-height:1.3;margin:0 0 12px;font-weight:900;letter-spacing:-.01em}
+.sec-head h2{font-size:clamp(28px,5.4vw,46px);line-height:1.12;margin:0 0 14px;font-weight:500;letter-spacing:-.04em}
 .lead{color:var(--muted);max-width:62ch}
 .note{font-size:12.5px;color:var(--muted);line-height:1.7;margin-top:12px;max-width:72ch}
-.sub{font-size:17px;font-weight:900;margin:32px 0 12px}
+.sub{font-size:17px;font-weight:700;letter-spacing:-.01em;margin:32px 0 12px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 1px 2px rgba(42,29,23,.04)}
 
 
@@ -214,8 +214,8 @@ button:focus-visible,[tabindex]:focus-visible,a:focus-visible{outline:3px solid 
 
 /* ---------- inner pages ---------- */
 .page-head{position:relative;padding-block:52px 12px;max-width:780px}
-.page-head h1{font-size:clamp(30px,7vw,48px);line-height:1.2;margin:0 0 14px;font-weight:900;letter-spacing:-.015em}
-.page-head .lead{font-size:16px}
+.page-head h1{font-size:clamp(36px,7vw,68px);line-height:1.04;margin:0 0 18px;font-weight:500;letter-spacing:-.045em}
+.page-head .lead{font-size:16px;color:var(--muted);max-width:36rem}
 .page-head::after{content:"";position:absolute;right:-300px;top:18px;width:260px;height:260px;opacity:.34;pointer-events:none;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-20 -20 40 40'%3E%3Cg fill='none' stroke='%23C9476F' stroke-width='.35'%3E%3Cpath d='M0 -2C5 -6 6 -14 0 -18C-6 -14 -5 -6 0 -2Z'/%3E%3Cpath transform='rotate(72)' d='M0 -2C5 -6 6 -14 0 -18C-6 -14 -5 -6 0 -2Z'/%3E%3Cpath transform='rotate(144)' d='M0 -2C5 -6 6 -14 0 -18C-6 -14 -5 -6 0 -2Z'/%3E%3Cpath transform='rotate(216)' d='M0 -2C5 -6 6 -14 0 -18C-6 -14 -5 -6 0 -2Z'/%3E%3Cpath transform='rotate(288)' d='M0 -2C5 -6 6 -14 0 -18C-6 -14 -5 -6 0 -2Z'/%3E%3Ccircle r='3'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
 @media(max-width:1199px){.page-head::after{display:none}}
