@@ -85,7 +85,7 @@ function studio(stage) {
       texture.dispose();
     }
     for (const bitmap of bitmaps) bitmap.close();
-    for (const material of materials) if (material !== ghost) material.dispose();
+    for (const material of materials) if (material !== ghost && material !== glass) material.dispose();
     for (const geometry of geometries) geometry.dispose();
     for (const skeleton of skeletons) skeleton.dispose();
   };
@@ -160,7 +160,10 @@ function studio(stage) {
   /* ---------- part focus ---------- */
   const ghost = new THREE.MeshStandardMaterial({ color: 0xe7e1dc, transparent: true, opacity: 0.12, depthWrite: false, roughness: 1, metalness: 0 });
   const originals = new WeakMap();
-  let focusPart = null;
+  let focusPart = null, display = 'solid';
+  // X-ray turns the housing to glass and keeps the parts that move the bottles solid.
+  const glass = new THREE.MeshStandardMaterial({ color: 0xa9c4dc, transparent: true, opacity: 0.16, depthWrite: false, roughness: 0.5, metalness: 0 });
+  const MECHANISM = ['lift', 'arm', 'carousel', 'bottles'];
   function restoreMaterials() {
     current?.traverse(o => { const saved = originals.get(o); if (saved) { o.material = saved.material; o.castShadow = saved.cast; } });
   }
@@ -169,8 +172,9 @@ function studio(stage) {
     current.traverse(o => {
       if (!o.isMesh) return;
       if (!originals.has(o)) originals.set(o, { material: o.material, cast: o.castShadow });
-      const saved = originals.get(o), on = !focusPart || o.userData.part === focusPart;
-      o.material = on ? saved.material : ghost;
+      const saved = originals.get(o), part = o.userData.part;
+      const on = focusPart ? part === focusPart : display !== 'xray' || MECHANISM.includes(part);
+      o.material = on ? saved.material : focusPart ? ghost : glass;
       o.castShadow = on && saved.cast;
     });
     document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.part === focusPart)));
@@ -189,6 +193,14 @@ function studio(stage) {
     flyTo(target, target.clone().addScaledVector(direction, distance));
   }
   document.querySelectorAll('[data-part]').forEach(b => b.addEventListener('click', () => { if (kind === 'concept') focus(b.dataset.part); }));
+
+  /* ---------- display modes ---------- */
+  function setDisplay(mode) {
+    display = mode;
+    document.querySelectorAll('[data-display]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.display === mode)));
+    applyHighlight();
+  }
+  document.querySelectorAll('[data-display]').forEach(b => b.addEventListener('click', () => { if (kind === 'concept') setDisplay(b.dataset.display); }));
 
   /* ---------- accent on the joint that is moving ---------- */
   // Each joint gets its own copies of the materials it owns (not those of the joints it carries),
