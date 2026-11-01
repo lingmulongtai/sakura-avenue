@@ -129,6 +129,7 @@ function studio(stage) {
     applyHighlight();
     measure();
     placeSection();
+    previewPlan();
   }
   let rebuildQueued = false;
   function queueRebuild() {
@@ -415,7 +416,7 @@ function studio(stage) {
 
   /* ---------- pose presets and the demo ---------- */
   let poseTween = null, demo = null, frameCount = 0, speed = 1;
-  const scope = createConsole({ onScrub: time => { if (demo) demo.time = time; }, onSpeed: value => { speed = value; } });
+  const scope = createConsole({ onScrub: time => { if (!demo) startDemo(); if (demo) demo.time = time; }, onSpeed: value => { speed = value; } });
   function presetPose(name) {
     const plan = planDemo(rig, pose(), 1);
     if (name === 'start') return { yaw: 90, lift: 540, reach: 0, grip: 0 };
@@ -473,7 +474,6 @@ function studio(stage) {
     if (!demo) return;
     demo = null;
     $('animate').setAttribute('aria-pressed', 'false');
-    scope.hide();
     if (!rig) return;
     rig.bottles.forEach((b, k) => setBottle(b, k, 'slot'));
     zones.group.visible = false;
@@ -483,6 +483,14 @@ function studio(stage) {
     rig.lamp.emissiveIntensity = 0.25;
     setAccent(null);
     if (restore) { rig.setPose(pose()); measure(); stage.invalidate(true); }
+    previewPlan();
+  }
+  // While nothing plays, the console shows the selected routine from the current pose at 0 s.
+  function previewPlan() {
+    if (demo || !rig || kind !== 'concept') return;
+    const plan = newPlan(pose());
+    scope.setPlan(plan);
+    scope.update(0, plan.at(0));
   }
   function stepDemo(dt) {
     if (!scope.holding) demo.time += dt * speed;
@@ -539,7 +547,7 @@ function studio(stage) {
     saveState();
     updateInputs();
     if (BUILD_KEYS.includes(key)) queueRebuild();
-    else { rig?.setPose(pose()); measure(); stage.invalidate(true); }
+    else { rig?.setPose(pose()); measure(); stage.invalidate(true); previewPlan(); }
   });
   document.querySelectorAll('[data-team]').forEach(b => b.addEventListener('click', () => {
     if (state.team === b.dataset.team) return;
@@ -625,6 +633,7 @@ function studio(stage) {
       if (box.isEmpty()) { dispose(gltf.scene); throw new Error('empty'); }
       stopDemo(false);
       kind = 'imported'; rig = null; focusPart = null; poseTween = null;
+      scope.hide(); showCallout(null);
       gltf.scene.traverse(o => { if (o.isMesh) o.castShadow = o.receiveShadow = true; });
       replaceModel(gltf.scene);
       clips = gltf.animations; mixer = new THREE.AnimationMixer(current); action = null;
