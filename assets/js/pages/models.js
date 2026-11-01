@@ -30,7 +30,8 @@ try {
 if (stage) studio(stage);
 
 function studio(stage) {
-  const { scene, camera, controls } = stage;
+  const { scene, camera, controls, renderer } = stage;
+  renderer.localClippingEnabled = true;
   const ease = p => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
 
   /* ---------- state ---------- */
@@ -104,11 +105,19 @@ function studio(stage) {
     zones = makeZones(rig.layout);
     scene.add(zones.group);
     prepareAccent();
+    // The housing gets its own materials so the cutaway never slices the mechanism that shares them.
+    const housing = new Map();
+    current.traverse(o => {
+      if (!o.isMesh || MECHANISM.includes(o.userData.part)) return;
+      if (!housing.has(o.material)) housing.set(o.material, o.material.clone());
+      o.material = housing.get(o.material);
+    });
     setExplode(explode.value);
     // The long rails upset the blurred contact-shadow pass; they keep their key-light shadow.
-    stage.shadowExclude = [envelope.group, zones.frames];
+    stage.shadowExclude = [envelope.group, zones.frames, section];
     applyHighlight();
     measure();
+    placeSection();
   }
   let rebuildQueued = false;
   function queueRebuild() {
@@ -179,6 +188,7 @@ function studio(stage) {
       const saved = originals.get(o), part = o.userData.part;
       const on = focusPart ? part === focusPart : display !== 'xray' || MECHANISM.includes(part);
       o.material = on ? saved.material : focusPart ? ghost : glass;
+      if (on && !MECHANISM.includes(part) && part !== 'dice') cutMaterial(o.material);
       o.castShadow = on && saved.cast;
     });
     document.querySelectorAll('[data-part]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.part === focusPart)));
@@ -213,6 +223,33 @@ function studio(stage) {
     }
   }
   const explodedHome = () => ({ target: homeBase.target.clone().add(new THREE.Vector3(0, 0.06, 0)), radius: homeBase.radius * 1.4 });
+  // Cutaway: opens the front half of the housing (frame, drive, electronics) and leaves the mechanism
+  // whole. The two planes only clip together, so nothing in front of the chassis is touched.
+  const cutPlanes = [new THREE.Plane(new THREE.Vector3(0, 0, -1), 0), new THREE.Plane(new THREE.Vector3(0, 0, 1), 0)];
+  const section = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(1, 1)), new THREE.LineBasicMaterial({ color: 0xe0457b }));
+  section.visible = false;
+  scene.add(section);
+  function cutMaterial(material) {
+    const on = display === 'cut';
+    if (material.userData.cut === on) return;
+    material.userData.cut = on;
+    material.userData.side ??= material.side;
+    material.clippingPlanes = on ? cutPlanes : null;
+    material.clipIntersection = true;
+    material.side = on ? THREE.DoubleSide : material.userData.side;
+    material.needsUpdate = true;
+  }
+  function placeSection() {
+    const frame = current?.children.find(g => g.userData.part === 'frame');
+    section.visible = display === 'cut' && !!frame;
+    if (!section.visible) return;
+    const box = new THREE.Box3().setFromObject(frame), all = new THREE.Box3().setFromObject(current);
+    const z = (box.min.z + box.max.z) / 2;
+    cutPlanes[0].constant = z;
+    cutPlanes[1].constant = -(box.max.z + 0.04);
+    section.scale.set(box.max.x - box.min.x + 0.04, all.max.y - all.min.y + 0.02, 1);
+    section.position.set((box.min.x + box.max.x) / 2, (all.min.y + all.max.y) / 2, z);
+  }
   function setDisplay(mode) {
     display = mode;
     const target = mode === 'explode' ? 1 : 0;
@@ -224,6 +261,7 @@ function studio(stage) {
     if (RM) { explode.progress = explode.target; setExplode(explode.target); }
     document.querySelectorAll('[data-display]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.display === mode)));
     applyHighlight();
+    placeSection();
   }
   document.querySelectorAll('[data-display]').forEach(b => b.addEventListener('click', () => { if (kind === 'concept') setDisplay(b.dataset.display); }));
 
