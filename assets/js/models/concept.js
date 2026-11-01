@@ -339,15 +339,11 @@ export function buildConcept({ width, depth, bottles: loaded, team }) {
   const fz = D / 2 + 0.003;
   put(dice, box(0.32, 0.009, 0.0065), m.steel, [0, 0.13, fz + 0.00325]);
   for (const s of [-1, 1]) put(dice, box(0.012, 0.022, 0.012), m.black, [s * 0.166, 0.13, fz + 0.006]);
-  // The paddle carriage slides along the rail; its pusher runs out on a rod to tip the die.
-  const paddle = group(dice, 'Dice paddle', [0.07, 0, 0], { joint: true, part: 'dice' });
-  put(paddle, box(0.022, 0.02, 0.01), m.steel, [0, 0.13, fz + 0.0115]);
-  put(paddle, box(0.032, 0.038, 0.003), m.pink, [0, 0.13, fz + 0.018]);
-  for (const [dx, dy] of [[-0.01, -0.012], [0.01, -0.012], [-0.01, 0.012], [0.01, 0.012]]) bolt(paddle, m, new THREE.Vector3(dx, 0.13 + dy, fz + 0.0195), new THREE.Vector3(0, 0, 1));
-  put(paddle, box(0.016, 0.012, 0.026), m.black, [0, 0.118, fz + 0.032]);
-  const pusher = group(paddle, 'Dice pusher', [], { joint: true, part: 'dice' });
-  put(pusher, cyl(0.004, 0.17, 'z', 16), m.steel, [0, 0.116, fz + 0.044 - 0.085]);
-  put(pusher, box(0.022, 0.016, 0.008), m.rubber, [0, 0.116, fz + 0.048]);
+  put(dice, box(0.022, 0.02, 0.01), m.steel, [0.07, 0.13, fz + 0.0115]);
+  put(dice, box(0.032, 0.038, 0.003), m.pink, [0.07, 0.13, fz + 0.018]);
+  for (const [dx, dy] of [[-0.01, -0.012], [0.01, -0.012], [-0.01, 0.012], [0.01, 0.012]]) bolt(dice, m, new THREE.Vector3(0.07 + dx, 0.13 + dy, fz + 0.0195), new THREE.Vector3(0, 0, 1));
+  put(dice, box(0.016, 0.012, 0.026), m.black, [0.07, 0.118, fz + 0.032]);
+  put(dice, box(0.022, 0.016, 0.008), m.rubber, [0.07, 0.116, fz + 0.048]);
   bake(dice);
 
   /* ---------- rig ---------- */
@@ -376,13 +372,7 @@ export function buildConcept({ width, depth, bottles: loaded, team }) {
     layout: { M, C, ring: RING, ox: OX, lz0: LZ0, drop: DROP, grab: GRAB, seat: SEAT, deck: DECK, place: { x: M.x, z: D / 2 + 0.208 }, pitch: 0.507, reachMax: RANGES.reach[1] * MM, slotDeg: k => k * 60 },
     wheels, bottles, slots, holder, lamp: m.lens,
     // The group each pose key moves; the console tints the one that is working.
-    joints: { yaw: turret, lift: carriage, reach: inner, grip: gripper, turn: table, paddle, push: pusher },
-    // Dice tool: paddle slide (mm from the rail centre) and pusher stroke (mm).
-    tool: { padX: 0.07, padY: 0.116, padZ: fz + 0.052, rail: 0.14 },
-    setTool({ paddle: x = 70, push = 0 }) {
-      paddle.position.x = x * MM;
-      pusher.position.z = push * MM;
-    },
+    joints: { yaw: turret, lift: carriage, reach: inner, grip: gripper, turn: table },
     setPose({ lift, reach, yaw, grip, turn }) {
       turret.rotation.y = yaw * DEG;
       carriage.position.y = lift * MM - DECK;
