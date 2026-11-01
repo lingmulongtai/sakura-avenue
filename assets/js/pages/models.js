@@ -8,6 +8,7 @@ import { planDemo } from '../models/motion.js';
 import { makeZones } from '../models/zones.js';
 import { createConsole } from '../models/console.js';
 import { makeDie, planDice, DIE } from '../models/dice.js';
+import { planDrive } from '../models/drive.js';
 
 const $ = id => document.getElementById(id);
 const viewport = $('viewport');
@@ -134,7 +135,7 @@ function studio(stage) {
     });
     setExplode(explode.value);
     // The long rails upset the blurred contact-shadow pass; they keep their key-light shadow.
-    stage.shadowExclude = [envelope.group, zones.frames, section];
+    stage.shadowExclude = [envelope.group, zones.frames, section, pathLine];
     applyHighlight();
     measure();
     placeSection();
@@ -450,7 +451,11 @@ function studio(stage) {
   let routine = 'place', die = null, dieFace = 1, dieChanged = false;
   const dieBase = new THREE.Quaternion(), dieNow = new THREE.Quaternion();
   const ROLL = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
-  const newPlan = from => routine === 'dice' ? planDice(rig, from) : planDemo(rig, from, rig.bottles.length);
+  const newPlan = from => routine === 'dice' ? planDice(rig, from) : routine === 'drive' ? planDrive(rig) : planDemo(rig, from, rig.bottles.length);
+  // The drive routine draws where the body centre will go on the floor.
+  const pathLine = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshBasicMaterial({ color: 0xe0457b }));
+  pathLine.visible = false;
+  scene.add(pathLine);
   function startDemo() {
     if (!rig) return;
     poseTween = null;
@@ -464,11 +469,22 @@ function studio(stage) {
       dieBase.identity(); dieFace = 1; dieChanged = false;
       die.group.position.set(demo.plan.dieX, 0, demo.plan.homeZ);
     }
+    pathLine.visible = routine === 'drive';
+    if (routine === 'drive') {
+      pathLine.geometry.dispose();
+      pathLine.geometry = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(demo.plan.path.map(([x, z]) => new THREE.Vector3(x, 0.004, z))), 240, 0.004, 6);
+    }
     $('animate').setAttribute('aria-pressed', 'true');
     demoView();
   }
   // Pull back to a view that keeps the row of zones in frame (and the lifted parts when exploded).
   function demoView() {
+    if (routine === 'drive') {
+      const target = new THREE.Vector3(0.1, 0.2, 0.1);
+      flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.7, 0.75, 1).normalize(), 3.1 + explode.target * 0.5), 1.1);
+      document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      return;
+    }
     if (routine === 'dice') {
       const target = new THREE.Vector3(demo.plan.dieX + 0.1, 0.22, demo.plan.homeZ - 0.2);
       flyTo(target, target.clone().addScaledVector(new THREE.Vector3(0.75, 0.45, 0.85).normalize(), 1.65 + explode.target * 0.4), 1.1);
@@ -488,6 +504,9 @@ function studio(stage) {
     zones.group.visible = false;
     zones.group.position.x = 0;
     if (die) die.group.visible = false;
+    pathLine.visible = false;
+    current.position.set(0, 0, 0);
+    current.rotation.y = 0;
     rig.wheels.forEach(w => { w.wheel.rotation.x = 0; });
     rig.lamp.emissiveIntensity = 0.25;
     setAccent(null);
@@ -511,6 +530,7 @@ function studio(stage) {
     }
     const s = demo.plan.at(demo.time);
     if (routine === 'dice') stepDie(s);
+    else if (routine === 'drive') stepDrive(s);
     else stepPlace(s);
     setAccent(s.activity);
     if (frameCount % 2 === 0) scope.update(demo.time, s);
@@ -532,6 +552,11 @@ function studio(stage) {
     s.face = die.top(dieNow);
     if (s.face !== dieFace) dieChanged = true;
     s.changed = dieChanged;
+  }
+  function stepDrive(s) {
+    current.position.set(s.x, 0, s.z);
+    current.rotation.y = s.yaw;
+    demo.plan.wheels.forEach((w, n) => { rig.wheels[w.i].wheel.rotation.x = s.wheel[n].angle; });
   }
   function stepPlace(s) {
     rig.setPose(s.pose);
