@@ -75,10 +75,10 @@ const hash = b => createHash('sha256').update(b).digest('hex');
     assert.equal(await page.locator('#fit-match').getAttribute('data-fit'),'yes');
     await page.locator('[data-envelope="700"]').click();
     assert.equal(await page.locator('[data-envelope="700"]').getAttribute('aria-pressed'),'true');
-    await page.locator('[data-part="drive"]').click();
-    assert.equal(await page.locator('[data-part="drive"]').getAttribute('aria-pressed'),'true');
-    await page.locator('[data-part="drive"]').click();
-    assert.equal(await page.locator('[data-part="drive"]').getAttribute('aria-pressed'),'false');
+    await page.locator('.part[data-part="drive"]').click();
+    assert.equal(await page.locator('.part[data-part="drive"]').getAttribute('aria-pressed'),'true');
+    await page.locator('.part[data-part="drive"]').click();
+    assert.equal(await page.locator('.part[data-part="drive"]').getAttribute('aria-pressed'),'false');
     await page.locator('#animate').click();
     assert.equal(await page.locator('#animate').getAttribute('aria-pressed'),'true');
     await changes(await shot());
@@ -90,7 +90,29 @@ const hash = b => createHash('sha256').update(b).digest('hex');
     assert.equal(await page.locator('[data-speed="0.5"]').getAttribute('aria-pressed'),'true');
     await page.locator('#animate').click();
     assert.equal(await page.locator('#animate').getAttribute('aria-pressed'),'false');
-    assert.equal(await page.locator('#scope').isHidden(),true);
+    // Stopped, the console previews the routine from the current pose at 0 s.
+    assert.equal(await page.locator('#scope').isVisible(),true);
+    assert.equal(await page.locator('#scope-time').textContent(),'0.0');
+    // The dice routine plays from its own switch and reports the face on top.
+    await page.locator('[data-routine="dice"]').click();
+    assert.equal(await page.locator('#animate').getAttribute('aria-pressed'),'true');
+    assert.match(await page.locator('#scope-stat-label').textContent(),/Die face/);
+    await page.locator('#scope-scrub').dispatchEvent('pointerdown');
+    await page.locator('#scope-scrub').fill('700');
+    await page.waitForFunction(()=>document.querySelector('#scope-placed').textContent==='5',null,{timeout:10000});
+    await page.locator('#scope-scrub').dispatchEvent('pointerup');
+    await page.locator('[data-routine="place"]').click();
+    await page.locator('#animate').click();
+    // Display modes and the part callout.
+    for (const mode of ['xray','explode','cut','solid']) {
+      await page.locator(`[data-display="${mode}"]`).click();
+      assert.equal(await page.locator(`[data-display="${mode}"]`).getAttribute('aria-pressed'),'true');
+    }
+    await page.locator('.part-chip[data-part="lift"]').click();
+    assert.equal(await page.locator('#callout').evaluate(e=>e.classList.contains('on')),true);
+    assert.match(await page.locator('#callout-spec').textContent(),/320/);
+    await page.locator('.part-chip[data-part="lift"]').click();
+    assert.equal(await page.locator('#callout').evaluate(e=>e.classList.contains('on')),false);
     const [download]=await Promise.all([page.waitForEvent('download'),page.locator('#export-glb').click()]);
     const exported=await download.path();
     await page.locator('#model-file').setInputFiles({name:'exported.glb',mimeType:'model/gltf-binary',buffer:fs.readFileSync(exported)});
